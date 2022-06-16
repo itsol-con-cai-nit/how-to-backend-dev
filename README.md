@@ -1,1 +1,99 @@
 # how-to-backend-dev
+
+
+## 1. Java
+	- Java 8, 11, ...
+	- Concurrency: Thread Pool, Thread, Concurren collection
+	- Java NIO
+	- Basic socket, RMI
+	- ...
+	
+## 2. DB
+	- SQL
+	- NoSQL: 
+		+ MongoDB, Cassandra, Firebase, ...
+		+ Elasticsearch
+	- Advance: 
+		+ ORMs: Hibernate
+		+ ACID
+		+ View
+		+ Function
+		+ Procedure
+		+ Trigger
+		+ Index
+		+ N + 1 problem
+		+ Sharding
+		+ Replica set
+		+ Log
+	- Others: SparkSQL
+
+## 3. APIs
+	- SOAP
+	- RESTful
+	- GraphQL
+	- gRPC
+	- Swagger
+	
+## 4. Spring
+	- Core
+	- Data JPA
+	- MVC
+	- Security: JWT, OAuth2, Cookie, Third party login (Google, FB, ...)
+	- AOP
+	- Validation
+
+## 5. Build tools
+	- Ant
+	- Maven
+	- Gradle
+
+## 6. Caching
+	- Server side:
+		+ Mem cache
+		+ Redis/Hazelcast
+	- Client side
+	- CDN
+
+## 7. Tesing for dev
+	- Unit test: JUnit, Mockito
+	- Integration test: Selenium
+	- Performance test: Jmeter
+
+## 8. Web security Knowledge
+	- HTTPS, SSL/TLS
+	- CORS
+
+## 9. Architecture & Design
+	- SOLID
+	- KISS
+	- DRY
+	- Monolithic & Microservices
+	- SOA
+
+## 10. Code quality
+	- Coding convention
+	- Clean code
+	- Sonar
+
+## 11. Technologies & Frameworks
+	- Message Broker: RabbitMQ, Kafka
+	- AWS/Heroku/Google Cloud/Azure
+	- WebSockets
+	- Web servers: Nginx, Apache, ...
+	- Streaming video
+
+## 12. DevOps
+	### 12.1 Monitoring
+		- JVM
+		- EFK
+		- Jaeger
+		- Grafana
+		- Prometheus
+		- Zabbiz
+		- Sentry
+		- Kubernetes
+	### 12.2 Containerization & Virtualization: Docker
+	### 12.3 CI/CD
+		- Jenkin
+		- Gitlab CI
+		- Kubernetes
