@@ -1,205 +1,566 @@
-# **CHƯƠNG 4: Comment thế nào cho chuẩn ?**
+# CHƯƠNG 4: Comment thế nào cho chuẩn ?
 
                                         “Đừng biến đống code gớm ghiếc của bạn thành comment – hãy viết lại nó”
 
                                                                                                 BRIAN W. KERNIGHAN AND P. J. PLAUGHER
-**Các comment tốt nhất nên trở thành sự lựa chọn cuối cùng**
+## Các comment tốt nhất nên trở thành sự lựa chọn cuối cùng
 - Khi các dòng code của bạn chưa rõ nghĩa thì cần đến các dòng comment
 - => Suy nghĩ cách thể biến các dòng code trở nên dễ hiểu và chính xác với những gì ta muốn thể hiện
 - Các dòng comment dần trở nên dứt đoạn với độ chính xác giảm dần theo thời gian tái lập và tạo lên chương trình
 
-- ![img_11.png](img_11.png)
+```java
+MockRequest request;
+private final String HTTP_DATE_REGEXP =
+ "[SMTWF][a-z]{2}\\,\\s[0-9]{2}\\s[JFMASOND][a-z]{2}\\s"+
+ "[0-9]{4}\\s[0-9]{2}\\:[0-9]{2}\\:[0-9]{2}\\sGMT";
+private Response response;
+private FitNesseContext context;
+private FileResponder responder;
+private Locale saveLocale;
+// Example: "Tue, 02 Apr 2003 22:18:49 GMT"
+```
 
-=> Chân lý chỉ có thể tìm thấy tại một nơi duy nhất: Code. Chỉ có code mới nói cho bạn biết thật sự những gì nó làm.
-Nó là nguồn thông tin chính xác duy nhất. Do đó, mặc dù comment đôi khi là cần thiết, nhưng chúng tôi sẽ cố gắng để giảm thiểu nó.
+=> Giảm thiểu comment code bằng cách code thật tường minh, rành mạch.
 
-# **Đừng dùng comment để làm màu cho code**
-  - Thay vì tự nhủ rằng: “Ồ, tốt hơn nên viết comment ở đây!”. Không! Tốt hơn bạn nên viết lại code!
+## Đừng dùng comment để làm màu cho code
+  - Đừng dùng comment để giải thích cho code khó hiểu, hãy làm code dễ hiểu.
 
-# **Giải thích ý nghĩa ngay trong code**
-- ![img_12.png](img_12.png)
+## Giải thích ý nghĩa ngay trong code
+```java
+// Check to see if the employee is eligible for full benefits
+if ((employee.flags & HOURLY_FLAG) && (employee.age > 65))
+```
 
-Hay cái này
+```java
+if (employee.isEligibleForFullBenefits())
+```
 
-- ![img_2.png](img_2.png)
+- Hãy tạo ra các hàm có tên giống với comment mà bạn muốn viết.
 
-Trong nhiều trường hợp, nó chỉ đơn giản là tạo ra một hàm có tên giống với comment mà bạn muốn viết
+## Comment tốt
+### 1- Comment pháp lý
+- Dùng comment pháp lý để đáp ứng nhu cầu của doanh nghiệp.
 
-# **Comment tốt**
-**- COMMENT PHÁP LÝ**
-![img_3.png](img_3.png)
+```java
+/* Copyright (C) 2003,2004,2005 by Object Mentor, Inc.
+ * All rights reserved. 
+ * Released under the terms of the GNU General Public License version
+ * 2 or later.
+ */
+```
 
-**- COMMENT CUNG CẤP THÔNG TIN**
+### 2- Comment cung cấp thông tin
 - Ví dụ, hãy xem cách mà comment này giải thích về giá trị trả về của một phương thức trừu tượng:
 
-![img_4.png](img_4.png)
+```java
+// Returns an instance of the Responder be ing tested. 
+protected abstract Responder responderInstance();
+```
 
 => Ví dụ, trong trường hợp này, chúng ta có thể dọn dẹp comment trên bằng cách đặt lại tên hàm thành _**responderBeingTested**_.
 
-**- GIẢI THÍCH MỤC ĐÍCH**
+###  3- Comment giải thích mục đích
 - Đôi khi comment không chỉ cung cấp thông tin về những dòng code mà còn cung cấp ý định đằng sau nó.
 
-**- LÀM DỄ HIỂU**
-- Đôi khi bạn cần dùng comment để diễn giải ý nghĩa của các đối số khó hiểu hoặc giá trị trả về, để biến chúng thành thứ gì đó có thể hiểu được. 
-- Nhưng khi nó là một phần của thư viện, hoặc thuộc về một phần code mà bạn không có quyền tùy chỉnh, thì một comment giải thích dễ hiểu có thể có ích trong trường hợp này.
+```java
+public void testConcurrentAddWidgets() throws Exception {
+    WidgetBuilder widgetBuilder = new WidgetBuilder(new Class[]{BoldWidget.class});
+    String text = "'''bold text'''";
+    ParentWidget parent =
+    new BoldWidget(new MockWidgetRoot(), "'''bold text'''");
+    AtomicBoolean failFlag = new AtomicBoolean();
+    failFlag.set(false);
+    //This is our best attempt to get a race condition
+    //by creating large number of threads.
+        
+        // Comment bên trên là comnment giải thích lý do sử dụng solution này của tác giả của đoạn code
+    for (int i = 0; i < 25000; i++) {
+        WidgetBuilderThread widgetBuilderThread =
+        new WidgetBuilderThread(widgetBuilder, text, parent,
+                                failFlag);
+        Thread thread = new Thread(widgetBuilderThread);
+        thread.start();
+    }
+    assertEquals(false, failFlag.get());
+}
+```
+### 4- Comment làm dễ hiểu
+- Khi cần giải thích 1 phần code trong thư viện khác hoặc phần code mà bạn không có quyền tùy chỉnh hãy dùng comment
+```java
+public void testCompareTo() throws Exception
+{
+    WikiPagePath a = PathParser.parse("PageA");
+    WikiPagePath ab = PathParser.parse("PageA.PageB");
+    WikiPagePath b = PathParser.parse("PageB");
+    WikiPagePath aa = PathParser.parse("PageA.PageA");
+    WikiPagePath bb = PathParser.parse("PageB.PageB");
+    WikiPagePath ba = PathParser.parse("PageB.PageA");
+ 
+    assertTrue(a.compareTo(a) == 0); // a == a
+    assertTrue(a.compareTo(b) != 0); // a != b
+    assertTrue(ab.compareTo(ab) == 0); // ab == ab
+    assertTrue(a.compareTo(b) == -1); // a < b
+    assertTrue(aa.compareTo(ab) == -1); // aa < ab
+    assertTrue(ba.compareTo(bb) == -1); // ba < bb
+    assertTrue(b.compareTo(a) == 1); // b > a
+    assertTrue(ab.compareTo(aa) == 1); // ab > aa
+    assertTrue(bb.compareTo(ba) == 1); // bb > ba
+}
+```
 
-![img_6.png](img_6.png)
+###  5- Comment cảnh báo về hậu quả
 
-**- CÁC CẢNH BÁO VỀ HẬU QUẢ**
+```java
+ // Don't run unless you 
+// have some time to kill – Đừng chạy hàm này, trừ khi mày quá rảnh 
+public void _testWithReallyBigFile() {
+        writeLinesToFile(10000000);
+        response.setBody(testFile);
+        response.readyToSend(this);
+        String responseString = output.toString();
+        assertSubString("Content-Length: 1000000000", responseString);
+        assertTrue(bytesSent > 1000000000);
+        }
+ ```
+- Có thể sử dụng @Ignore (“It takes too long to run”) để thay thế.
 
-![img_7.png](img_7.png)
+### 6- Comment todo
+- Những comment dạng TODO là những công việc mà lập trình viên cho rằng nên được thực hiện, nhưng vì lý do nào đó mà họ 
+không thể thực hiện nó ngay lúc này. Nó có thể là một lời nhắc để xóa một hàm không dùng nữa, hoặc yêu cầu người khác xem 
+xét một số vấn đề: đặt lại một cái tên khác tốt hơn, lời nhắc thay đổi code của hàm khi kế hoạch của dự án thay đổi,..
 
-- Sử dụng @Ignore (“It takes too long to run”).
-- Nhưng trước khi JUnit 4 xuất hiện, việc đặt một dấu gạch dưới vào trước tên hàm là một quy tắc rất phổ biến. 
+```java
+// TODO-MdM these are not needed – Hàm này không cần thiết
+// We expect this to go away when we do the checkout model
+// Nó sẽ bị xóa khi chúng tôi thực hiện mô hình thanh toán
+protected VersionInfo makeVersion() throws Exception
+{
+    return null;
+}
+```
 
-**- TODO COMMENTS**
 
-![img_8.png](img_8.png)
+### 7- Comment khuếch đại
+- Comment để khuếch đại tầm quan trọng của 1 cái gì đó trông có vẻ không quan trọng
+```java
+String listItemContent = match.group(3).trim();
+// the trim is real important. It removes the starting
+// spaces that could cause the item to be recognized
+// as another list.
+new ListItemWidget(this, listItemContent, this.level + 1);
+return buildList(text.substring(match.end()));
+```
 
-- Những comment dạng TODO là những công việc mà lập trình viên cho rằng nên được thực hiện, nhưng vì lý do nào đó mà họ không thể thực hiện nó ngay lúc này. Nó có thể là một lời nhắc để xóa một hàm không dùng nữa, hoặc yêu cầu người khác xem xét một số vấn đề: đặt lại một cái tên khác tốt hơn, lời nhắc thay đổi code của hàm khi kế hoạch của dự án thay đổi,.. 
-- Ngày nay, hầu hết các IDE đều cung cấp các tính năng đặc biệt để định vị các comment TODO, do đó bạn không cần lo việc bỏ quên/lạc mất nó
+### 8- Javadocs trogn public APIs
+- Đây là các comment trong thuw viện để mô tả tính năng.
 
-**- KHUẾCH ĐẠI**
+## Comment tồi
 
-![img_9.png](img_9.png)
+### 1- Comment độc thoại
+- Comment không diễn giải đầy đủ chỉ có tác giả hiểu ý nghĩa của comment.
 
-**- JAVADOCS TRONG PUBLIC APIS**
-- Không có gì hữu ích và tuyệt vời bằng một public API được mô tả tốt. Các javadoc của thư viện chuẩn của Java là một trường hợp điển hình. Sẽ rất khó để viết các chương trình Java mà thiếu chúng.
-
-# **- Comment tồi**
-- Đa số các comment rơi vào thể loại này.
-- húng thường được sử dụng như cái cớ cho việc viết code rởm hoặc biện minh cho các cách giải quyết đầy thiếu sót, các giá trị không đầy đủ so với cách lập trình viên nghĩ về nó.
-
-**- ĐỘC THOẠI**
-- Quăng vào một comment chỉ vì bạn thấy thích, hoặc chỉ vì quá trình xử lý cần đến nó, điều đó được gọi là hack (giải quyết vấn đề không theo cách thường mà dùng thủ thuật, đường tắt,…). Nếu bạn quyết định viết comment, hãy dành thời gian cho nó để đảm bảo đó là comment tốt nhất mà bạn có thể viết.
-
-![img_10.png](img_10.png)
-
-- Trong trường hợp này các thuộc tính mặc định sẽ được tải.
--Nhưng, cái gì sẽ tải thuộc tính mặc định? Những thuộc tính mặc định đó đã được tải trước khi gọi loadProperties()? Hay chúng được tải khi loadedProperties.load(propertiesStream) phát sinh Exception? Hay chúng được tải sau khi gọi loadProperties()?  Có phải tác giả chỉ đang cố làm hài lòng chính bản thân anh ta về việc bỏ trống khối catch? Hoặc, kinh khủng hơn – tác giả đã dùng comment như một dấu hiệu, để sau này quay lại và viết các đoạn code tải các thuộc tính mặc định vào khối catch?
-
-**- CÁC COMMENT THỪA THẢI**
-
-Listing 4-1: waitForClose
-
-    // Utility method that returns when this.closed is true. Throws an exception
-    // if the timeout is reached.
-    // Phương thức return khi this.closed là true, phát sinh ngoại lệ nếu hết thời gian chờ
-    public synchronized void waitForClose(final long timeoutMillis)
-    throws Exception
+```java
+public void loadProperties()
+{
+    try
     {
+        String propertiesPath = propertiesLocation + "/" + PROPERTIES_FILE;
+        FileInputStream propertiesStream = new FileInputStream(propertiesPath);
+        loadedProperties.load(propertiesStream);
+    }
+    catch(IOException e)
+    {
+        // No properties files means all defaults are loaded
+    }
+}
+```
+
+### 2- Comment thừa
+   - Phần code của hàm này đã cung cấp đầy đủ thông tin để người đọc có thể hiểu được không cần phải thêm comment.
+```java
+// Utility method that returns when this.closed is true. Throws an exception
+// if the timeout is reached.
+// Phương thức return khi this.closed là true, phát sinh ngoại lệ nếu hết thời gian chờ
+public synchronized void waitForClose(final long timeoutMillis)
+ throws Exception
+{
     if(!closed)
     {
-    wait(timeoutMillis);
-    if(!closed)
-    throw new Exception("MockResponseSender could not be closed");
+        wait(timeoutMillis);
+        if(!closed)
+            throw new Exception("MockResponseSender could not be closed");
     }
-    }
+}
+```
 
-- Nó chắn chắn không cung cấp nhiều thông tin hơn code. Nó không diễn giải cho code, không cung cấp mục đích hoặc lý do. Nó không dễ hiểu hơn code. Sự thật là, nó ít chính xác hơn code nhưng lại lôi cuốn người đọc chấp nhận sự thiếu chính xác đó thay cho hiểu biết thật sự.
+### 3- Comment sai sự thật
+- Tránh viết các comment để bổ sung thông tin nhưng lại là những thông tin sai sự thật.
 
-**-CÁC COMMENT SAI SỰ THẬT**
 
-- Bạn có phát hiện ra comment ở Listing 4-1 sai lệch như thế nào chưa? Phương thức không return khi (become) this.closed là true, nó return nếu (if) this.closed là true. Mặt khác, nó giả vờ chờ một khoản thời gian và sinh ra một Exception nếu this.closed vẫn chưa là true.
+### 4- Comment bắt buộc
+- Không viết các javadocs bừa.
+```java
+/**
+ *
+ * @param title The title of the CD
+ * @param author The author of the CD
+ * @param tracks The number of tracks on the CD
+ * @param durationInMinutes The duration of the CD in minutes
+ */
+public void addCD(String title, String author,
+ int tracks, int durationInMinutes) {
+    CD cd = new CD();
+    cd.title = title;
+    cd.author = author;
+    cd.tracks = tracks;
+    cd.duration = duration;
+    cdList.add(cd);
+}
+```
 
-**- CÁC COMMENT BẮT BUỘC**
-- Thật điên rồ khi cho rằng tất cả các hàm đều phải có javadoc, hoặc mọi biến đều phải có comment. Những comment như vậy chỉ làm rối code, đưa ra những lời bịa đặt, và ủng hộ việc gây nhầm lẫn và vô tổ chức. 
+### 5-  Comment nhật ký
+- Không viết các comment nhật ký
 
-Listing 4-3
+```java
+/*
+ * Changes (from 11-Oct-2001)
+ * --------------------------
+ * 11-Oct-2001 : Re-organised the class and moved it to new package
+ * com.jrefinery.date (DG);
+ * 05-Nov-2001 : Added a getDescription() method, and eliminated NotableDate
+ * class (DG);
+ * 12-Nov-2001 : IBD requires setDescription() method, now that NotableDate
+ * class is gone (DG); Changed getPreviousDayOfWeek(),
+ * getFollowingDayOfWeek() and getNearestDayOfWeek() to correct
+ * bugs (DG);
+ * 05-Dec-2001 : Fixed bug in SpreadsheetDate class (DG);
+ * 29-May-2002 : Moved the month constants into a separate interface
+ * (MonthConstants) (DG);
+ * 27-Aug-2002 : Fixed bug in addMonths() method, thanks to N???levka Petr (DG);
+ * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
+ * 13-Mar-2003 : Implemented Serializable (DG);
+ * 29-May-2003 : Fixed bug in addMonths method (DG);
+ * 04-Sep-2003 : Implemented Comparable. Updated the isInRange javadocs (DG);
+ * 05-Jan-2005 : Fixed bug in addYears() method (1096282) (DG);
+ */
+```
 
-![img_11.png](img\img_11.png)
+### 6- Comment gây nhiễu
+- Không viết các comment làm phức tạp các điều hiển nhiên ai cũng biết.
 
-**- CÁC COMMENT NHẬT KÝ**
-- Khi còn chưa có các hệ thống quản lý mã nguồn (source control)Đôi khi mọi người thêm một comment vào đầu module mỗi khi họ chỉnh sửa nó.
+```java
+/**
+ * Default constructor.
+ */
+protected AnnualDateRule() {
+}
 
-![img_12.png](img\img_12.png)
+/** The day of the month. */
+private int dayOfMonth;
 
-**- CÁC COMMENT GÂY NHIỄU**
-- Đôi khi bạn gặp các comment không cung cấp thông tin gì ngoài sự phiền phức, chúng lặp lại một vấn đề hiển nhiên và không cung cấp thêm thông tin mới
+/**
+ * Returns the day of the month.
+ *
+ * @return the day of the month.
+ */
+public int getDayOfMonth() {
+        return dayOfMonth;
+        }
+```
 
-![img_13.png](img\img_13.png)
+### 7- Comment có thể thay thế bằng hàm hoặc biến 
+ Đoạn code sau:
+```java
+// does the module from the global list <mod> depend on the
+// subsystem we are part of?
+if (smodule.getDependSubsystems().contains(subSysMod.getSubSystem()))
+```
+Có thể được viết lại mà không cần comment:
+```java
+ArrayList moduleDependees = smodule.getDependSubsystems();
+String ourSubSystem = subSysMod.getSubSystem();
+if (moduleDependees.contains(ourSubSystem))
+```
+### 8- Đánh dấu lãnh thổ
+- Hạn chế dùng các comment nổi bặt để đánh dấu 1 khu vực code.
 
-Còn cái này:
+`
+// Actions //////////////////////////////////
+`
 
-![img_14.png](img\img_14.png)
+### 9- Comment kết thúc
+- Không dùng các comment để đánh dấu điểm kết thúc của các khối lệnh dài thay vào đó cố chỉa nhỏ khối lệnh đó ra thành nhiều hàm, biến nhỏ.
 
-Và sau đó là sự thừa thãi này:
+```java
+public class wc {
+    public static void main(String[] args) {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        int lineCount = 0;
+        int charCount = 0;
+        int wordCount = 0;
+        try {
+            while ((line = in.readLine()) != null) {
+                lineCount++;
+                charCount += line.length();
+                String words[] = line.split("\\W");
+                wordCount += words.length;
+            } //while
+            System.out.println("wordCount = " + wordCount);
+            System.out.println("lineCount = " + lineCount);
+            System.out.println("charCount = " + charCount);
+        } // try
+        catch (IOException e) {
+            System.err.println("Error:" + e.getMessage());
+        } //catch
+    } //main
+}
+```
 
-![img_15.png](img\img_15.png)
+### 10- Comment đánh dấu thuộc tính và dòng tắc giả
+- Không dùng comment để đánh dấu bản quyển, các IDE đã làm hộ việc này rồi.
+`/* Added by Rick */`
 
-Ví dụ khác:
 
-![img.png](img.png)
+### 11- Comment hóa code
+- Đừng chuyển code thành comment, nếu không dùng hãy xóa đi, để lại dễ gây hiểu lầm cho người maintain.
+```java
+InputStreamResponse response = new InputStreamResponse();
+response.setBody(formatter.getResultStream(), formatter.getByteCount());
+// InputStream resultsStream = formatter.getResultStream();
+// StreamReader reader = new StreamReader(resultsStream);
+// response.setContent(reader.read(formatter.getByteCount()));
+```
 
-_**Ví dụ:** Listing 4-4: startSending_
-
-**- ĐỪNG DÙNG COMMENT KHI BẠN CÓ THỂ DÙNG HÀM HOẶC BIẾN**
-Hãy xem xét đoạn code sau:
-![img_1.png](img_1.png)
-
-Chúng có thể được viết lại mà không cần comment:
-![img_2.png](img_2.png)
-
-- Có thể tác giả đã viết comment trước (tôi đoán thế), và sau đó viết code để hoàn thành nội dung của comment. Tuy nhiên, tác giả nên tái cấu trúc code, như tôi đã làm, để comment được xóa mà không ảnh hưởng đến thông điệp của đoạn code đó.
-
-**- ĐÁNH DẤU LÃNH THỔ**
-- Thỉnh thoảng vài lập trình viên thích đánh dấu một vị trí trong tệp mã nguồn
-
-![img_3.png](img_3.png)
-
-**- CÁC COMMENT KẾT THÚC**
-- Mặc dù điều này có thể có ý nghĩa với các hàm dài và có nhiều cấu trúc lồng nhau, nhưng chúng lại thường được dùng trong các hàm nhỏ, hoặc các hàm mà lập trình viên thấy thích. Vì vậy lần tới nếu muốn đánh dấu kết thúc một khối lệnh phức tạp, hãy thử chia nhỏ hoặc rút ngắn hàm của bạn.
-
-Listing 4-6: wc.java
-
-![img_4.png](img_4.png)
-
-**- THUỘC TÍNH VÀ DÒNG TÁC GIẢ**
-
-![img_5.png](img_5.png)
-
-- Hệ thống quản lý mã nguồn ghi nhớ rất tốt việc ai đã thêm gì, thêm khi nào,.. 
-
-**- COMMENT-HÓA CODE**
-- Comment-hóa code (chuyển code thành comment) là một trong những thói quen khiến lập trình viên dễ bị ghét nhất. Đừng làm việc đó!
-
-![img_6.png](img_6.png)
-
-**- HTML COMMENT**
-
-![img_7.png](img_7.png)
+### 12- HTML Comment
+- Đừng đưa HTML vào comment 
+```html
+/**
+ * Task to run fit tests.
+ * This task runs fitnesse tests and publishes the results.
+ * <p/>
+ * <pre>
+ * Usage:
+ * &lt;taskdef name=&quot;execute-fitnesse-tests&quot;
+ * classname=&quot;fitnesse.ant.ExecuteFitnesseTestsTask&quot;
+ * classpathref=&quot;classpath&quot; /&gt;
+ * OR
+ * &lt;taskdef classpathref=&quot;classpath&quot;
+ * resource=&quot;tasks.properties&quot; /&gt;
+ * <p/>
+ * &lt;execute-fitnesse-tests
+ * suitepage=&quot;FitNesse.SuiteAcceptanceTests&quot;
+ * fitnesseport=&quot;8082&quot;
+ * resultsdir=&quot;${results.dir}&quot;
+ * resultshtmlpage=&quot;fit-results.html&quot;
+ * classpathref=&quot;classpath&quot; /&gt;
+ * </pre>
+ */
+```
 
 - Nó làm comment khó đọc trực tiếp nhưng lại dễ đọc hơn trên trình soạn thảo hoặc IDE khác
 
-**- THÔNG TIN PHI TẬP TRUNG**
-- Nếu bắt buộc phải viết một comment, hãy đảm bảo rằng nó giải thích cho phần code gần nó nhất. Đừng cung cấp thông tin của toàn bộ hệ thống trong một comment cục bộ.
+### 13- Comment cung cấp thông tin phi tập trung 
+- Nếu bắt buộc phải viết một comment, hãy đảm bảo rằng nó giải thích cho phần code gần nó nhất. Đừng cung cấp thông 
+tin của toàn bộ hệ thống trong một comment cục bộ.
 
-![img_8.png](img_8.png)
+```java
+/**
+ * Port on which fitnesse would run. Defaults to <b>8082</b>.
+ *
+ * @param fitnessePort
+ */
+public void setFitnessePort(int fitnessePort)
+{
+    this.fitnessePort = fitnessePort;
+}
+```
 
-**- QUÁ NHIỀU THÔNG TIN**
-
+### 14- Comment cung cấp quá nhiều thông tin lan man
 - Đừng đưa các cuộc thảo luận hoặc mô tả không liên quan vào comment của bạn.
-- Comment dưới đây được lấy ra từ một module có chức năng mã hóa và giải mã base64.
+```java
+/*
+ RFC 2045 - Multipurpose Internet Mail Extensions (MIME)
+ Part One: Format of Internet Message Bodies
+ section 6.8. Base64 Content-Transfer-Encoding
+ The encoding process represents 24-bit groups of input bits as output
+ strings of 4 encoded characters. Proceeding from left to right, a
+ 24-bit input group is formed by concatenating 3 8-bit input groups.
+ These 24 bits are then treated as 4 concatenated 6-bit groups, each
+ of which is translated into a single digit in the base64 alphabet.
+ When encoding a bit stream via the base64 encoding, the bit stream
+ must be presumed to be ordered with the most-significant-bit first.
+ That is, the first bit in the stream will be the high-order bit in
+ the first 8-bit byte, and the eighth bit will be the low-order bit in
+ the first 8-bit byte, and so on.
+ */
+```
 
-![img_9.png](img_9.png)
+### 15- Comment thiếu sự kết nối với đoạn code mà nó mô tả
 
-**- MỐI QUAN HỆ KHÓ HIỂU**
-- Sự kết nối giữa comment và code mà nó mô tả nên rõ ràng.
+- Comment phải mô tả cho những đoạn code khó hiểu chứ không phải viết 1 cách khó hiểu.
+```java
+/*
+ * start with an array that is big enough to hold all the pixels
+ * (plus filter bytes), and an extra 200 bytes for header info
+ * bắt đầu với một mảng đủ lớn để chứa tất cả các pixel
+ * (cộng với một số byte của bộ lọc), và thêm 200 byte cho tiêu đề
+ */
+ this.pngBytes = new byte[((this.width + 1) * this.height * 3) + 200];
+```
 
-![img_10.png](img_10.png)
+### 16- Comment làm tiêu đề cho hàm
+- Hãy đặt 1 cái tên hàm dài để thay cho 1 tên hàm ngắn mà còn phải bổ sung comment.
 
-- Một byte của bộ lọc nghĩa là gì? Nó có liên quan gì đến +1 không? Hay *3? Hay cả hai? Tại sao lại là giá trị 200 mà không phải giá trị khác? Mục đích của comment là để giải thích code, không phải giải thích chính nó. Thật đáng tiếc khi comment lại cần một lời giải thích cho riêng mình.
 
-**- COMMENT LÀM TIÊU ĐỀ CHO HÀM**
-- Các hàm ngắn không cần nhiều mô tả. Đặt một cái tên đủ tốt cho hàm thường tốt hơn việc đặt một comment ở trước hàm đó.
+## Tìm vấn đề trong đoạn code sau 
+### Code thúi
+```java
+/**
+ * This class Generates prime numbers up to a user specified
+ * maximum. The algorithm used is the Sieve of Eratosthenes.
+ * <p>
+ * Eratosthenes of Cyrene, b. c. 276 BC, Cyrene, Libya --
+ * d. c. 194, Alexandria. The first man to calculate the
+ * circumference of the Earth. Also known for working on
+ * calendars with leap years and ran the library at Alexandria.
+ * <p>
+ * The algorithm is quite simple. Given an array of integers
+ * starting at 2. Cross out all multiples of 2. Find the next
+ * uncrossed integer, and cross out all of its multiples.
+ * Repeat untilyou have passed the square root of the maximum
+ * value.
+ *
+ * @author Alphonse
+ * @version 13 Feb 2002 atp
+ */
+import java.util.*;
+public class GeneratePrimes
+{
+    /**
+    * @param maxValue is the generation limit.
+    */
+    public static int[] generatePrimes(int maxValue)
+    {
+        if (maxValue >= 2) // the only valid case
+        {
+            // declarations
+            int s = maxValue + 1; // size of array
+            boolean[] f = new boolean[s];
+            int i;
+            // initialize array to true.
+            for (i = 0; i < s; i++)
+            f[i] = true;
+            // get rid of known non-primes
+            f[0] = f[1] = false;
+            // sieve
+            int j;
+            for (i = 2; i < Math.sqrt(s) + 1; i++)
+            {
+                if (f[i]) // if i is uncrossed, cross its multiples.
+                {
+                    for (j = 2 * i; j < s; j += i)
+                    f[j] = false; // multiple is not prime
+                }
+            }
+            // how many primes are there?
+            int count = 0;
+            for (i = 0; i < s; i++)
+            {
+                if (f[i])
+                count++; // bump count.
+            }
+            int[] primes = new int[count];
+            // move the primes into the result
+            for (i = 0, j = 0; i < s; i++)
+            {
+                if (f[i]) // if prime
+                primes[j++] = i;
+            }
+            return primes; // return the primes
+        }
+        else // maxValue < 2
+        return new int[0]; // return null array if bad input.
+    }
+}
 
-**- JAVADOCS TRONG CODE KHÔNG CÔNG KHAI**
-
-VD: GeneratePrimes.java (example_01/example_02)
-
-- Thật dễ để chỉ ra comment đầu tiên là dư thừa vì nó đọc rất giống hàm generatePrimes. Tuy nhiên, tôi nghĩ rằng comment giúp người đọc dễ tiếp cận thuật toán, vì vậy tôi có xu hướng để lại nó.
-- Comment thứ hai chắc chắn là cần thiết. Nó giải thích lý do đằng sau việc sử dụng giá trị căn bậc hai làm giới hạn vòng lặp.
-
+```
+### Code sạch
+```java
+/**
+ * This class Generates prime numbers up to a user specified
+ * maximum. The algorithm used is the Sieve of Eratosthenes.
+ * Given an array of integers starting at 2:
+ * Find the first uncrossed integer, and cross out all its
+ * multiples. Repeat until there are no more multiples
+ * in the array.
+ */
+public class PrimeGenerator
+{
+    private static boolean[] crossedOut;
+    private static int[] result;
+    public static int[] generatePrimes(int maxValue)
+    {
+        if (maxValue < 2)
+            return new int[0];
+        else
+        {
+            uncrossIntegersUpTo(maxValue);
+            crossOutMultiples();
+            putUncrossedIntegersIntoResult();
+            return result;
+        }
+    }
+    private static void uncrossIntegersUpTo(int maxValue)
+    {
+        crossedOut = new boolean[maxValue + 1];
+        for (int i = 2; i < crossedOut.length; i++)
+            crossedOut[i] = false;
+    }
+    private static void crossOutMultiples()
+    {
+        int limit = determineIterationLimit();
+        for (int i = 2; i <= limit; i++)
+            if (notCrossed(i))
+                crossOutMultiplesOf(i);
+    }
+    private static int determineIterationLimit()
+    {
+        // Every multiple in the array has a prime factor that
+        // is less than or equal to the root of the array size,
+        // so we don't have to cross out multiples of numbers
+        // larger than that root.
+        double iterationLimit = Math.sqrt(crossedOut.length);
+        return (int) iterationLimit;
+    }
+    private static void crossOutMultiplesOf(int i)
+    {
+        for (int multiple = 2*i;
+                multiple < crossedOut.length;
+                multiple += i)
+            crossedOut[multiple] = true;
+    }
+    private static boolean notCrossed(int i)
+    {
+        return crossedOut[i] == false;
+    }
+    private static void putUncrossedIntegersIntoResult()
+    {
+        result = new int[numberOfUncrossedIntegers()];
+        for (int j = 0, i = 2; i < crossedOut.length; i++)
+            if (notCrossed(i))
+                result[j++] = i;
+    }
+    private static int numberOfUncrossedIntegers()
+    {
+        int count = 0;
+        for (int i = 2; i < crossedOut.length; i++)
+            if (notCrossed(i))
+                count++;
+        return count;
+    }
+}
+```
 
 
 
