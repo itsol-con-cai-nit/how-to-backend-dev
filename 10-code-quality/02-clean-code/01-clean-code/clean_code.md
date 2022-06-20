@@ -1,10 +1,12 @@
-#CLEAN CODE
+# CLEAN CODE
+
 ![Alt text](img_1.png?raw=true "Title")
-##Clean code là gì ?
+
+## Clean code là gì ?
 - Là code mà người khác có thể dễ dàng:  hiểu, sửa đổi và kiểm tra.
 
 
-##Tại sao lại cần Clean code ?
+## Tại sao lại cần Clean code ?
 - Clean code giúp code dễ bảo trì.
 - Giúp thể hiện trình độ lập trình viên.
 - Giúp người khác dễ đọc code hơn.
@@ -44,7 +46,7 @@ public class ReadableExample {
     // Windows: Ctrl + Alt + L
 }
 ```
-###Maintainable 
+### Maintainable 
 - Code có thể chỉnh sửa 1 cách dễ dàng
 
 ```java
@@ -77,9 +79,9 @@ float calculatePrice(int price, int vat, int sale, int number) {
         return totalPrice;
     }}
 ```
-###Testable
+### Testable
 - Code có thể test được
-###Expandable
+### Expandable
 - Code có thể mở rộng được (được áp dụng nhiều trong thiết kế hệ thống)
 ```java
 public class ExpandableExample {
@@ -98,7 +100,7 @@ public class ExpandableExample {
     }}
 
 ```
-##Yếu tố chính ảnh hưởng tới Clean code
+## Yếu tố chính ảnh hưởng tới Clean code
 - Định danh: Yêu cầu với biến, hàm, lớp hay package phải súc tích, đơn giản, dễ hiểu và thể hiện được ý nghĩa. Tuyệt đối không sử dụng những tên chung chung, khó hiểu hay dễ gây hiểu lầm.
 - Hàm: Yêu cầu đối với hàm khi đặt không quá dài, không làm nhiều nhiệm vụ khác nhau, và không có quá nhiều tham số. Đặc biệt, không nên quá lạm dụng ghi chú và sử dụng ghi chú không đúng mục đích.
 - Định dạng mã nguồn – Format: đây chính là các khoảng cách lùi đầu dòng.

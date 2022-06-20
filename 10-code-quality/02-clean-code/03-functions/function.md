@@ -1,6 +1,6 @@
-#CÁCH VIẾT HÀM
+# CÁCH VIẾT HÀM
 
-##So Sánh 2 hàm sau.
+## So Sánh 2 hàm sau.
 - Hàm 1: 
 ```java
 public static String testableHtml(
@@ -86,8 +86,8 @@ PageData pageData, boolean isSuite
 ```
 - Có thể thấy rằng hàm 2 dễ hiểu hơn hàm 1, vậy làm thế nào để đạt được sự dễ hiểu này.
 
-##Các quy tắc để hàm sạch
-###1- Hàm phải nhỏ 
+## Các quy tắc để hàm sạch
+### 1- Hàm phải nhỏ 
 - Các dòng không nên dài quá 150 ký tự, các hàm không nên quá 20 dòng
 - Ví dụ như hàm 2 bên trên còn có thể rút lại thành hàm 3.
 - Hàm 3:
@@ -102,12 +102,12 @@ PageData pageData, boolean isSuite) throws Exception {
 - Các khối lệnh trong câu lệnh if-else phải dài 1 dòng và dòng đó nên là một lời gọi hàm,
 giúp giữ cho các hàm nhỏ và bổ sung thêm giá trị tài liệu cho code.
 
-###2- Hàm chỉ thực hiện 1 việc
+### 2- Hàm chỉ thực hiện 1 việc
 - "HÀM CHỈ NÊN THỰC HIỆN MỘT VIỆC. CHÚNG NÊN LÀM TỐT VIỆC ĐÓ, VÀ CHỈ LÀM DUY NHẤT VIỆC ĐÓ"
 - Để biết hàm A đang làm nhiều hơn 1 việc: có thể trích suất 1 hàm khác từ hàm A, hàm được trích xuất có chức năng khác
 tên hàm A (ví dụ hàm 1 và 2)
 
-###3- Mỗi hàm là 1 cấp độ trừu tượng 
+### 3- Mỗi hàm là 1 cấp độ trừu tượng 
 - Cấp độ trừu tượng :
 - ![img_3.png](img_3.png)
   Mức độ phức tạp mà hệ thống được xem hoặc lập trình. Cấp càng cao thì càng ít chi tiết. Cấp càng thấp thì càng chi tiết.
@@ -117,7 +117,7 @@ nhất có thể là hàng triệu đối tượng
 - Đọc code từ trên xuống dưới: nguyên tắc Stepdown
 thứ tự của các dòng code, trên cùng là các hàm có cấp độ trừu tượng cao nhất, càng xuống dưới thì cấp độ trừu tượng càng thấp dần.
 
-###4- Câu lệnh switch.
+### 4- Câu lệnh switch.
 - Bản chất của câu lệnh switch là thực hiện nhiều việc, rất khó để sử dụng câu lệnh này trong 1 hàm mà hàm đó chỉ làm 1
 việc
 ```java
@@ -172,12 +172,12 @@ public class EmployeeFactoryImpl implements EmployeeFactory {
 - Factory Pattern xác định một interface để tạo một đối tượng, nhưng cho phép các lớp con quyết định lớp nào sẽ khởi tạo.
 Factory Pattern giao việc khởi tạo một đối tượng cụ thể cho lớp con
 
-###5- Dùng tên có tính mô tả
+### 5- Dùng tên có tính mô tả
 - Tên tốt là tên có thể mô tả được chức năng của hàm .
 - Đừng ngại đặt tên dài.
 - Thử nghiệm và tìm ra cái tên phù hợp.
 
-###6- Đối số của hàm
+### 6- Đối số của hàm
 - Số lượng đối số lý tưởng cho một hàm là không (niladic), tiếp đến là một (monadic), sau đó là hai (dyadic). Nên tránh
 trường hợp ba đối số (triadic) nếu có thể. Các hàm có nhiều hơn ba đối số (polyadic) chỉ cần thiết trong các trường hợp
 đặc biệt, và sau đó nên hạn chế sử dụng chúng đến mức thấp nhất.
@@ -205,7 +205,7 @@ Circle makeCircle(Point center, double radius);
   + Chọn tên tốt cho một hàm có thể góp phần giải thích ý định của hàm và mục đích của các
     đối số vd:  assertEquals có thể được cải tiến thành assertExpectedEqualsActual(expected, actual)
 
-###7- Không có tác dụng phụ
+### 7- Không có tác dụng phụ
  - Mỗi hàm chỉ làm 1 việc, đừng tạo ra các tác dụng phụ không nằm trong chức năng được nêu ở tên hàm.
 ```java
 public class UserValidator {
@@ -228,7 +228,7 @@ public class UserValidator {
 kiểm tra mật khẩu. Tên hàm không thông báo rằng nó khởi tạo session. Nếu bắt buộc phải khởi tạo sesion hãy nêu nó ở tên 
 hàm checkPasswordAndInitializeSession
  
-###8- Ưu tiên các trường hợp ngoại lệ để return mã lỗi
+### 8- Ưu tiên các trường hợp ngoại lệ để return mã lỗi
  - Khi trả về một mã lỗi, bạn tạo ra vấn đề mà nơi gọi phải xử lý lỗi ngay lập tức.
 ```java
 if (deletePage(page) == E_OK) {
@@ -287,12 +287,12 @@ private void logError(Exception e) {
    ngụ ý (như trong ví dụ trên) rằng nếu từ khóa try tồn tại trong một hàm, nó phải là từ đầu tiên trong hàm và không 
    được có gì khác sau các khối catch/ final.
 
-###9- Đừng lặp lại code của bạn
+### 9- Đừng lặp lại code của bạn
  - Sự trùng lặp có lẽ là gốc rễ của mọi tội lỗi trong lập trình. Nhiều nguyên tắc và kinh nghiệm đã được tạo ra cho mục 
 đích kiểm soát hoặc loại bỏ nó. Lập trình cấu trúc, lập trình hướng đối tượng (OOP), lập trình hướng khía cạnh (Aspect 
 Oriented Programming – AOP), lập trình hướng thành phần (Component Oriented Programming – COP), tất cả chúng đều có 
 chiến lược để loại bỏ code trùng lặp. Nó chứng minh rằng kể từ khi chương trình con được phát minh, các sáng kiến 
 trong ngành công nghiệp phát triển phần mềm đều nhắm đến việc loại bỏ những đoạn code trùng lặp ra khỏi mã nguồn.
 
-###10- Tôi đã viết các hàm này như thế nào?
+### 10- Tôi đã viết các hàm này như thế nào?
   - Viết và làm cho các hàm chạy trước, sau đó sắp xếp và clean lại sau.
