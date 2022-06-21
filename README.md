@@ -12,7 +12,10 @@
 	+ Threads & Concurency
 
 ## 1. Java
-- Java 8, 11, ...
+- Java version:
+	+ [8](https://github.com/truongbb/java-8-tutorial)
+	+ 11
+	+ ...
 - Concurrency: Thread Pool & Thread, Concurrent collection
 - Java NIO
 - Basic socket, RMI
