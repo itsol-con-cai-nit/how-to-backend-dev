@@ -1,8 +1,21 @@
 # how-to-backend-dev
 
+## 0. Basic knowledge
+- Git
+- Basic Linux: CentOS, Ubuntu, ...
+	+ Directory structure: opt, usr, var, home, etc, ...
+	+ Terminal usage & basic commands
+	+ SSH
+	+ Memory management
+	+ I/O management
+	+ Basic networking in Linux: ip, iptables, firewall, ...
+	+ Threads & Concurency
 
 ## 1. Java
-- Java 8, 11, ...
+- Java version:
+	+ [8](https://github.com/truongbb/java-8-tutorial)
+	+ 11
+	+ ...
 - Concurrency: Thread Pool & Thread, Concurrent collection
 - Java NIO
 - Basic socket, RMI
@@ -84,6 +97,10 @@
 - Streaming video
 
 ## 12. DevOps
+
+### 12.0
+- Getting deeper with Linux: 
+
 ### 12.1 Monitoring
 - JVM
 - EFK
