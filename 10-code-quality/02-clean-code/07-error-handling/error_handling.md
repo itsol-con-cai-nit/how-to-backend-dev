@@ -1,6 +1,6 @@
-#XỬ LÝ LỖI
+# XỬ LÝ LỖI
 
-##1- Sử dụng ngoại lệ thay vì để cho code xử lý
+## 1- Sử dụng ngoại lệ thay vì để cho code xử lý
 - Không nên dùng cách đặt cờ hay trả lại mã lỗi vì gây lộn xộn, việc code và xử lý lỗi bị trộn lẫn với nhau.
 - Trong ví dụ bên dưới có thể thấy rằng việc trả lại mã lỗi khiến cho người sử dụng hàm phải bắt lỗi ngay mà không phải
 lúc nào họ cũng biết là hàm này có lỗi hay nhớ phải bắt lỗi.
@@ -56,20 +56,20 @@ public class DeviceController {
 }
 ```
  
-##2- Viết khối Try-Catch-Finally
+## 2- Viết khối Try-Catch-Finally
 - Khi viết TCF hãy kiểm tra, tìm kiếm các ngoại lệ có thể xảy ra rồi mới bắt đầu xử lý các bước logic
 
-##3- Ưu tiên sử dụng Unchecked Exceptions
+## 3- Ưu tiên sử dụng Unchecked Exceptions
 - Lý do ko dùng các checked exceptions: Các checked exceptions khi sử dụng ở các cấp thấp sẽ dẫn đến thay đổi ở các cấp
 cao hơn, vi phạm nguyên tắc mở đóng (thay đổi sẽ không gây nên quá nhiều thay đổi trong các thành phần khác của chương trình).
 
 - Custom lại lớp exception theo nhu cầu của người gọi.
 
-##4- Cung cấp ngữ cảnh có ngoại lệ
+## 4- Cung cấp ngữ cảnh có ngoại lệ
 - Một ngoại lệ cần cung cấp đầy đủ thông tin để xác định nguyên nhân, vị trí lỗi
 - Nếu cần thiết hãy cung cấp thêm thông tin ở phần log.
 
-##5- Xác định ngoại lệ theo nhu cầu 
+## 5- Xác định ngoại lệ theo nhu cầu 
 - Có nhiều cách phân loại lỗi. Chúng ta có thể phân loại chúng theo nguồn của chúng: Chúng đến từ thành phần này hay
 thành phần khác? Hoặc loại của chúng: Chúng bị lỗi thiết bị, lỗi mạng, hoặc lỗi lập trình? Tuy nhiên, khi chúng ta xác
 định các lớp ngoại lệ trong một ứng dụng, mối quan tâm quan trọng nhất của chúng ta là cách chúng được bắt.
@@ -127,7 +127,7 @@ public class LocalPort {
 - Đóng gói API bên thứ 3 giúp giảm bớt sự phụ thuộc vào nó , thông thường 1 lớp ngoại lệ duy nhất là tốt cho 1 vùng code
 cụ thể.
 
-##5- Xác định dòng chảy bình thường
+## 5- Xác định dòng chảy bình thường
 - Khi code xử lý lỗi dùng để xử lý 1 trường hợp đặc biệt, hãy tạo ra 1 lớp hoặc cấu hình 1 đối tượng để  xử lý trường  hợp đặc biệt đó 
 -  Bên dưới là 1 trường hợp xử lý lỗi đặc biệt, lỗi đã trở thành 1 phần trong logic nghiệp vụ.
 ```java
@@ -151,7 +151,7 @@ public class PerDiemMealExpenses implements MealExpenses {
 }
 ```
 
-6- Đừng trả về null
+## 6- Đừng trả về null
 - Trả về null khiến cho người gọi hàm phải check null liên tục và không phải ai cũng nhớ việc check null.
 ```java
 public void registerItem(Item item) { 
@@ -189,7 +189,7 @@ public List<Employee> getEmployees() {
 }
 ```
 
-7- Đừng truyền vào null
+## 7- Đừng truyền vào null
 - Truyền null vào 1 hàm sẽ rắt dễ gây ra lỗi
 ```java
 public class MetricsCalculator {
