@@ -107,5 +107,4 @@ public class ExpandableExample {
 - Thiết kế và kiến trúc tồi: nó khiến quá trình mở rộng hay thay đổi theo yêu cầu thực tế gặp nhiều khó khăn.
 - Thiếu đi các bản kiểm thử: nó ảnh hưởng tới việc không đảm bảo được độ ổn định, chất lượng của mã nguồn.
 
-
-
+Nguồn: https://toihocdesignpattern.com/chuong-1-code-sach.html

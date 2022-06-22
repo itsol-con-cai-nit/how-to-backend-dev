@@ -296,3 +296,5 @@ trong ngành công nghiệp phát triển phần mềm đều nhắm đến vi�
 
 ### 10- Tôi đã viết các hàm này như thế nào?
   - Viết và làm cho các hàm chạy trước, sau đó sắp xếp và clean lại sau.
+
+Nguồn: https://toihocdesignpattern.com/chuong-3-cach-viet-ham.html

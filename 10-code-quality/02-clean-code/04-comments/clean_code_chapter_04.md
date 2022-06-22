@@ -561,10 +561,7 @@ public class PrimeGenerator
     }
 }
 ```
-
-
-
-
+Nguồn: https://toihocdesignpattern.com/chuong-4-comment-the-nao-cho-chuan.html
 
 
 

@@ -205,3 +205,5 @@ class normal{
 ```
 ### 13 -Quy tắc đặt ten trong Java
  https://niithanoi.edu.vn/6-quy-uoc-dat-ten-tieu-chuan-trong-java.html
+
+Nguồn: https://toihocdesignpattern.com/chuong-2-nhung-cai-ten-ro-nghia-quy-tac-dat-ten-bai-dich-clean-code-tieng-viet.html
