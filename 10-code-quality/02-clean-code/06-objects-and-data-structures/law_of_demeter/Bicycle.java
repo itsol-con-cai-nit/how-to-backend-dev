@@ -6,12 +6,12 @@ public class Bicycle extends Vehicle {
         super(wheel);
     }
 
-
-
     @Override
     boolean canMove() {
+        if(this.getWheel().getTension()>0.7){
+            return true;
+        }else
         return false;
     }
-
 
 }

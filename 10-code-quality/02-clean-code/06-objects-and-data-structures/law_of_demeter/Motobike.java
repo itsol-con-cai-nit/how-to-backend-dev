@@ -7,7 +7,7 @@ public class Motobike extends Vehicle {
 
     @Override
     boolean canMove() {
-        return false;
+        return this.getEngine().isWork() && this.getWheel().getTension() > 0.8;
     }
 
 }

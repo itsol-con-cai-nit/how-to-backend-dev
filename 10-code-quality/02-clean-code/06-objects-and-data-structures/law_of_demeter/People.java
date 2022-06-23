@@ -18,15 +18,13 @@ public class People {
         } }
 
         // đi xe máy
-        /*if (this.transport instanceof Motobike){
+        if (this.transport instanceof Motobike){
         if(this.transport.getWheel().getTension()>0.8 && this.transport.getEngine().isWork() ){
             System.out.println("Go to work");
             this.transport.move();
         }else{
             System.out.println("Work at hone");
-        } }*/
-
-
+        } }
     }
 
     public void goToWorkUpdated(){
