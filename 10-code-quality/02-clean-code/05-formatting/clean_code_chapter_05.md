@@ -30,7 +30,7 @@ cho hệ thống quan trọng như thư viện.
 
 ### Khoảng cách giữa code và các định nghĩa 
 - Viết code để đọc được từ trái qua phải, từ trẻn xuống dưới, mỗi dòng đại diện cho một biểu thức hoặc một mệnh đề,
-và mỗi nhóm dòng đại diện cho một mạch logic hoàn chỉnh. hững định nghĩa đó nên được tách biệt với nhau bằng những dòng trống.
+và mỗi nhóm dòng đại diện cho một mạch logic hoàn chỉnh. những định nghĩa đó nên được tách biệt với nhau bằng những dòng trống.
 
 ```java
 package fitnesse.wikitext.widgets;
@@ -139,7 +139,7 @@ private static void readPreferences(){
 }
 ```
 
-- Các biến điều khiển vòng lặp nên được khai báo trong vòng lặp, như ví dụ:
+- Các biến điều khiển vòng lặp nên được khai báo gần vòng lặp, như ví dụ:
 ```java
 public int countTestCases() {
     int count= 0;
@@ -410,7 +410,6 @@ public class CommentWidget extends TextWidget
 }
 ```
 
-![img_18.png](img_18.png)
 
 **- NHỮNG KHOẢNG TRỐNG GIẢ**
 - Hãy dùng 1 dấu phẩy xuống dòng để phần biệt các vòng lặp while hoặc vòng lặp for có một thân giả.

@@ -152,12 +152,12 @@ return buildList(text.substring(match.end()));
 ```
 
 ### 8- Javadocs trogn public APIs
-- Đây là các comment trong thuw viện để mô tả tính năng.
+- Đây là các comment trong thư viện để mô tả tính năng.
 
 ## Comment tồi
 
 ### 1- Comment độc thoại
-- Comment không diễn giải đầy đủ chỉ có tác giả hiểu ý nghĩa của comment.
+- Comment không diễn giải đầy đủ, chỉ có tác giả hiểu ý nghĩa của comment.
 
 ```java
 public void loadProperties()
@@ -317,7 +317,7 @@ public class wc {
 }
 ```
 
-### 10- Comment đánh dấu thuộc tính và dòng tắc giả
+### 10- Comment đánh dấu thuộc tính và tác giả
 - Không dùng comment để đánh dấu bản quyển, các IDE đã làm hộ việc này rồi.
 `/* Added by Rick */`
 

@@ -4,7 +4,7 @@
 - Cố gắng trừu tượng hóa dữ liệu  qua các cách: 
 ### 1-Đặt tên
 - Đặt tên tránh tiết lộ hình thức của dữ liệu.
-- Cách đặt tên chưa trừu tượng do dùng các thuật ngữ cụ thể để miêu tả hàm => người dùng biết rằng các hàm này chỉ là truy suất đến các biền.
+- Cách đặt tên chưa trừu tượng do dùng các thuật ngữ cụ thể để miêu tả hàm => người dùng biết rằng các hàm này chỉ là truy suất đến các biến.
 ```java
 public interface Vehicle {
     double getFuelTankCapacityInGallons();
