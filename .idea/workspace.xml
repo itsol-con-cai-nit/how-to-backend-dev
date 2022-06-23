@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="548e25e6-a5ed-4465-b625-d9e7867fdc2f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/how-to-backend-dev.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/a/3a5a0072e0d82bcfa5f50cd8d8344d2c68a4bf59" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/e/ae5aedaaa853cc3ca778082ac84901aac3fb3dde" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/d/bd4cab3988f36eb731a0d2697de69a9958c81c40" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/2/c239da44b5aa8e0bfc70ad292891832603d71389" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/Bicycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/Bicycle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/Engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/Motobike.java" beforeDir="false" afterPath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/Motobike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/10-code-quality/02-clean-code/06-objects-and-data-structures/law_of_demeter/People.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/10-code-quality/10-code-quality.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +46,7 @@
       <workItem from="1655870913361" duration="981000" />
       <workItem from="1655887164520" duration="288000" />
       <workItem from="1655951309443" duration="11883000" />
-      <workItem from="1655998098903" duration="816000" />
+      <workItem from="1655998098903" duration="1191000" />
     </task>
     <servers />
   </component>
