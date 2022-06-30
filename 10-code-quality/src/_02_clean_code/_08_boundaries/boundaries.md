@@ -7,6 +7,7 @@
 - Người viết thư viện thì muốn thư viện nhiều tính năng để thu hút người dùng, nhưng người dùng lại muốn những tính năng 
 tập trung vào nhu cầu cụ thể của họ
 - Nếu Map thay đổi thì sẽ rất nhiều code bị ảnh hưởng.
+
 ![img.png](img.png)
 ```java
        Map sensors = new HashMap();
