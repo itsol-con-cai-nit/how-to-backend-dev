@@ -78,17 +78,19 @@
 - Ba trạng thái của một repo:
 
 
-<p align="center">
-    <img width="460" src="./image/git-workflow.png">
-</p>
+    <p align="center">
+        <img width="460" src="./image/git-workflow.png">
+    </p>
 
 
-<p align="center">
-    <img width="460" src="./image/gitflow.png">
-</p>
-    - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
-    - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
-    - Git directory: nơi lưu trữ mã nguồn( github).
+    <p align="center">
+        <img width="460" src="./image/gitflow.png">
+    </p>
+        - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
+
+        - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
+        
+        - Git directory: nơi lưu trữ mã nguồn( github).
     
 - Tương ứng có các hành động - có 2 workflow:
 
@@ -121,20 +123,19 @@
     <img width="460" src="./image/push_err.png">
     </p>
     
-    Khi đó bạn cần phải pull về để đồng bộ những thay đổi của người khác, kiểm tra lại add, commit rồi mới push lên lại.
+        Khi đó bạn cần phải pull về để đồng bộ những thay đổi của người khác, kiểm tra lại add, commit rồi mới push lên lại.
     - Khi thực hiện pull/merge, git sẽ tự động tích hợp những chỗ thay đổi, tuy nhiên cũng có trường hợp không tích hợp tự động được. Đó là lúc có sự thay đổi ở cùng một nơi giống nhau giữa remote và local repo, git không biết lấy thay đổi từ đâu lúc nàu sẽ sinh ra xung đột(conflict) vd như hình bên dưới đây.
-
 
 
     <p align="center">
     <img width="460" src="./image/conflict.png">
     </p>
-        - Phần phía trên mà đã được chia ra bằng ==== là của local repository, phía dưới được hiển thị là nội dung chỉnh sửa của remote repository. Lúc này cần xóa 1 trong 2 những thay đổi đó để giải quyết xung đột.
+            - Phần phía trên mà đã được chia ra bằng ==== là của local repository, phía dưới được hiển thị là nội dung chỉnh sửa của remote repository. Lúc này cần xóa 1 trong 2 những thay đổi đó để giải quyết xung đột.
 
         
-    <p align="center">
-    <img width="460" src="./image/revise_conflict.png">
-    </p>
+            <p align="center">
+            <img width="460" src="./image/revise_conflict.png">
+            </p>
         
     - Trong lệnh git push có từ `orgin`, đây chính là `tên remote repo`, mặc định khi clone một repo thì nó đặt tên là origin.
 #### 4.1.2. Lấy dữ liệu từ Remote Repo
