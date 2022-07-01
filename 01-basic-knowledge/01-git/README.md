@@ -14,8 +14,8 @@
 <p align="center">
   <img width="460" height="300" src="./image/m%C3%B4_h%C3%ACnh_cvcs.png">
 </p>
-
     -  Các thành viên trong team có thể kết nối với nhau. Tuy nhiên:
+
         - Khi máy chủ gặp sự cố, các thành viên không thể kết nối với nhau.
         - Nếu ổ cứng máy chủ bị hỏng, các bản sao lưu dự phòng chưa kịp lưu lại thì thông tin sẽ bị thất thoát, thậm chí `mất tất cả`
 - **Hệ thống quản lý phiên bản phân tán(Distributed Version Control System - DVCSs)**
@@ -51,10 +51,10 @@
 - `Git` là một **Hệ thống quản lý dữ liệu phân tán**(*Distributed Version Control System - DVCS*) là một hệ thống quản lý phổ biến hiện nay. DVCS nghĩa là hệ thống giúp mỗi máy tính có thể lưu trữ nhiều phiên bản khác nhau của một mã nguồn được nhân bản (**clone**) từ một kho chứa mã nguồn (**repository**), mỗi thay đổi vào mã nguồn trên máy tính sẽ có thể ủy thác (**commit**) rồi đưa lên máy chủ nơi đặt kho chứa chính. Và một máy tính khác (nếu họ có quyền truy cập) cũng có thể clone lại mã nguồn từ kho chứa hoặc clone lại một tập hợp các thay đổi mới nhất trên máy tính kia.
 - Hiểu đơn giản **git** giúp lưu lại các phiên bản của những lần thay đổi vào mã nguồn và có thể dễ dang khôi phục lại, có thể xem những gì đã thay đổi,và ai đã thay đổi.
 ### Phân biệt Git & Github
-- Git là tên gọi của một mô hình hệ thống.
+- `Git` là tên gọi của một mô hình hệ thống.
 - `GitHub` là một trang web,cho phép người dùng tạo tài khoản, tạo kho chứa repo và cho phép lưu source code lên đó.
 
-![](./image/github-home.png?style=centerme)
+![](./image/github-home.png)
 ## 2. Tại sao nên dùng git?
 - Git dễ sử dụng, an toàn và nhanh chóng.
 - Có thể giúp quy trình làm việc code theo nhóm đơn giản hơn rất nhiều bằng việc kết hợp các phân nhánh (branch).
@@ -87,29 +87,26 @@
     <img width="460" src="./image/gitflow.png">
 </p>
     - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
-
     - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
-
-    - Git directory: nơi lưu trữ mã nguồn(github).
+    - Git directory: nơi lưu trữ mã nguồn( github).
     
-- Tương ứng có các hành động - 2 workflow:
+- Tương ứng có các hành động - có 2 workflow:
 
-   **Subversion-style()**:
+   **a. Subversion-style()**:
     1. Sau khi tạo xong repo, clone repo này về máy tính của bạn bằng lệnh `git clone địa_chỉ`.
     2. Checkout: tạo nhánh `git checkout tên_nhánh`
     3. Add: lưu file thay đổi(mang tính cục bộ)- tương ứng `git add tên_file`
     4. Commmit: ghi lại trạng thái thay đổi - tương ứng `git commit -m message`. Mỗi một commit sẽ đính kèm 1 *message* mô tả sự thay đổi của code.
-    5. Push: chia sẻ những thay đổi từ local lên remote repo - tương ứng lệnh `git push`. 
-    
-    
+    5. Push: chia sẻ những thay đổi từ local lên remote repo - tương ứng lệnh `git push`.
+
     <p align="center">
-    <img width="460" src="./image/push.png">
+        <img width="460" src="./image/push.png">
     </p>
     6. Pull: đồng bộ trạng thái từ server về máy trạm - tương ứng lệnh `git pull`.
     
 
 
-    **Integration Manager**: Tạm dịch là tích hợp quản lý, kiểu này hịn và chuyên nghiệp hơn.
+    **b. Integration Manager**: Tạm dịch là tích hợp quản lý, kiểu này hịn và chuyên nghiệp hơn.
 
     1. "Sao chép" repository về kho của mình, gọi là fock repo
     2. Clone fock repo từ kho về máy tính cá nhân.
