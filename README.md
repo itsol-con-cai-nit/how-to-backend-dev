@@ -1,7 +1,7 @@
 # how-to-backend-dev
 
 ## 0. Basic knowledge
-- Git
+- [Git](./01-basic-knowledge/01-git/README.md)
 - Basic Linux: CentOS, Ubuntu, ...
 	+ Directory structure: opt, usr, var, home, etc, ...
 	+ Terminal usage & basic commands
