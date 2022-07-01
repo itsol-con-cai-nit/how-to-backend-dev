@@ -77,20 +77,19 @@
 
 - Ba trạng thái của một repo:
 
+<p align="center">
+    <img width="460" src="./image/git-workflow.png">
+</p>
 
-    <p align="center">
-        <img width="460" src="./image/git-workflow.png">
-    </p>
+<p align="center">
+    <img width="460" src="./image/gitflow.png">
+</p>
 
+    - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
 
-    <p align="center">
-        <img width="460" src="./image/gitflow.png">
-    </p>
-        - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
+    - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
 
-        - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
-        
-        - Git directory: nơi lưu trữ mã nguồn( github).
+    - Git directory: nơi lưu trữ mã nguồn( github).
     
 - Tương ứng có các hành động - có 2 workflow:
 
