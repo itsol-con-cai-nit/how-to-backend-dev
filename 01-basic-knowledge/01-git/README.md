@@ -155,7 +155,7 @@ nothing added to commit but untracked files present (use "git add" to track)
     - **Modified**: là những files đã được git theo dõi và vừa mới có sự thay đổi nội dung files và những nội dung đó chưa được add vào staging area.
     - **Staged**: là những files đã được tạo mới hoặc mới sửa đổi và đã được đưa vào staging area
 #### c. Lệnh chuyển trạng thái
-- **Untracked sang Tracked**: git add tên_file hoặc git add --all.
+- **Untracked sang Tracked**: git add tên_file hoặc git add .
 - **Chuyển từ Tracked về Untracked**: sử dụng lệnh `rm tên_file` hoặc `git restore --staged tên_file`. Lệnh `rm` giúp đưa tập tin về trạng thái Untracked nhưng *không xóa hẳn* trong ổ cứng.
 Nếu muốn xóa luôn tập tin đó thì dùng lệnh: `git rm -f tên_file` và **nhớ cẩn thận** khi dùng lệnh này.
 - **Unmodified sang Modified**: đơn giản là sửa nội dung.
