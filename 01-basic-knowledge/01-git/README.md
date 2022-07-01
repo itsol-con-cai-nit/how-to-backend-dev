@@ -10,8 +10,10 @@
 ## VCS gồm:
 - **Hệ thống quản lý phiên bản tập trung (Centralized Version Control Systems - CVCSs)**
     - Mô hình này gồm 1 máy chủ có chứa tất cả các file đã được phiên bản hóa kèm theo danh sách các máy khách có quyền thay đổi các tập tin này trên máy chủ trung tâm đó.
-![](./image/m%C3%B4_h%C3%ACnh_cvcs.png?style=centerme)
 
+<p align="center">
+  <img width="460" height="300" src="./image/m%C3%B4_h%C3%ACnh_cvcs.png">
+</p>
 
     -  Các thành viên trong team có thể kết nối với nhau. Tuy nhiên:
         - Khi máy chủ gặp sự cố, các thành viên không thể kết nối với nhau.
@@ -19,9 +21,12 @@
 - **Hệ thống quản lý phiên bản phân tán(Distributed Version Control System - DVCSs)**
     - Trong DVCS các máy khách sao chép toàn bộ kho chứa(repository). Do đó chúng luôn có những bản sao chứa đầy đủ tất cả các dữ liệu. 
     
-    ![](./image/mô_hình_dvcs.png?style=centerme)
+    
+    <p align="center">
+    <img width="460" height="400" src="./image/mô_hình_dvcs.png">
+    </p>
     - Ngoài ra, DVCSs còn giải quyết được bài toán quản lý nhiều kho chứa từ xa, khi đó còn có thể cộng tác với nhiều nhóm người khác nhau theo những cách khác nhau trong cùng một dự án.
-    - Git là một trong những hệ thống quản lý đó, và 
+    - Git là một trong những hệ thống quản lý đó, và được sử dụng khá phổ biến hiện nay. 
 
 ## Điểm khác nhau giữa Git với các VCS khác
 - Phần lớn các VCS khác lưu thông tin dữ liệu dưới dạng:
@@ -29,13 +34,19 @@
     - Coi thông tin được lưu trữ như một tập hợp các tập tin.
     - Các thay đổi thực hiện trên mỗi tập tin theo thời gian.
 
-    ![](./image/dữ_liệu_vcs.png?style=centerme)
+    <p align="center">
+    <img width="460" src="./image/dữ_liệu_vcs.png">
+    </p>
+    
 - Git xem dữ liệu giống như:
     - Một tập hợp các "ảnh"(**snapshot**) trên mỗi tập tin và thư mục sau khi commit.
     - Mỗi lần bạn lưu lại trạng thái hiện tại của dự án, về cơ bản Git "chụp một bức ảnh" ghi lại nội dung của tất cả các tập tin tại thời điểm đó và tạo ra một tham chiếu tới "ảnh" đó.
     - Để hiệu quả hơn, nếu như tập tin không có sự thay đổi nào, Git không lưu trữ tập tin đó lại một lần nữa mà chỉ tạo một liên kết tới tập tin gốc đã tồn tại trước đó.
 
-   ![](./image/dư_liệu_git.png?style=centerme)
+
+   <p align="center">
+    <img width="460" src="./image/dư_liệu_git.png">
+    </p>
 ## 1. Khái niệm về Git
 - `Git` là một **Hệ thống quản lý dữ liệu phân tán**(*Distributed Version Control System - DVCS*) là một hệ thống quản lý phổ biến hiện nay. DVCS nghĩa là hệ thống giúp mỗi máy tính có thể lưu trữ nhiều phiên bản khác nhau của một mã nguồn được nhân bản (**clone**) từ một kho chứa mã nguồn (**repository**), mỗi thay đổi vào mã nguồn trên máy tính sẽ có thể ủy thác (**commit**) rồi đưa lên máy chủ nơi đặt kho chứa chính. Và một máy tính khác (nếu họ có quyền truy cập) cũng có thể clone lại mã nguồn từ kho chứa hoặc clone lại một tập hợp các thay đổi mới nhất trên máy tính kia.
 - Hiểu đơn giản **git** giúp lưu lại các phiên bản của những lần thay đổi vào mã nguồn và có thể dễ dang khôi phục lại, có thể xem những gì đã thay đổi,và ai đã thay đổi.
@@ -59,14 +70,22 @@
     - `Local repo`: kho này đặt trên máy của người dùng.
 - Do repository phân thành 2 loại là local và remote nên với những công việc bình thường thì có thể sử dụng local repository và thực hiện trên toàn bộ máy sẵn có. Khi muốn công khai nội dung công việc mà bản thân đã làm trên local repository, thì sẽ upload lên remote repository rồi công khai. Thêm nữa, thông qua remote repository cũng có thể lấy về nội dung công việc của người khác.
 
-    ![](./image/repo_git.png?style=centerme)
+    
+    <p align="center">
+    <img width="460" src="./image/repo_git.png">
+    </p>
 
 - Ba trạng thái của một repo:
 
-![](./image/git-workflow.png?style=centerme)
+
+<p align="center">
+    <img width="460" src="./image/git-workflow.png">
+</p>
 
 
-![](./image/gitflow.png?style=centerme)
+<p align="center">
+    <img width="460" src="./image/gitflow.png">
+</p>
     - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
 
     - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
@@ -75,20 +94,23 @@
     
 - Tương ứng có các hành động - 2 workflow:
 
-   - Subversion-style():
+   **Subversion-style()**:
     1. Sau khi tạo xong repo, clone repo này về máy tính của bạn bằng lệnh `git clone địa_chỉ`.
     2. Checkout: tạo nhánh `git checkout tên_nhánh`
     3. Add: lưu file thay đổi(mang tính cục bộ)- tương ứng `git add tên_file`
     4. Commmit: ghi lại trạng thái thay đổi - tương ứng `git commit -m message`. Mỗi một commit sẽ đính kèm 1 *message* mô tả sự thay đổi của code.
     5. Push: chia sẻ những thay đổi từ local lên remote repo - tương ứng lệnh `git push`. 
     
-    ![](./image/push.png?style=centerme)
+    
+    <p align="center">
+    <img width="460" src="./image/push.png">
+    </p>
     6. Pull: đồng bộ trạng thái từ server về máy trạm - tương ứng lệnh `git pull`.
     
 
-    Integration Manager
 
-    - Tạm dịch là tích hợp quản lý, kiểu này hịn và chuyên nghiệp hơn.
+    **Integration Manager**: Tạm dịch là tích hợp quản lý, kiểu này hịn và chuyên nghiệp hơn.
+
     1. "Sao chép" repository về kho của mình, gọi là fock repo
     2. Clone fock repo từ kho về máy tính cá nhân.
     3. Sau khi chỉnh sửa, push trạng thái mới lên fock repo.
@@ -97,16 +119,25 @@
     **Lưu ý**:
     - Git không cho phép bạn **push** lên máy chủ nếu ai đó đã **push** `trong khoảng thời gian` từ lần cuối cùng bạn **pull** về trở đi.
     
-    ![](./image/push_err.png?style=centerme) 
+    
+    <p align="center">
+    <img width="460" src="./image/push_err.png">
+    </p>
     
     Khi đó bạn cần phải pull về để đồng bộ những thay đổi của người khác, kiểm tra lại add, commit rồi mới push lên lại.
     - Khi thực hiện pull/merge, git sẽ tự động tích hợp những chỗ thay đổi, tuy nhiên cũng có trường hợp không tích hợp tự động được. Đó là lúc có sự thay đổi ở cùng một nơi giống nhau giữa remote và local repo, git không biết lấy thay đổi từ đâu lúc nàu sẽ sinh ra xung đột(conflict) vd như hình bên dưới đây.
 
 
-    ![](./image/conflict.png)
+
+    <p align="center">
+    <img width="460" src="./image/conflict.png">
+    </p>
         - Phần phía trên mà đã được chia ra bằng ==== là của local repository, phía dưới được hiển thị là nội dung chỉnh sửa của remote repository. Lúc này cần xóa 1 trong 2 những thay đổi đó để giải quyết xung đột.
 
-        ![](./image/revise_conflict.png)
+        
+    <p align="center">
+    <img width="460" src="./image/revise_conflict.png">
+    </p>
         
     - Trong lệnh git push có từ `orgin`, đây chính là `tên remote repo`, mặc định khi clone một repo thì nó đặt tên là origin.
 #### 4.1.2. Lấy dữ liệu từ Remote Repo
@@ -114,7 +145,10 @@
     - **git clone**: Lệnh này sẽ sao chép toàn bộ dữ liệu trên repository và sao chép luôn các thiết lập về repository, tức là nó sẽ tự động tạo một master branch trên máy tính của bạn. Lệnh này chỉ nên sử dụng khi bạn cần tạo mới một Git mới trên máy tính với toàn bộ dữ liệu và thiết lập của một remote repository.
     - **git pull**: Lệnh này sẽ tự động lấy toàn bộ dữ liệu từ remote repository và gộp vào cái branch hiện tại bạn đang làm việc.
     
-    ![](./image/pull.png)
+    
+    <p align="center">
+    <img width="460" src="./image/pull.png">
+    </p>
 
     - **git fetch**: Lệnh này sẽ lấy toàn bộ dữ liệu từ remote repository nhưng sẽ cho phép bạn gộp thủ công vào một branch nào đó trên thư mục Git ở máy tính.
 ### 4.2 Branch - nhánh của repo
@@ -145,9 +179,13 @@
 - **Staging Area** nghĩa là một khu vực mà nó sẽ được chuẩn bị cho quá trình commit. Trước hết, trong các hệ thống quản lý phiên bản (Version Control System) thì các dữ liệu sẽ được lưu trữ ở hai nơi, một là thư mục bạn đang làm việc trên *máy tính* và một là *kho chứa mã nguồn (repository)* sau khi bạn đã thực hiện thay đổi (ví dụ như kho chứa trên Github).
 - Với Git thì nó có thêm một lựa chọn nữa đó là có thêm một khu vực trung gian gọi là **Staging Area** và đây chính là một lợi thế lớn của Git. Staging Area nghĩa là khu vực sẽ lưu trữ những thay đổi của bạn trên tập tin để nó có thể được commit, vì muốn commit tập tin nào thì tập tin đó phải nằm trong Staging Area. Một tập tin khi nằm trong Staging Area sẽ có trạng thái là *Stagged* (xem thêm ở dưới). 
 
-![](./image/hd_staging_area.png?style=centerme)
+
+<p align="center">
+    <img width="460" src="./image/hd_staging_area.png">
+</p>
 - Để đưa một tập tin vào Staging Area thì bạn sẽ cần phải sử dụng lệnh `git add tên_file`
 #### 4.3.2. Commit là gì và cách hoạt động của nó?
+
 #### 4.3.2.1. Khái niệm
 - **Commit** nghĩa là một hành động để Git lưu lại một bản chụp (snapshot) của các sự thay đổi trong thư mục làm việc, và các tập tin và thư mục được thay đổi đã phải nằm trong Staging Area. Mỗi lần commit nó sẽ được lưu lại lịch sử chỉnh sửa của mã nguồn kèm theo tên và địa chỉ email của người commit.
 - Nếu bạn muốn đưa tập tin lên repository thì bạn phải commit nó trước rồi sau đó lệnh `git push origin master` sẽ có nhiệm vụ đưa toàn bộ các tập tin đã được commit lên repository.
@@ -164,7 +202,10 @@ Vd: `git commit -a -m "Skipped staging area to commit"`.
 
 #### 4.3.2.3. Tìm hiểu thêm về các trạng thái
 
-![](./image/vong_doi_status.png?style=centerme)
+
+<p align="center">
+    <img width="460" src="./image/vong_doi_status.png">
+</p>
 
 #### a. Untracked
 - Là files chưa được git theo dõi <=> là files chưa được add vào staging area bất cứ 1 lần nào <=> là files mới được tạo lần đầu tiên trong project source.
