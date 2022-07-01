@@ -5,7 +5,7 @@
 - Muốn kiểm tra những thay đổi: thay đổi ở đâu, như thế nào, ai đã thực hiện sự thay đổi đó...
 - Trường hợp file đang chia sẻ trong nhóm, nếu có hai người chỉnh sửa cùng lúc, thì sẽ xảy ra trường hợp xóa mất nội dung thay đổi của người đã chỉnh sửa trước đó.
 
-==>  Công cụ giúp quản lý phiên bản của source code ra đời: `**Hệ thống quản lý phiên bản(Version ControL System - VCS)**`.
+==>  Công cụ giúp quản lý phiên bản của source code ra đời: `Hệ thống quản lý phiên bản(Version Control System - VCS)`.
 
 ## VCS gồm:
 - **Hệ thống quản lý phiên bản tập trung (Centralized Version Control Systems - CVCSs)**
@@ -77,13 +77,13 @@
 
 - Ba trạng thái của một repo:
 
-<p align="center">
-    <img width="460" src="./image/git-workflow.png">
-</p>
+    <p align="center">
+        <img width="460" src="./image/git-workflow.png">
+    </p>
 
-<p align="center">
-    <img width="460" src="./image/gitflow.png">
-</p>
+    <p align="center">
+        <img width="460" src="./image/gitflow.png">
+    </p>
 
     - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
 
@@ -94,47 +94,54 @@
 - Tương ứng có các hành động - có 2 workflow:
 
    **a. Subversion-style()**:
-    1. Sau khi tạo xong repo, clone repo này về máy tính của bạn bằng lệnh `git clone địa_chỉ`.
-    2. Checkout: tạo nhánh `git checkout tên_nhánh`
-    3. Add: lưu file thay đổi(mang tính cục bộ)- tương ứng `git add tên_file`
-    4. Commmit: ghi lại trạng thái thay đổi - tương ứng `git commit -m message`. Mỗi một commit sẽ đính kèm 1 *message* mô tả sự thay đổi của code.
-    5. Push: chia sẻ những thay đổi từ local lên remote repo - tương ứng lệnh `git push`.
+
+    i. Sau khi tạo xong repo, clone repo này về máy tính của bạn bằng lệnh `git clone địa_chỉ`.
+
+    ii. Checkout: tạo nhánh `git checkout tên_nhánh`.
+
+    iii. Add: lưu file thay đổi(mang tính cục bộ)- tương ứng `git add tên_file`.
+    
+    iv. Commmit: ghi lại trạng thái thay đổi - tương ứng `git commit -m message`. Mỗi một commit sẽ đính kèm 1 *message* mô tả sự thay đổi của code.
+
+    v. Push: chia sẻ những thay đổi từ local lên remote repo - tương ứng lệnh `git push`.
 
     <p align="center">
         <img width="460" src="./image/push.png">
-    </p>
-    6. Pull: đồng bộ trạng thái từ server về máy trạm - tương ứng lệnh `git pull`.
-    
+    </p> 
+    vi. Pull: đồng bộ trạng thái từ server về máy trạm - tương ứng lệnh `git pull`.
 
 
     **b. Integration Manager**: Tạm dịch là tích hợp quản lý, kiểu này hịn và chuyên nghiệp hơn.
 
-    1. "Sao chép" repository về kho của mình, gọi là fock repo
-    2. Clone fock repo từ kho về máy tính cá nhân.
-    3. Sau khi chỉnh sửa, push trạng thái mới lên fock repo.
-    4. Tạo bản so sánh giữa 2 branch của 2 repo, gọi là pull request, gửi cho người quản lý có quyền merge code mới vào.
+    i. "Sao chép" repository về kho của mình, gọi là `fock repo`.
+
+    ii. Clone fock repo từ kho về máy tính cá nhân.
+
+    iii. Sau khi chỉnh sửa, push trạng thái mới lên fock repo.
+
+    iv. Tạo bản so sánh giữa 2 branch của 2 repo, gọi là `pull request`, gửi cho người quản lý có quyền merge code mới vào.
 
     **Lưu ý**:
-    - Git không cho phép bạn **push** lên máy chủ nếu ai đó đã **push** `trong khoảng thời gian` từ lần cuối cùng bạn **pull** về trở đi.
+    - Git không cho phép bạn **push** lên máy chủ nếu ai đó đã **push** `trong khoảng thời gian` từ lần `cuối cùng` bạn **pull** về trở đi.
     
     
-    <p align="center">
-    <img width="460" src="./image/push_err.png">
-    </p>
+        <p align="center">
+        <img width="460" src="./image/push_err.png">
+        </p>
     
         Khi đó bạn cần phải pull về để đồng bộ những thay đổi của người khác, kiểm tra lại add, commit rồi mới push lên lại.
     - Khi thực hiện pull/merge, git sẽ tự động tích hợp những chỗ thay đổi, tuy nhiên cũng có trường hợp không tích hợp tự động được. Đó là lúc có sự thay đổi ở cùng một nơi giống nhau giữa remote và local repo, git không biết lấy thay đổi từ đâu lúc nàu sẽ sinh ra xung đột(conflict) vd như hình bên dưới đây.
 
 
-    <p align="center">
-    <img width="460" src="./image/conflict.png">
-    </p>
+        <p align="center">
+        <img width="460" src="./image/conflict.png">
+        </p>
             - Phần phía trên mà đã được chia ra bằng ==== là của local repository, phía dưới được hiển thị là nội dung chỉnh sửa của remote repository. Lúc này cần xóa 1 trong 2 những thay đổi đó để giải quyết xung đột.
 
         
-            <p align="center">
-            <img width="460" src="./image/revise_conflict.png">
-            </p>
+        <p align="center">
+        <img width="460" src="./image/revise_conflict.png">
+        </p>
         
     - Trong lệnh git push có từ `orgin`, đây chính là `tên remote repo`, mặc định khi clone một repo thì nó đặt tên là origin.
 #### 4.1.2. Lấy dữ liệu từ Remote Repo
@@ -151,6 +158,11 @@
 ### 4.2 Branch - nhánh của repo
 #### 4.2.1. Đặc điểm
 - Các nhánh sẽ *độc lập* với nhau và phát triển một *tính năng* hoặc làm một nhiệm vụ nào đó, không ảnh hưởng đến các nhánh khác.
+
+    <p align = center>
+    <img width="460" src="./image/branch.png">
+    </p>
+
 - Khi các nhánh hợp nhất lại với nhau gọi là **merge**, thông thường nhánh mặc định là **master**.
 - Branch ở trên local repo thì gọi là *local branch*.
 - Branch ở trên remote repo thì gọi là *remote branch*.
@@ -161,15 +173,16 @@
 - Việc merge code được thực hiện lần lượt, vd từ nhánh nhỏ trong dev -> dev -> master.
 #### 4.2.2. Thao tác với branch
 - Tạo 1 branch: 
-    - Xem toàn bộ branch có trong working tree: git branch
-    - Tạo 1 branch: git branch tên_nhánh
-- Checkout 1 branch:
-    - git checkout tên_nhánh
+    - Xem toàn bộ branch có trong working tree: `git branch`
+    - Tạo 1 branch: `git branch tên_nhánh`
+- Checkout chuyển sang 1 branch khác:
+    - `git checkout tên_nhánh`
+    - Kết hợp tạo branch và checkout: `git checkout -b tên_nhánh` 
 - Xóa 1 branch:
-    - git branch -d tên_nhánh
+    - `git branch -d tên_nhánh`
 - Merge 2 branch:vd merge dev vào master
     - Checkout sang nhánh master
-    - Sử dụng lệnh: git merge dev
+    - Sử dụng lệnh: `git merge dev`
 
 ### 4.3 Staging Area
 #### 4.3.1. Khái niệm
