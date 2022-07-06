@@ -74,7 +74,18 @@
     <p align="center">
     <img width="460" src="./image/repo_git.png">
     </p>
+- Lệnh tạo Repo: `git init`
 
+    Khi chúng ta chạy lệnh $ git init thì một thư mục ẩn được tạo ra đó là .git, thư mục này sẽ chứa toàn bộ database và các thao tác của dự án, nó có một số thư mục con và một số file quan trọng gồm: HEAD, branches/, config, description, hooks/ index, info/, objects/, refs/.
+         <p align="center">
+        <img width="460" src="./image/tệp_git.png">
+        </p>   
+    Trong đó bạn cần chú ý đến thư mục objects vì đây là thư mục chứa toàn bộ database, nó có 4 objects như sau:
+
+        - tree: là directory
+        - blob: là file
+        - commit
+        - tag
 - Ba trạng thái của một repo:
 
     <p align="center">
@@ -85,17 +96,17 @@
         <img width="460" src="./image/gitflow.png">
     </p>
 
-    - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...
+    - Working directory: đây là nơi bạn thực hiện các thao tác chỉnh sửa với file mã nguồn của mình. ví dụ: notepad++, visual code...Tương ứng trạng thái **Modified**
 
-    - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save.
+    - Staging area: đây là một khu vực trung gian mà commit có thể được định dạng và xem lại trước khi hoàn thành. Những thay đổi của bạn với file mã nguồn được lưu lại, giống như Save. Tương ứng trạng thái **Staged**
 
-    - Git directory: nơi lưu trữ mã nguồn( github).
+    - Git directory: nơi lưu trữ mã nguồn( github), tiếp nhận và lưu trữ các commit từ stage area. Tương ứng trạng thái **Committed**
     
 - Tương ứng có các hành động - có 2 workflow:
 
    **a. Subversion-style()**:
 
-    i. Sau khi tạo xong repo, clone repo này về máy tính của bạn bằng lệnh `git clone địa_chỉ`.
+    i. Sau khi tạo xong repo, clone repo này về máy tính của bạn bằng lệnh `git clone địa_chỉ_git`.
 
     ii. Checkout: tạo nhánh `git checkout tên_nhánh`.
 
@@ -172,15 +183,23 @@
 - Một số branch nhỏ như **dev**( *kiểm thử lại chức năng*), **feature**( *xây dựng các tính năng mới*).
 - Việc merge code được thực hiện lần lượt, vd từ nhánh nhỏ trong dev -> dev -> master.
 #### 4.2.2. Thao tác với branch
-- Tạo 1 branch: 
+- **Tạo 1 branch**: 
     - Xem toàn bộ branch có trong working tree: `git branch`
+        <p align = center>
+         <img width="500" height = 50 src="./image/2022-07-06.png">
+        </p>
+         Git sử dụng dấu hoa thị và phông chữ có màu khác để xác định nhánh nào đang hoạt động. Ký hiệu này đại diện cho con trỏ **HEAD** hiển thị nhánh nào đang hoạt động.
+
     - Tạo 1 branch: `git branch tên_nhánh`
-- Checkout chuyển sang 1 branch khác:
+
+         *Lưu ý*: Đặt tên nhánh có thể dựa trên quy chuẩn `tính_năng/thời_gian/người_thực_hiện/mô_tả_công_việc` sẽ thực hiện.
+            vd: feature/20220629_gut, fixbug/20220607_gtgc.... 
+- **Checkout chuyển sang 1 branch khác**:
     - `git checkout tên_nhánh`
     - Kết hợp tạo branch và checkout: `git checkout -b tên_nhánh` 
-- Xóa 1 branch:
+- **Xóa 1 branch**:
     - `git branch -d tên_nhánh`
-- Merge 2 branch:vd merge dev vào master
+- **Merge branch**: tức là gộp hai branch lại với nhau, thao tác này thường dùng để merge branch khác vào branch master trước khi push lên remote repository, hoặc merge hai branch thành một để giải quyết chung một task.vd merge dev vào master
     - Checkout sang nhánh master
     - Sử dụng lệnh: `git merge dev`
 
@@ -194,12 +213,15 @@
     <img width="460" src="./image/hd_staging_area.png">
 </p>
 - Để đưa một tập tin vào Staging Area thì bạn sẽ cần phải sử dụng lệnh `git add tên_file`
+
 #### 4.3.2. Commit là gì và cách hoạt động của nó?
 
 #### 4.3.2.1. Khái niệm
-- **Commit** nghĩa là một hành động để Git lưu lại một bản chụp (snapshot) của các sự thay đổi trong thư mục làm việc, và các tập tin và thư mục được thay đổi đã phải nằm trong Staging Area. Mỗi lần commit nó sẽ được lưu lại lịch sử chỉnh sửa của mã nguồn kèm theo tên và địa chỉ email của người commit.
+- **Commit** nghĩa là một hành động để Git lưu lại một bản chụp (snapshot) của các sự thay đổi trong thư mục làm việc, và các tập tin và thư mục được thay đổi đã phải nằm trong Staging Area. Lênh commit sẽ băm các file và lưu chúng dưới dạng đối tượng tree (thư mục), trong tree sẽ chứa tất cả các blob (tức là các file trên) và mỗi blod sẽ trỏ đến file gốc của nó. Sau đó nó tạo một đối tượng commit chứa các thông tin metadata như author, email, message ... và đặc biệt là đối tượng commit này có một con trỏ trỏ tới đối tượng tree, vì vậy ta có thể tái tạo lại history thông qua đối tượng commit này.
+
 - Nếu bạn muốn đưa tập tin lên repository thì bạn phải commit nó trước rồi sau đó lệnh `git push origin master` sẽ có nhiệm vụ đưa toàn bộ các tập tin đã được commit lên repository.
 - Khi commit yêu cầu có commit message. Vì message này giúp chúng ta khi xem lại có thể hiểu được là tập tin này đã được chỉnh sửa nội dung gì...
+
 #### 4.3.2.2. Điều kiện để commit một tập tin
 - Nếu muốn commit một tập tin nào đó thì cần phải đưa tập tin đó vào trạng thái tracked bằng lệnh `git add tên_file`. trong git có 2 loại trạng thái chính là **Tracked** và **Untracked**.
     - **Tracked**: là tập tin được đánh dấu theo dõi trong Git để làm việc với nó. Nó có thêm các trạng thái phụ khác: Unmodified(chưa chỉnh sửa gì), Modified (đã chỉnh sửa) và Staged (đã sẵn sàng để commit).
@@ -241,15 +263,71 @@ Nếu muốn xóa luôn tập tin đó thì dùng lệnh: `git rm -f tên_file` 
 - **Modified về UnModified**: `git restore tên_file` hoặc `git restore .` (chuyển all).
 - **Modified sang Staged**: git add
 - **Staged về Modified**: `git restore --staged` hoặc `git restore --staged .` (all)
-- Bỏ tập tin ra khỏi Staging Area: git reset HEAD tên_file. (HEAD tượng trưng cho con trỏ chỉ cho bạn biết bạn đang nằm ở đâu)
+- Bỏ tập tin ra khỏi Staging Area: `git reset HEAD tên_file`. (HEAD tượng trưng cho con trỏ chỉ cho bạn biết bạn đang nằm ở đâu)
 ### Một số lệnh khác
 - **`git log`** hoặc **`git diff`**: xem lịch sử commit
-- **`git status`**: xem trạng thái của gist repo xem đang ở nhánh nào, có thay đổi gì không.
+- **`git status`**: xem trạng thái của git repo xem đang ở nhánh nào, có thay đổi gì không.
 - **`git reset`**: để xóa sự thay đổi về trạng thái ban đầu chưa sửa hoặc về bất cứ commit nào trong quá khứ
-- **`Stash`**: Là tính năng lưu tạm các sự thay đổi vào local khi chúng ta đang làm code dở ở nhánh A nhưng lại chưa muốn commit thì chúng ta phải sang nhánh B để fix bug nên chúng ta phải stash lại để không bị mất code cũng không phải commit. Khi quay lại nhánh A sẽ apply stash để sửa tiếp.
+- **`git stash`** trở về trạng thái ban đầu: là lệnh dùng để thiết lập trạng thái ban đầu cho tất cả các file nằm trong thư mục làm việc (working directory), điều kiện là dữ liệu đó đã được đưa vào trạng thái Staged hoặc đã từng được committed. Trạng thái ban đầu ở đây chính là nội dung dữ liệu ban đầu của file (so với commit cuối cùng hoặc pull từ remote repository).
     - `git stash save` --lưu change hiện tại vào stash
     - `git stash list` --hiển thị danh sách stash
+    - `git stash drop <stash>`: xóa 1 stash ra khỏi lịch sử, stash truyền vào dạng *stash@{0,1,2....}*
     - `git stash apply <stash_name>` --đẩy changes từ 1 stash vào một nhánh
+    - `git stash show`: xem chi tiết 1 stash , so sánh nó với dữ liệu ban đầu
+    - `git stash clear`: xóa tất cả stash
+- `Git --amend`: thay đổi commit cuối cùng
+
+    Trong một số trường hợp bạn commit nhưng bị quên add một số file nào đó và bạn không muốn tạo ra một commit mới thì có thể sử dụng lệnh commit kết hợp tham số --amend để gộp các file đó và bổ sung vào commit cuối cùng, vì vậy không tạo ra commit mới.  
+    Cú pháp lệnh:
+
+    - `git add file_cần_thêm`
+    - `git commit --amend` 
+- `Tích hợp nhánh`
+
+    Git rebase và git merge là 2 câu lệnh được sử dụng để giải quyết việc tích hợp những thay đổi từ 1 nhánh này vào 1 nhánh khác. Tuy nhiên cách thức của chúng sẽ khác nhau.
+    <p align="center">
+    <img width="460" src="./image/history_commit.png">
+    </p>
+#### **Merge**
+
+Ví dụ merge branch `master` vào branch `Feature` bằng cách :
+-  `git checkout Feature`
+-  `git merge master`
+
+    Câu lệnh trên sẽ tạo ra một `merge commit` mới trên branch `Feature` bao gồm lịch sử của cả 2 branch (Hình minh họa)
+
+<p align="center">
+<img width="460" src="./image/merge_branch.png">
+</p>
+
+    Ưu điểm: Merging không làm thay đổi hệ thống. Những nhánh đang tồn tại sẽ không bị ảnh hưởng gì cả. 
+
+    Nhược điểm: Branch Feature sẽ có thêm 1 commit merge mỗi lần bạn cần tích hợp những thay đổi từ các nhánh khác vào nó. Nếu branch master liên tục bị thay đổi thì lịch sử commit của branch Feature sẽ rất khó nhìn. Nó sẽ gây rất nhiều khó khăn trong việc xem lại lịch sử commit của dự án
+#### **Rebase**
+`Git rebase`: là 1 tiện ích git được dùng để tích hợp các thay đổi từ nhánh này sang nhánh khác. Rebasing là quá trình kết hợp hoặc di chuyển 1 chuỗi các commit trên một commit cơ sở mới.
+
+Cũng là một cách gộp những thay đổi từ các nhánh với nhau bằng commands:
+
+- `git checkout Feature`
+
+- `git rebase master`
+
+Lệnh `git rebase` sẽ đưa toàn bộ nhánh `master` làm base của `Feature`. Nhưng thay vì dùng một commit merge, nó sẽ viết lại lịch sử của project bằng cách tạo các commit hoàn toàn mới cho mỗi commit ở nhánh ban đầu.
+
+<p align="center">
+<img width="460" src="./image/rebase_branch.png">
+</p>
+
+Lợi ích chính của việc `rebasing` này là lịch sử project sẽ gọn gàng & sạch sẽ hơn. Đầu tiên, nó sẽ loại bỏ những `commit merge` không cần thiết mà được sinh ra bởi git merge. Sau đó, như bạn đã thấy trên biểu đồ phía trên, `rebasing` sẽ tạo ra `một đường thẳng commit` trong lịch sử commit
+
+- Nếu có 1 số xung đột trong nhánh, hãy giải quyết chúng và thực hiện lệnh dưới đây để tiếp tục thay đổi: `git rebase --continue` 
+
+**Khác nhau**:
+
+- `Merge`: Thao tác merge là kết quả của phép trộn giữa ba commit, đó là commit cha chung và 2 commit mới nhất của 2 nhánh (hai điểm kết thúc), kết quả sẽ tạo ra một commit chứa kết quả của phép trộn.
+- `Rebase`: Cho lịch sử rõ ràng hơn, bởi nó sẽ duyệt qua từng commit của nhánh đang làm việc và thực hiện thay đổi, vì vậy nhìn vào ta sẽ thấy giống như một đường thẳng.
+
+==> Nếu bạn muốn một lịch sử commit gọn gàng, chỉ có 1 hàng trên cây commit thôi, thì bạn `git rebase` sẽ phù hợp với bạn
 
 
 # Tài liệu tham khảo
