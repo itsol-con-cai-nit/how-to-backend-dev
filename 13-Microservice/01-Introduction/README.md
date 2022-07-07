@@ -4,11 +4,11 @@
 
 - Trước khi ý tưởng về `microservice` phát triển, hầu hết ứng dụng được xây dựng theo `monolithic architectural style`
 - Tất cả UI, business, và database access logic được đóng gói cùng nhau trong a single application duy nhất và đươc
-  deploy lên a application server
+  deploy lên a application server.
 - Vấn đề ở đây là kích thước và độ phức tạp của ứng dụng lớn lên. Mỗi lần, một team cần sự thay đổi, toàn bộ ứng dụng
   cần rebuilt, retested and redeployed.
 - Khái niệm về một `microservice` ban đầu len lỏi vào ý thức của cộng đồng phát triển phần mềm vào khoảng năm 2014 và là
-  một phản hồi trực tiếp đến nhiều thủ thách của cố gắng mở rộng quy mô cả về mặt kỹ thuật và tổ chức, các monolithic
+  một phản hồi trực tiếp đến nhiều thử thách của cố gắng mở rộng quy mô cả về mặt kỹ thuật và tổ chức, các monolithic
   applications.
 - Microservices cho phép bạn phân rã một ứng dụng lớn thành các thành phần dễ quản lý với các trách nhiệm được xác định
   hẹp (cụ thể).
@@ -107,5 +107,19 @@
 
 ![Alt text](Figure1.14-UsingATokenBased.png?raw=true "Title")
 
+# 1.10 Microservice logging and tracing patterns
 
+- Nhược điểm của Microservice architecture là khó để debug, trace and monitor những vấn đề bởi vì một hành động đơn giản
+  có thể liên quan đến nhiều microservice.
+  ![Alt text](Figure1.15-LoggingAndTracing.png?raw=true "Title")
+
+# 1.11 Application metrics pattern
+
+- The application metrics pattern: monitor metrics and warn các nguyên nhân có thể gây ra lỗi
+
+  - Metrics: Thông tin về health và số liệu.
+  - Metrics service: Store và query the application metrics.
+  - Metrics visualization suite: Trực quan dữ liệu.
+  
+    ![Alt text](Figure1.16-Metrics.png?raw=true "Title")
 
