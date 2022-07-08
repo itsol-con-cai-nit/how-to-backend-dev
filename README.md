@@ -111,6 +111,20 @@
 - Sentry
 - Kubernetes
 ### 12.2 Containerization & Virtualization: Docker
+- Docker fundamental
+	+ What is Docker?
+	+ Why docker & containerization?
+	+ Virtual machines & docker containers
+	+ Docker setup
+- Docker images & docker containers
+- Docker volumes
+- Docker networks
+- Dockerfile
+- Docker compose
+- Docker registry
+- Docker Swarm
+- Container Orchestration
+- Best practices
 ### 12.3 CI/CD
 - Jenkin
 - Gitlab CI
