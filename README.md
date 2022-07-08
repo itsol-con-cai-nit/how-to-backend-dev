@@ -86,7 +86,7 @@
 
 ## 10. Code quality
 - Coding convention
-- Clean code
+- [Clean code](./10-code-quality/02-clean-code/)
 - Sonar
 
 ## 11. Technologies & Frameworks
