@@ -4,11 +4,12 @@
 <img width = '500' src = "./image/git.png">
 </p>
 
-1. [Tổng  quan về git](https://github.com/itsol-con-cai-nit/how-to-backend-dev/tree/feature/20220629_git/01-basic-knowledge/01-git/01-tổng-quan.md)
-2. [Git repository](https://github.com/itsol-con-cai-nit/how-to-backend-dev/tree/feature/20220629_git/01-basic-knowledge/01-git/02-Repository.md)
-3. [Git branch](https://github.com/itsol-con-cai-nit/how-to-backend-dev/tree/feature/20220629_git/01-basic-knowledge/01-git/03-Branch.md)
-4. [Git Strage Area - Commit](https://github.com/itsol-con-cai-nit/how-to-backend-dev/tree/feature/20220629_git/01-basic-knowledge/01-git/04-Staging-Area.md)
-5. [Một số lệnh khác](https://github.com/itsol-con-cai-nit/how-to-backend-dev/tree/feature/20220629_git/01-basic-knowledge/01-git/05-lệnh#.md)
+1. [Tổng  quan về git](./01-overview-git.md)
+2. [Git repository](./02-Repository.md)
+3. [Git branch](./03-Branch.md)
+4. [Git Strage Area - Commit](./04-Staging-Area.md)
+5. [Một số lệnh khác](./05-other-commands.md)
+
 # Tài liệu tham khảo
 [1] [Git-Học nghiêm túc một lần](http://https://viblo.asia/p/git-hoc-nghiem-tuc-mot-lan-phan-1-OeVKBo6JZkW)
 
