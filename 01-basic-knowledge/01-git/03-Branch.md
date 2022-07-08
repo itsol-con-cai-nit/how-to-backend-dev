@@ -22,12 +22,12 @@
     - Checkout sang nhánh master
     - Sử dụng lệnh: `git merge dev`
 
-`Tích hợp nhánh`
+# `Merging and Rebasing`
 
     Git rebase và git merge là 2 câu lệnh được sử dụng để giải quyết việc tích hợp những thay đổi từ 1 nhánh này vào 1 nhánh khác. Tuy nhiên cách thức của chúng sẽ khác nhau.
-    <p align="center">
-    <img width="460" src="./image/history_commit.png">
-    </p>
+<p align="center">
+<img width="460" src="./image/history_commit.png">
+</p>
 #### **Merging**
     Ví dụ merge branch `master` vào branch `Feature` bằng cách :
 -  `git checkout Feature`
