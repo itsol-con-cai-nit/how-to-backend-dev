@@ -1,7 +1,5 @@
-## Spring Microservices in Action - Second Edition. Chapter 5
-
 # Introduction
-Welcome to Spring Microservices in Action, Chapter 5.  Chapter 5 introduces the Spring Cloud Config service and how you can use it managed the configuration of your microservices.  By the time you are done reading this chapter you will have built and/or deployed:
+Welcome to Spring Microservices in Action, Chapter 2.  Chapter 2 introduces the Spring Cloud Config service and how you can use it managed the configuration of your microservices.  By the time you are done reading this chapter you will have built and/or deployed:
 
 1.  A Spring Cloud Config server that is deployed as Docker container and can manage a services configuration information using a file system/ classpath or GitHub-based repository.
 2.  A licensing service that will manage licensing data used within Ostock.
