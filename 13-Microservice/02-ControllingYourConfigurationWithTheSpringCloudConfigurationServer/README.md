@@ -75,8 +75,7 @@
 
 ![Alt text](Image/Figure5.8-RetrievingConfiguration.png?raw=true "Title")
 
-- Khi licensing service khởi chạy, nó sẽ liên hệ Spring Cloud Config service thông qua endpoint để build Spring
-  profile.
+- Khi licensing service khởi chạy, nó sẽ liên hệ Spring Cloud Config service thông qua endpoint để build Spring profile.
 - The Spring Cloud Config service sau đó sẽ sử dụng configured backend repository (filesystem, Git, or Vault) để lấy
   thông tin
 - Spring profile value được chuyển qua URI. Các thuộc tính thích hợp sau đó sẽ chuyển về licensing service.
@@ -111,6 +110,7 @@
 - Cung cấp một cơ chế dễ dàng để tích hợp việc triển khai property configuration files trong việc build và deployment
   pipeline.
   ![Alt text](Image/Figure5.13-Adding Git support to the Spring Cloud.png?raw=true "Title")
+
 - Spring.profiles.active: thuộc tính đặt tất cả active profiles for the Spring Config service.
 - Spring.cloud.config.server.git: thuộc tính thông báo cho Spring Cloud Config Server để sử dụng non-filesystem-based
   backend repository.
