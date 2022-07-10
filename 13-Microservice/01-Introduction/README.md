@@ -65,7 +65,25 @@
   Elasticsearch, và Logstash để quản lý logs và sử dụng Spring Boot Actuator, Prometheus, and Grafana để hiển thị the
   application metrics.
 
-# 1.4 Why the cloud and microservices ?
+# 1.4 What exactly is cloud computing?
+
+- Cloud computing là nơi cung cấp các dịch vụ computing và virtualized IT services—databases, networking, software,
+  servers, analytics ... Thông qua internet để cung cấp môi trường linh hoạt, bảo mật và dễ sử dụng.
+- The cloud computing để người dùng chọn mức độ quản lí thông tin và service những cái mà họ cung
+  cấp (` anything as a service.`)
+    - Infrastructure as a Service (IaaS) : Nhà cung cấp cung cấp cơ sở hạ tầng cho phép bạn truy cập s computing
+      resources such as servers, storage, and networks.( AWS (EC2), Azure Virtual Machines, Google Compute Engine, and
+      Kubernetes )
+    - Container as a Service (CaaS) : Ảo hóa dựa theo vùng chứa ( such as docker )
+    - Platform as a Service (PaaS) : Một môi trường tập trung vào development, execution, and maintenance of the
+      application (Google App Engine, Cloud Foundry, Heroku, and AWS Elastic Beanstalk)
+    - Function as a Service (FaaS) : Chạy và quản lý các chức năng của ứng dụng mà không phức tạp trong việc xây dựng và
+      duy trì cơ sở hạ tầng thường liên quan đến việc phát triển và khởi chạy ứng dụng.
+    - Software as a Service (SaaS): Còn được gọi là phần mềm theo yêu cầu. Cho phép người dùng sử dụng một ứng dụng cụ
+      thể mà không cần phải triển khai hoặc duy trì nó.
+      ![Alt text](Figure1.9-The different cloud computing models.png?raw=true "Title")
+
+# 1.5 Why the cloud and microservices ?
 
 - Một trong những khái niệm cốt lõi của `a microservice architecture` là mỗi service được đóng gói và deployed độc lập.
   Service instances nên được đưa lên nhanh chóng và chúng không thể phân biệt với nhau.
@@ -75,16 +93,38 @@
     - Physical server
     - Virtual machine images
     - Virtual container
+- Lợi thế của dịch vụ vi mô dựa trên đám mây xoay quanh khái niệm `elasticity`. Các nhà cung cấp dịch vụ đám mây cho
+  phép bạn nhanh chóng tạo ra VMs và container chỉ trong vài phút. Nếu các như cầu về công suất bạn giảm xuống bạn có
+  thể giảm container để tránh thêm chi phí.
+- Sử dụng các nhà cung cấp đám mây để phát triển mang lại cho bạn khả năng mở rộng theo chiều ngang đáng kể.
 
-# 1.5  Microservices are more than writing the code ?
+# 1.6  Microservices are more than writing the code ?
 
 ![Alt text](Figure1.5-MicroserviceAreMoreThanBusinessLogic.png?raw=true "Title")
 
-# 1.6 Core microservice development pattern.
+- Right-sized : Cách bạn đảm bảo rằng các dịch vụ nhỏ của bạn có kích thước phù hợp để bạn không phải gánh vác quá nhiều
+  trách nhiệm.
+- Location transparent : Các bạn quản lý physical details of service invocation. Khi trong một microservice application,
+  nhiều service instances có thể nhanh trong khởi động và tắt.
+- Resilient : Cách bảo vệ microservice consumers của bạn và toàn vẹn tổng thể ứng dụng của bạn.
+- Repeatable : Cách bạn đảm bảo mọi new instance của bạn cung cấp ược đảm bảo có cấu hình và cơ sở mã giống như tất cả
+  các instance khác trong quá trình sản xuất.
+- Scalable : Cách bạn giảm thiểu sự phụ thuộc trực tiếp giữa các service và đảm bảo bạn có thể mở rộng quy mô.
+
+# 1.7 Core microservice development pattern.
 
 ![Alt text](Figure1.11-WhenDesigning.png?raw=true "Title")
 
-# 1.7 Microservice routing patterns.
+- Service granularity : Làm cách nào để bạn tiếp cận việc phân tách miền doanh nghiệp thành microservices để mỗi
+  microservice có mức trách nhiệm phù hợp.
+- Communication protocols : Các nhà phát triển sẽ giao tiếp với dịch vụ của bạn như thế nào (XML, JSON, AMQP).
+- Interface design : Cách bạn cấu trúc dịch vụ của mình.
+- Configuration management of service : Làm cách nào để bạn quản lý cấu hình của microservice của mình để nó di chuyển
+  giữadifferent environments in the cloud.
+- Event processing between services : Bạn làm cách nào để tách microservice của mình bằng các sự kiện để giảm thiểu sự
+  phụ thuộc được hardcode giữa các dịch vụ và tăng khả năng `resiliency` ứng dụng của bạn.
+
+# 1.8 Microservice routing patterns.
 
 - The Microservice routing patterns thỏa thuận với cách một client application để cung cấp a microservice discovers the
   location of the service và được chuyển đến nó.
@@ -92,34 +132,52 @@
   abstract the physical IP address của service đó và có a single point of entry cho service gọi.
     - Service discovery : Với service discovery client application có thể tìm thấy chúng mà không cần mã hóa cứng trong
       những application
-    - Service routing: Với an API Gateway, bạn có thể cung cấp a single entry point cho tất service của bạn. Security
+    - Service routing : Với an API Gateway, bạn có thể cung cấp a single entry point cho tất service của bạn. Security
       policies and routing rules được áp dụng đồng nhất đến nhiều service và service instances.
 
   ![Alt text](Figure1.12-ServiceDiscoveryAndServiceRouting.png?raw=true "Title")
 
-# 1.8 Microservice client resiliency
+# 1.9 Microservice client resiliency
 
 - Bởi vì `microservice architectures are highly distributed`, nên phải cực kì nhạy cảm trong việc ngăn chặn sự cố trong
   a single service(or service instance).
   ![Alt text](Figure1.13-ProtectService.png?raw=true "Title")
 
-# 1.9 Microservice security patterns
+- Client-side load balancing : Cách bạn lưu vào bộ nhớ cache vị trí cùa service instance. Để các lệnh gọi đến multiple
+  instances của microservice được cân bằng tải.
+- Circuit breaker pattern : Các ngăn client tiếp tực gọi vào service đang bị lỗi về hiệu suất.
+- Fallback pattern: Khi một service call thất bại, cho phép service client cố gắng thực hiện công việc của mình thông
+  qua các phương tiện thay thế.
+- Bulkhead pattern : Các microservice sử dụng nhiều tài nguyên phân tán để thực hiện công việc của chúng. Nghĩa là khi
+  có 1 hành vi sai của call service thì không ảnh đến phần còn lại của ứng dụng.
+
+# 1.10 Microservice security patterns
 
 ![Alt text](Figure1.14-UsingATokenBased.png?raw=true "Title")
 
-# 1.10 Microservice logging and tracing patterns
+- Authentication : Cách bạn xác định client call service.
+- Authorization : Cách bạn xác định xem client service gọi một microservice có được phép thực hiện hành động mà họ đang
+  cố gắng thực hiện hay không.
+- Credential management and propagation : Cách bạn ngăn client service liên tục phải xuất trình thông tin đăng nhập của
+  họ cho các cuộc gọi dịch vụ liên quan đến một giao dịch.(OAuth2 and JWT)
+
+# 1.11 Microservice logging and tracing patterns
 
 - Nhược điểm của Microservice architecture là khó để debug, trace and monitor những vấn đề bởi vì một hành động đơn giản
   có thể liên quan đến nhiều microservice.
   ![Alt text](Figure1.15-LoggingAndTracing.png?raw=true "Title")
+    - Log correlation : Cách bạn liên kết tất cả logs được tạo ra giữa các service cho single user transaction.
+    - Log aggregation : Cách tập hợp tất cả logs được tạo bởi microservices của bạn vào một cơ sở dữ liệu có thể truy
+      vấn.
+    - Microservice tracing : Cách các luồng transaction trên tất cả service.
 
-# 1.11 Application metrics pattern
+# 1.12 Application metrics pattern
 
 - The application metrics pattern: monitor metrics and warn các nguyên nhân có thể gây ra lỗi
 
-  - Metrics: Thông tin về health và số liệu.
-  - Metrics service: Store và query the application metrics.
-  - Metrics visualization suite: Trực quan dữ liệu.
-  
-    ![Alt text](Figure1.16-Metrics.png?raw=true "Title")
+    - Metrics : Thông tin về health và số liệu.
+    - Metrics service : Store và query the application metrics.
+    - Metrics visualization suite : Trực quan dữ liệu.
+
+      ![Alt text](Figure1.16-Metrics.png?raw=true "Title")
 
