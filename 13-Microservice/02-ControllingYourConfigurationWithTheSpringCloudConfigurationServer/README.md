@@ -69,7 +69,7 @@
   production environment.
 - Với Spring Cloud Config, mọi thứ hoạt động theo thứ bậc. Your application configuration được đại diện bằng name of the
   application và sau đó property file cho môi trường bạn muốn configure.
-  ![Alt text](Image/Figure5.5-Spring Cloud Config exposes environment-specific properties.png?raw=true "Title")
+  ![Alt text](Image/Figure5.5-SpringCloudConfigExposesEnvironment-specificProperties.png?raw=true "Title")
 
 ### 2.4.4 Integrating Spring Cloud Config with a Spring Boot client
 
@@ -83,7 +83,7 @@
 
 ### 2.4.5 Configuring the licensing service to use Spring Cloud Config
 
-![Alt text](Image/Figure5.6-Configuring the licensing service’s.png?raw=true "Title")
+![Alt text](Image/Figure5.6-ConfiguringTheLicensingService.png?raw=true "Title")
 
 - The spring.application.name is tên application phải map trực tiếp tên config trong Spring Cloud Configuration Server.
 - Spring.profiles.active tells Spring Boot cái profile sẽ chạy.
@@ -99,7 +99,7 @@
   mình khi một thuộc tính thay đổi.
 - Spring Boot Actuator đưa ra @RefreshScope annotation cho phép nhóm phát triển truy cập vào endpoint `/refresh` buộc
   ứng dụng Spring Boot đọc lại cấu hình ứng dụng của nó.
-  ![Alt text](Image/Figure5.12-The RefreshScope annotation.png?raw=true "Title")
+  ![Alt text](Image/Figure5.12-TheRefreshScopeAnnotation.png?raw=true "Title")
 
 ### 2.4.6 Using Spring Cloud Configuration Server with Git
 
@@ -109,7 +109,7 @@
   việc đặt configuration management properties.
 - Cung cấp một cơ chế dễ dàng để tích hợp việc triển khai property configuration files trong việc build và deployment
   pipeline.
-  ![Alt text](Image/Figure5.13-Adding Git support to the Spring Cloud.png?raw=true "Title")
+  ![Alt text](Image/Figure5.13-AddingGitSupportToTheSpringCloud.png?raw=true "Title")
 
 - Spring.profiles.active: thuộc tính đặt tất cả active profiles for the Spring Config service.
 - Spring.cloud.config.server.git: thuộc tính thông báo cho Spring Cloud Config Server để sử dụng non-filesystem-based
@@ -132,7 +132,7 @@
   decrypt.
 - Với Spring Cloud Configuration Server, the symmetric encryption key là string of characters có thể đặt trong tệp
   bootstrap.ym hoặc được chuyển tới service via an OS environment variable.
-  ![Alt text](Image/Figure5.15-Setting a symmetric key in the boostrap.yml file.png?raw=true "Title")
+  ![Alt text](Image/Figure5.15-SettingASymmetricKeyInTheBoostrap.png?raw=true "Title")
 
 ### 2.5.2 Encrypting and decrypting a property
 
@@ -140,7 +140,7 @@
 
 - Spring Cloud Config phát hiện ENCRYPT_KEY environment variable hoặc bootstrap file property được thiết lập và tự động
   thêm 2 endpoints `/encrypt` and `/decrypt`
-  ![Alt text](Image/Figure5.16-Adding an encrypted value.png?raw=true "Title")
+  ![Alt text](Image/Figure5.16-AddingAnEncryptedValue.png?raw=true "Title")
 - The Spring Cloud Configuration Server yêu cầu tất encrypted properties được thêm vào trước giá trị `{cipher}`. Giá trị
   này cho biết rằng Config Server đang được mã hóa.
 
