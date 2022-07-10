@@ -101,7 +101,7 @@
   ứng dụng Spring Boot đọc lại cấu hình ứng dụng của nó.
   ![Alt text](Image/Figure5.12-The RefreshScope annotation.png?raw=true "Title")
 
-### 2.4.5 Using Spring Cloud Configuration Server with Git
+### 2.4.6 Using Spring Cloud Configuration Server with Git
 
 - Như đã đề cập ở trên, việc sử dụng filesystem as the backend repository for the Spring Cloud Configuration Server có
   thể không thực tế với cloud-based application.
