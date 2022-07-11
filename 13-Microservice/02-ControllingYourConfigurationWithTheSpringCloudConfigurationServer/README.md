@@ -12,8 +12,8 @@
 
     - Tách biệt hoàn toàn configuration của một ứng dụng khỏi mã thực đang được triển khai.
     - Xây dựng immutable application images không bao giờ thay đổi vì chúng được quảng bá thông qua môi trường của bạn.
-    - Inject bất kì application configuration thông qua một trong hai biến môi trường khi khởi động máy chủ thông qua
-      một trong hai biến môi trường hoặc một kho lưu trữ tập trung mà các microservices đọc khi khởi động.
+    - Inject bất kì application configuration thông qua một trong hai biến môi trường khi khởi động máy chủ hoặc một kho
+      lưu trữ tập trung mà các microservices đọc khi khởi động.
 
 ## 2.2 On managing configuration (and complexity)
 
@@ -95,7 +95,7 @@
 
 #### Refreshing your properties using Spring Cloud Config Server
 
-- Môt trong nhưng câu hỏi đầu tiên xuất hiện từ các nhóm phát triển àm cách nào họ có thể tự động làm mới ứng dụng của
+- Môt trong nhưng câu hỏi đầu tiên xuất hiện từ các nhóm phát triển làm cách nào họ có thể tự động làm mới ứng dụng của
   mình khi một thuộc tính thay đổi.
 - Spring Boot Actuator đưa ra @RefreshScope annotation cho phép nhóm phát triển truy cập vào endpoint `/refresh` buộc
   ứng dụng Spring Boot đọc lại cấu hình ứng dụng của nó.
@@ -105,7 +105,7 @@
 
 - Như đã đề cập ở trên, việc sử dụng filesystem as the backend repository for the Spring Cloud Configuration Server có
   thể không thực tế với cloud-based application.
-- Một cách tiếp cận là sử dụng Git source control repository. Bằng cách sử dụng Git, bạn nhận tất tất cả lợi ích của
+- Một cách tiếp cận là sử dụng Git source control repository. Bằng cách sử dụng Git, bạn nhận tất cả lợi ích của
   việc đặt configuration management properties.
 - Cung cấp một cơ chế dễ dàng để tích hợp việc triển khai property configuration files trong việc build và deployment
   pipeline.
