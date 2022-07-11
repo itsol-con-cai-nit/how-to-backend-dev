@@ -135,17 +135,72 @@
 - eureka.instance.preferIpAddress: thuộc tính cho Eureka biết rằng bạn muốn đăng ký service’s IP address với Eureka thay
   vì hostname của nó.
 
-### 3.5.1  Eureka’s REST API
+### 3.5.1 Eureka’s REST API.
 
 - Để xem tất cả các phiên bản của một dịch vụ trong API REST, hãy chọn GET endpoint sau:
 - `http://<eureka service>:8070/eureka/apps/<APPID>`
   ![Alt text](Image/Figure6.7-TheEurekaRESTAPI.png?raw=true "Title")
 
-### 3.5.2   Eureka dashboard
+### 3.5.2 Eureka dashboard.
 
-- Khi Eureka service hoạt động, chúng tôi có thể trỏ trình duyệt của mình tới http://localhost:8070 để xem Eureka dashboard.
+- Khi Eureka service hoạt động, chúng tôi có thể trỏ trình duyệt của mình tới http://localhost:8070 để xem Eureka
+  dashboard.
   ![Alt text](Image/Figure6.8-TheEurekaDashboard.png?raw=true "Title")
 
+## 3.6 Using service discovery to look up a service.
+
+- Chúng ta sẽ xem xét 3 thư viện Spring/Netflix client trong đó service consumer có thể tương tác với Spring Cloud Load
+  Balancer.
+    - Spring Discovery Client.
+    - Spring Discovery Client–enabled REST template.
+    - Netflix Feign client.
+      ![Alt text](Image/Listing6.9-CallingTheLicensingService.png?raw=true "Title")
+    - clientType tham số được truyền trên tuyến thúc đẩy type of client.
+        - Discovery: Sử dụng Discovery Client và lstandard Spring RestTemplate class để gọi organization service.
+        - Rest: Sử dụng Spring RestTemplate nâng cao để gọi Load Balancer service.
+        - Feign: Sử dụng Netflix’s Feign client library để gọi một service via the Load Balancer.
+
+### 3.6.1 Looking up service instances with Spring Discovery Client.
+
+- Spring Discovery Client cung cấp mức truy cập thấp nhất vào Load Balancer và các service được đăng ký trong đó.
+- Sử dụng Discovery Client, bạn có thể truy vấn tất cả services registered với Spring Cloud Load Balancer client và các
+  URL tương ứng của chúng.
+  ![Alt text](Image/Listing6.11-SettingUpTheBootstrapClass.png?raw=true "Title")
+- The @EnableDiscoveryClient là trigger cho Spring Cloud để cho phép application sử dụng Discovery Client và Spring
+  Cloud Load Balancer libraries.
+  ![Alt text](Image/Listing6.12-UsingTheDiscoveryClient.png?raw=true "Title")
+  ![Alt text](Image/Listing6.12.1-UsingTheDiscoveryClient.png?raw=true "Title")
+- Mục đầu tiên quan tâm trong mã là DiscoveryClient class. Bạn sử dụng lớp này để tương tác với Spring Cloud Load
+  Balancer.
+- Sau đó, để truy xuất all instances of the organization services đã đăng ký với Eureka, bạn sử dụng phương thức
+  getInstances (), chuyển service key mà bạn đang tìm kiếm để truy xuất danh sách các đối tượng ServiceInstance.
+- Lớp ServiceInstance giữ thông tin về a specific instance of a service, bao gồm hostname, port, and URI.
+
+### 3.6.2 Invoking services with a Load Balancer–aware Spring REST template.
+
+- Tiếp theo, chúng ta sẽ thấy một ví dụ về cách sử dụng REST template mà Load Balancer-aware.
+- Đây là một trong những cơ chế phổ biến hơn để tương tác với Load Balancer qua Spring. Để sử dụng lớp RestTemplate nhận
+  biết Load Balancer, chúng ta cần xác định bean RestTemplate với cSpring Cloud @LoadBalanced annotation.
+  ![Alt text](Image/Listing6.13-AnnotatingAndDefining.png?raw=true "Title")
+  ![Alt text](Image/Listing6.14-UsingALoadBalancer–backedRestTemplate.png?raw=true "Title")
+  ![Alt text](Image/Listing6.14.1-UsingALoadBalancer–backedRestTemplate.png?raw=true "Title")
+- The Load Balancer–enabled RestTemplate class phân tích cú pháp URL được truyền vào nó và sử dụng bất kỳ thứ gì được
+  chuyển vào dưới dạng server name làm khóa để truy vấn Load Balancer cho instance of a service.
+
+### 3.6.3 Invoking services with Netflix Feign client.
+
+- Một giải pháp thay thế cho Spring Load Balancer–enabled RestTemplate class là Netflix’s Feign client library
+- The Feign library có một cách tiếp cận khác để gọi một REST service.
+- Với cách tiếp cận này, trước tiên nhà phát triển xác định Java interface và sau đó thêm Spring Cloud annotations để
+  ánh xạ Eureka-based service mà Spring Cloud Load Balancer sẽ gọi.
+- The Spring Cloud framework sẽ tự động tạo ra a proxy class để gọi REST service được nhắm mục tiêu. Không có mã nào
+  được viết để gọi service other than an interface definition.
+- Để cho phép Feign client sử dụng trong licensing service, chúng ta cần thêm annotation, @EnableFeignClients.
+  ![Alt text](Image/Listing6.15-EnablingTheSpringCloud-NetflixFeign.png?raw=true "Title")
+  ![Alt text](Image/Listing6.16-DefiningAFeignInterfaceForCalling.png?raw=true "Title")
+- chúng ta đã sử dụng @FeignClient annotation, chuyển cho nó application ID of the service mà chúng tôi muốn interface
+  to represent. Sau đó, chúng tôi đã xác định một phương thức, getOrganization(), trong interface của chúng ta, phương
+  thức này có thể được khách hàng gọi để gọi organization service.
 
 
 
