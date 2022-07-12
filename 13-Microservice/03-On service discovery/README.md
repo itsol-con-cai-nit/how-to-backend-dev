@@ -1,6 +1,6 @@
 ## 3.1 Introduction
 
-- Trong bất kì distributed architecture, chúng ta cần tìm e hostname or IP address của nơi machine được đặt.
+- Trong bất kì distributed architecture, chúng ta cần tìm hostname or IP address của nơi machine được đặt.
 - Khái niệm này đã xuất hiện từ thời kỳ đầu của distributed computing và được biết đến với tên chính
   thức `service discovery`.
 - Service discovery có thể một cái gì đó đơn giản như duy trì property file với địa chỉ của tất cả remote services được
@@ -18,13 +18,13 @@
 - Trong non-cloud world, service location resolution thường được giải quyết thông qua sự kết hợp giữa DNS và network
   load balancer.
   ![Alt text](Image/Figure6.1-ATraditionalService.png?raw=true "Title")
-- Trong kịch bản truyền thống, load balancer khi nhận yêu cầu từ service consumer, xác định vị mục nhập địa chỉ thực
+- Trong kịch bản truyền thống, load balancer khi nhận yêu cầu từ service consumer, xác định vị trí mục nhập địa chỉ thực
   trong bảng định tuyến dựa trên đường dẫn mà người dùng đang cố gắng truy cập.
 - This routing table entry chứa danh sách một hoặc nhiều servers hosting the service.
 - Load balancer sau khi đã chọn một trong servers trong danh sách và chuyển tiếp yêu cầu đến server đó.
 - Với mô hình này, mỗi instance của service được deployed trong một hoặc nhiều application servers.
 - Số lượng của những application servers thường là static và persistent.
-- Để đạt được một form of high availability, a secondary idle load balancer pinged e primary load balancer xem liệu nó
+- Để đạt được một form of high availability, a secondary idle load balancer pinged the primary load balancer xem liệu nó
   còn sống hay không. Nếu nó không còn sống, the secondary load balancer trở nên active, tiếp quản địa chỉ IP của bộ cân
   bằng tải chính và bắt đầu cung cấp các yêu cầu.
 - Mặc dù loại mô hình này hoạt động tốt số lượng nhỏ service chạy trên một nhóm static servers. Nó không hoạt động tốt
