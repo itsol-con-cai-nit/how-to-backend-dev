@@ -12,8 +12,8 @@
   applications.
 - Microservices cho phép bạn phân rã một ứng dụng lớn thành các thành phần dễ quản lý với các trách nhiệm được xác định
   hẹp (cụ thể).
-  ![Alt text](Figure1.1-MonolithicApplication.png?raw=true "Title")
-  ![Alt text](Figure1.2-MicroserviceApplication.png?raw=true "Title")
+  ![Alt text](Image/Figure1.1-MonolithicApplication.png?raw=true "Title")
+  ![Alt text](Image/Figure1.2-MicroserviceApplication.png?raw=true "Title")
 
 ### A microservice architecture has the following characteristics:
 
@@ -24,7 +24,7 @@
   như HTTP và JSON.
 - Việc triển khai kỹ thuật của các service là không liên quan đến nhau vì ứng dụng luôn giao tiếp với một giao thức
   trung lập về công nghệ.
-  ![Alt text](Figure1.3-Comparing.png?raw=true "Title")
+  ![Alt text](Image/Figure1.3-Comparing.png?raw=true "Title")
 
 # 1.2 Why is Spring relevant to microservice ?
 
@@ -54,7 +54,7 @@
   để lấy access token. Mỗi khi token được nhận, Client gửi 1 request đến Spring Cloud API Gateway. API Gateway service
   là cổng vào cho toàn bộ architecture.Nó giao tiếp với Eureka service discovery để lấy locations, licensing services và
   sau đó gọi đến các microservice cụ thể.
-  ![Alt text](Figure1.4-High-level.png?raw=true "Title")
+  ![Alt text](Image/Figure1.4-High-level.png?raw=true "Title")
 
 - Một khi request đến `organization service`, nó validate access token, sau khi validated organization service cập nhật
   và lấy những thông tin và gửi về client as một HTTP response. As an alternative path, một khi the organization
@@ -81,7 +81,7 @@
       duy trì cơ sở hạ tầng thường liên quan đến việc phát triển và khởi chạy ứng dụng.
     - Software as a Service (SaaS): Còn được gọi là phần mềm theo yêu cầu. Cho phép người dùng sử dụng một ứng dụng cụ
       thể mà không cần phải triển khai hoặc duy trì nó.
-      ![Alt text](Figure1.9-The-different-cloud-computing-models.png?raw=true "Title")
+      ![Alt text](Image/Figure1.9-The-different-cloud-computing-models.png?raw=true "Title")
 
 # 1.5 Why the cloud and microservices ?
 
@@ -100,7 +100,7 @@
 
 # 1.6  Microservices are more than writing the code ?
 
-![Alt text](Figure1.5-MicroserviceAreMoreThanBusinessLogic.png?raw=true "Title")
+![Alt text](Image/Figure1.5-MicroserviceAreMoreThanBusinessLogic.png?raw=true "Title")
 
 - Right-sized : Cách bạn đảm bảo rằng các dịch vụ nhỏ của bạn có kích thước phù hợp để bạn không phải gánh vác quá nhiều
   trách nhiệm.
@@ -113,7 +113,7 @@
 
 # 1.7 Core microservice development pattern.
 
-![Alt text](Figure1.11-WhenDesigning.png?raw=true "Title")
+![Alt text](Image/Figure1.11-WhenDesigning.png?raw=true "Title")
 
 - Service granularity : Làm cách nào để bạn tiếp cận việc phân tách miền doanh nghiệp thành microservices để mỗi
   microservice có mức trách nhiệm phù hợp.
@@ -135,13 +135,13 @@
     - Service routing : Với an API Gateway, bạn có thể cung cấp a single entry point cho tất service của bạn. Security
       policies and routing rules được áp dụng đồng nhất đến nhiều service và service instances.
 
-  ![Alt text](Figure1.12-ServiceDiscoveryAndServiceRouting.png?raw=true "Title")
+  ![Alt text](Image/Figure1.12-ServiceDiscoveryAndServiceRouting.png?raw=true "Title")
 
 # 1.9 Microservice client resiliency
 
 - Bởi vì `microservice architectures are highly distributed`, nên phải cực kì nhạy cảm trong việc ngăn chặn sự cố trong
   a single service(or service instance).
-  ![Alt text](Figure1.13-ProtectService.png?raw=true "Title")
+  ![Alt text](Image/Figure1.13-ProtectService.png?raw=true "Title")
 
 - Client-side load balancing : Cách bạn lưu vào bộ nhớ cache vị trí cùa service instance. Để các lệnh gọi đến multiple
   instances của microservice được cân bằng tải.
@@ -153,7 +153,7 @@
 
 # 1.10 Microservice security patterns
 
-![Alt text](Figure1.14-UsingATokenBased.png?raw=true "Title")
+![Alt text](Image/Figure1.14-UsingATokenBased.png?raw=true "Title")
 
 - Authentication : Cách bạn xác định client call service.
 - Authorization : Cách bạn xác định xem client service gọi một microservice có được phép thực hiện hành động mà họ đang
@@ -165,7 +165,7 @@
 
 - Nhược điểm của Microservice architecture là khó để debug, trace and monitor những vấn đề bởi vì một hành động đơn giản
   có thể liên quan đến nhiều microservice.
-  ![Alt text](Figure1.15-LoggingAndTracing.png?raw=true "Title")
+  ![Alt text](Image/Figure1.15-LoggingAndTracing.png?raw=true "Title")
     - Log correlation : Cách bạn liên kết tất cả logs được tạo ra giữa các service cho single user transaction.
     - Log aggregation : Cách tập hợp tất cả logs được tạo bởi microservices của bạn vào một cơ sở dữ liệu có thể truy
       vấn.
@@ -179,5 +179,5 @@
     - Metrics service : Store và query the application metrics.
     - Metrics visualization suite : Trực quan dữ liệu.
 
-      ![Alt text](Figure1.16-Metrics.png?raw=true "Title")
+      ![Alt text](Image/Figure1.16-Metrics.png?raw=true "Title")
 
