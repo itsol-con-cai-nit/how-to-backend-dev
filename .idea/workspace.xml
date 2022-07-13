@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fab6a928-b912-4f1c-8fe6-76adc4adb42e" name="Changes" comment="chapter 2">
-      <change beforePath="$PROJECT_DIR$/13-Microservice/02-ControllingYourConfigurationWithTheSpringCloudConfigurationServer/Example-Chapter2/configserver/src/main/resources/bootstrap.yml" beforeDir="false" afterPath="$PROJECT_DIR$/13-Microservice/02-ControllingYourConfigurationWithTheSpringCloudConfigurationServer/Example-Chapter2/configserver/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/13-Microservice/02-ControllingYourConfigurationWithTheSpringCloudConfigurationServer/Example-Chapter2/configserver/src/main/resources/config/licensing-service-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/13-Microservice/02-ControllingYourConfigurationWithTheSpringCloudConfigurationServer/Example-Chapter2/configserver/src/main/resources/config/licensing-service-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +52,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jdk.selected.JAVA_MODULE" value="11" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/13-Microservice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.18469657" />
     <property name="project.structure.side.proportion" value="0.152439" />
@@ -108,6 +110,12 @@
       <workItem from="1657438216899" duration="19127000" />
       <workItem from="1657504870433" duration="87000" />
       <workItem from="1657504970775" duration="29000" />
+      <workItem from="1657553127999" duration="138000" />
+      <workItem from="1657553377368" duration="622000" />
+      <workItem from="1657555102862" duration="65000" />
+      <workItem from="1657590577100" duration="95000" />
+      <workItem from="1657646467606" duration="249000" />
+      <workItem from="1657677690121" duration="1351000" />
     </task>
     <task id="LOCAL-00001" summary="chapter 1">
       <created>1657192046177</created>
