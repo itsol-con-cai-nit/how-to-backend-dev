@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fab6a928-b912-4f1c-8fe6-76adc4adb42e" name="Changes" comment="chapter 2">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="fab6a928-b912-4f1c-8fe6-76adc4adb42e" name="Changes" comment="chapter 2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,6 +59,7 @@
       <recent name="D:\ProjectAT\how-to-backend-dev\13-Microservice\01-Introduction" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ProjectAT\how-to-backend-dev\13-Microservice\01-Introduction\Image" />
       <recent name="D:\ProjectAT\how-to-backend-dev\13-Microservice\02-Controlling your  configuration with  the Spring Cloud  Configuration Server\Image" />
     </key>
   </component>
@@ -116,6 +112,7 @@
       <workItem from="1657590577100" duration="95000" />
       <workItem from="1657646467606" duration="249000" />
       <workItem from="1657677690121" duration="1351000" />
+      <workItem from="1657732526242" duration="315000" />
     </task>
     <task id="LOCAL-00001" summary="chapter 1">
       <created>1657192046177</created>
