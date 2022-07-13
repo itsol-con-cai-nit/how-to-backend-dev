@@ -81,7 +81,7 @@
       duy trì cơ sở hạ tầng thường liên quan đến việc phát triển và khởi chạy ứng dụng.
     - Software as a Service (SaaS): Còn được gọi là phần mềm theo yêu cầu. Cho phép người dùng sử dụng một ứng dụng cụ
       thể mà không cần phải triển khai hoặc duy trì nó.
-      ![Alt text](Figure1.9-The different cloud computing models.png?raw=true "Title")
+      ![Alt text](Figure1.9-The-different-cloud-computing-models.png?raw=true "Title")
 
 # 1.5 Why the cloud and microservices ?
 

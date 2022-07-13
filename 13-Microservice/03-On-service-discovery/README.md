@@ -130,7 +130,7 @@
 
 - `spring-cloud-starter-netflix-eureka-client` giữ các tệp JAR mà Spring Cloud sử dụng để tương tác với Eureka service
   của bạn.
-  ![Alt text](Image/Listing 6.6-AddingTheSpring.application.name.png?raw=true "Title")
+  ![Alt text](Image/Listing6.6-AddingTheSpring.application.name.png?raw=true "Title")
   ![Alt text](Image/Listing6.8-ModifyingTheServiceApplication.properties.png?raw=true "Title")
 - eureka.instance.preferIpAddress: thuộc tính cho Eureka biết rằng bạn muốn đăng ký service’s IP address với Eureka thay
   vì hostname của nó.
