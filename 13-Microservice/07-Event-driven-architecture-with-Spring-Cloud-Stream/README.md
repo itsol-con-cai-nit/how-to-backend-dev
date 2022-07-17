@@ -1,4 +1,4 @@
-## 6.1 Introduction
+## 7.1 Introduction
 
 - Con người luôn ở trong trạng thái chuyển động khi họ tương tác với môi trường của họ. Thông thường, các cuộc trò
   chuyện của họ synchronous, linear, or as narrowly defined như a request-response model.
@@ -19,7 +19,7 @@
   consumption trong khi bảo vệ các service của chúng ta khỏi các chi tiết triển khai được liên kết với nền tảng
   messaging cơ bản.
 
-## 6.2  The case for messaging, EDA, and microservices
+## 7.2  The case for messaging, EDA, and microservices
 
 - Tại sao messaging lại quan trọng trong việc xây dựng các microservice-based applications? Để trả lời câu hỏi đó, hãy
   bắt đầu với một ví dụ. Đối với điều này, chúng ta sẽ sử dụng the two services mà chúng ta đã sử dụng trong suốt cuốn
@@ -190,7 +190,7 @@
   trong các service của bạn đòi hỏi phải được suy tính trước. Mặt tích cực của messaging là bản thân các doanh nghiệp
   hoạt động asynchronously, vì vậy, cuối cùng, chúng ta đang mô hình hóa hoạt động business của mình chặt chẽ hơn.
 
-### 7.2  Introducing Spring Cloud Stream
+### 7.3  Introducing Spring Cloud Stream
 
 - Spring Cloud giúp bạn dễ dàng tích hợp messaging vào các Spring-based microservices của chúng ta. Nó thực hiện điều
   này thông qua the Spring Cloud Stream project  (https://spring.io/projects/spring-cloud-stream).
@@ -221,7 +221,7 @@
   sink lắng nghe a channel cho các tin nhắn đến và deserializes the message trở lại a POJO object. Từ đó, the message có
   thể được xử lý theo business logic of the Spring service.
 
-## 7.3 Writing a simple message producer and consumer
+## 7.4 Writing a simple message producer and consumer
 
 - chúng ta sẽ chuyển một message từ our organization service to our licensing service, service này sẽ in a log message
   tới the console. Ngoài ra, vì chúng ta sẽ chỉ có one Spring Cloud Stream source (the message producer) and a sink (
@@ -231,7 +231,7 @@
 
 ![img.png](Image/Figure10.4-When-the-organization-service-data-changes.png)
 
-### 7.3.1 Configuring Apache Kafka and Redis in Docker
+### 7.4.1 Configuring Apache Kafka and Redis in Docker
 
 - Trong phần này, chúng ta sẽ giải thích cách add the Kafka and Redis services vào môi trường Docker cho trình our
   message producer. Để đạt được điều này, hãy bắt đầu bằng cách thêm mã được hiển thị trong danh sách sau vào tệp
@@ -239,7 +239,7 @@
 - ![img.png](Image/Listing10.10-Adding-Kafka-and-Redis.png)
 - ![img.png](Image/Listing10.10.1-Adding-Kafka-and-Redis.png)
 
-### 7.3.2 Writing the message producer in the organization service
+### 7.4.2 Writing the message producer in the organization service
 
 - Để tập trung vào cách sử dụng các chủ đề trong kiến trúc của chúng ta, chúng ta sẽ bắt đầu bằng cách sửa đổi the
   organization service để mỗi khi organization data được thêm, cập nhật hoặc xóa, the organization service sẽ publish a
@@ -303,7 +303,7 @@
   Stream sử dụng Kafka as a message broker, hãy xem nơi the publication of the message trong our organization service.
   ![img.png](Image/Listing10.7-Publishing-a-message.png)
 
-### 7.3.3 Writing the message consumer in the licensing service
+### 7.4.3 Writing the message consumer in the licensing service
 
 - Tại thời điểm này, chúng ta đã sửa đổi the organization service to publish a message to Kafka mỗi khi the organization
   service changes data. Any interested service cũng có thể phản ứng mà không cần phải được y the organization service
@@ -336,7 +336,7 @@
   xác định the consumer group mà the service thuộc về.
   ![img.png](Image/Figure10.6-The-consumer-group-guarantees.png)
 
-### 7.3.4 Seeing the message service in action
+### 7.4.4 Seeing the message service in action
 
 - Tại thời điểm này, the organization service publishes a message to the orgChangeTopic mỗi khi a record được thêm, cập
   nhật hoặc xóa và the licensing service nhận được thông báo có the same topic. Tiếp theo, chúng ta sẽ thấy mã này hoạt
@@ -353,7 +353,7 @@
   nhau. Họ đang sử dụng a messaging broker để giao tiếp với tư cách là người trung gian và Spring Cloud Stream như một
   lớp trừu tượng trên the messaging broker.
 
-## 7.4 A Spring Cloud Stream use case: Distributed caching
+## 7.5 A Spring Cloud Stream use case: Distributed caching
 
 - Hiện chúng ta có hai service giao tiếp bằng messaging, nhưng chúng ta không thực sự làm bất cứ điều gì với messaging.
   Tiếp theo, chúng ta sẽ xây dựng ví dụ về the distributed caching mà chúng ta đã thảo luận trước đó trong chương. Vì
@@ -364,7 +364,7 @@
 - Khi dữ liệu được cập nhật trong the organization service, the organization service sẽ gửi một thông báo đến Kafka. The
   licensing service sẽ nhận thông báo và đưa ra DELETE đối với Redis để xóa bộ nhớ cache.
 
-### 7.4.1 Using Redis to cache lookups
+### 7.5.1 Using Redis to cache lookups
 
 - Chúng ta sẽ bắt đầu bằng cách thiết lập licensing service để sử dụng Redis. May mắn thay, Spring Data giúp việc giới
   thiệu Redis vào licensing service của chúng ta trở nên đơn giản.
@@ -424,7 +424,7 @@
       service để truy xuất dữ liệu. Kết quả tiếp theo cho thấy rằng khi bạn nhập the licensing service endpoint lần thứ
       hai, the organization record hiện đã được lưu vào bộ nhớ đệm.
 
-### 10.4.2 Defining custom channels
+### 10.5.2 Defining custom channels
 
 - Trước đây, chúng ta đã xây dựng tích hợp nhắn tin giữa các the licensing and organization services để sử dụng the
   default output and input channels được the Source and Sink interfaces trong Spring Cloud Stream.
