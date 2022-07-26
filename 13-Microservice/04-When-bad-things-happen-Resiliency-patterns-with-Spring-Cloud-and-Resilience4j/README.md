@@ -5,7 +5,7 @@
   mọi nhà phát triển phần mềm.
 - Tuy nhiên, khi nói đến việc xây dựng các hệ thống có khả năng phục hồi, hầu hết các kỹ sư phần mềm chỉ tính đến sự
   thất bại hoàn toàn của một phần cơ sở hạ tầng hoặc service.
-- Họ tập trung vào việc xây dựng dự phòng vào từng lớp ứng dụng của họ bằng cách sử dụng các kỹ thuật nhưclustering key
+- Họ tập trung vào việc xây dựng dự phòng vào từng lớp ứng dụng của họ bằng cách sử dụng các kỹ thuật như clustering key
   servers, load balancing giữa services và phân tách cơ sở hạ tầng thành multiple locations.
 - Trong khi các cách tiếp cận này tính đến sự mất mát hoàn toàn của một thành phần hệ thống, chúng chỉ giải quyết một
   phần nhỏ của việc xây dựng các hệ thống có `resilient systems`. Khi một service crashes, thật dễ dàng phát hiện ra
@@ -35,7 +35,7 @@
 
 ### 4.2.1 Client-side load balancing
 
-- Client-side load balancing liên quan đến việcthe client tra cứu service’s individual instances của dịch vụ từ a
+- Client-side load balancing liên quan đến việc the client tra cứu service’s individual instances của dịch vụ từ a
   service discovery agent (như Netflix Eureka) và sau đó caching the physical location của các service instance nói
   trên.
 - Khi service consumer cần gọi service consumer, the client-side load balancer sẽ trả về location from the pool of
@@ -225,7 +225,7 @@
   pattern.
     - Semaphore bulkhead: Sử dụng cách tiếp cận cách ly semaphore, giới hạn số lượng yêu cầu đồng thời đến service. Khi
       đạt đến giới hạn, nó bắt đầu từ chối các yêu cầu.
-    - Thread pool bulkhead: ử dụng một hàng đợi có giới hạn và một nhóm luồng cố định. Cách tiếp cận này chỉ từ chối yêu
+    - Thread pool bulkhead: sử dụng một hàng đợi có giới hạn và một nhóm luồng cố định. Cách tiếp cận này chỉ từ chối yêu
       cầu khi nhóm và hàng đợi đã đầy.
 - Mô hình này hoạt động tốt nếu chúng ta có một số lượng nhỏ remote resources được truy cập trong một ứng dụng và khối
   lượng cuộc gọi cho các dịch vụ riêng lẻ được phân phối đồng đều (tương đối).
@@ -246,7 +246,7 @@
 - A key indicator cho thấy các thuộc tính nhóm luồng cần được điều chỉnh là khi một lệnh gọi dịch vụ đang trong quá
   trình hết thời gian chờ, ngay cả khi remote resource được nhắm mục tiêu là lành mạnh.
   ![Alt text](Image/Listing7.7-CreatingABulkheadAround.png?raw=true "Title")
-- @Bulkhead: annotation này cho biết rằng chúng ta đang thiết lập bulkhead pattern.. Nếu chúng ta không đặt thêm giá
+- @Bulkhead: annotation này cho biết rằng chúng ta đang thiết lập bulkhead pattern. Nếu chúng ta không đặt thêm giá
   trị nào trong các thuộc tính ứng dụng, thì Resilience4j sẽ sử dụng các giá trị mặc định được đề cập trước đó cho
   semaphore bulkhead type.
 
@@ -305,7 +305,7 @@
 - Chúng ta sẽ xác định một số giá trị trong ThreadLocal để xem liệu chúng có được truyền qua các phương thức bằng cách
   sử dụng annotations Resilience4J hay không.
 - Hãy xem một ví dụ cụ thể. Thông thường, trong a REST-based environment, chúng ta muốn chuyển thông tin theo ngữ cảnh
-  đến một cuộc gọi service sẽ giúp chúng ta quản lý service một cách hoạt động.
+  đến một cuộc gọi service sẽ giúp chúng ta quản lý cách hoạt động một service.
 - Ví dụ: chúng ta có thể chuyển một correlation ID hoặc authentication token trong HTTP header của lệnh gọi REST mà sau
   đó có thể được truyền cho bất kỳ lệnh gọi service nào. Correlation ID cho phép chúng ta có một số nhận dạng duy nhất
   có thể được truy tìm qua nhiều cuộc gọi service trong một giao dịch duy nhất.
