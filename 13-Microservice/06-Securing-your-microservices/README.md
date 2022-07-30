@@ -32,13 +32,12 @@
   thông tin đăng nhập của người dùng cho service của bên thứ ba.
 - OpenID Connect (OIDC) là a layer on top of the OAuth2 framework cung cấp thông tin authentication and profile
   information đã đăng nhập vào ứng dụng (danh tính).
-- Khi n an authorization server supports OIDC, nó đôi khi được gọi là identity provider. Trước khi đi sâu vào chi tiết
-  kỹ thuật của việc bảo vệ các service của mình, hãy cùng tìm hiểu kiến trúc Keycloak.
+- Khi an authorization server supports OIDC, nó đôi khi được gọi là identity provider. Trước khi đi sâu vào chi tiết kỹ
+  thuật của việc bảo vệ các service của mình, hãy cùng tìm hiểu kiến trúc Keycloak.
 
 ## 6.3 Introduction to Keycloak.
 
-- Keycloak là an open source identity và nhận dạng mã nguồn mở cho các service và ứng dụng của chúng ta. Mục tiêu chính
-  của Keycloak là tạo điều kiện bảo vệ các service và ứng dụng có ít hoặc không có mã.
+- Keycloak là an open source identity và nhận dạng mã nguồn mở cho các service và ứng dụng của chúng ta.
 - Mục tiêu chính của Keycloak là the protection of the services và ứng dụng có ít hoặc không có mã.
     - Nó tập trung xác thực và cho phép xác thực đăng nhập một lần (SSO).
     - Nó cho phép các nhà phát triển tập trung vào business functionality thay vì lo lắng về các khía cạnh bảo mật như
@@ -69,8 +68,8 @@
   sang service khác mỗi khi người dùng sử dụng service.
 - Sau đó, tài nguyên được bảo vệ có thể liên hệ với the Keycloak server để the token’s validity và truy xuất các vai trò
   được chỉ định cho người dùng. Các vai trò được sử dụng để nhóm những người dùng có liên quan lại với nhau và xác định
-  những tài nguyên nào họ có thể truy cập. Đối với chương này, chúng ta sẽ sử dụng Keycloak roles để xác định những
-  động từ HTTP nào mà người dùng có thể sử dụng để gọi các authorized service endpoints.
+  những tài nguyên nào họ có thể truy cập. Đối với chương này, chúng ta sẽ sử dụng Keycloak roles để xác định những động
+  từ HTTP nào mà người dùng có thể sử dụng để gọi các authorized service endpoints.
 
 ## 6.4 Starting small: Using Spring and Keycloak to protect a single endpoint
 
@@ -91,8 +90,8 @@
 
 - Sau khi the services are up, hãy truy cập liên kết sau để mở the Keycloak Administration
   Console: http://keycloak:8080/auth/. Configuring Keycloak là một quá trình đơn giản.
-- Lần đầu tiên chúng ta truy cập Keycloak, trang Chào mừng sẽ hiển thị. Trang này hiển thị các tùy chọn khác nhau,
-  chẳng hạn như truy cập the Administration Console, documentation, reporting issues, and more.
+- Lần đầu tiên chúng ta truy cập Keycloak, trang Chào mừng sẽ hiển thị. Trang này hiển thị các tùy chọn khác nhau, chẳng
+  hạn như truy cập the Administration Console, documentation, reporting issues, and more.
 
   ![Alt text](Image/Figure9.2-The-Keycloak-Welcome-page.png?raw=true "Title")
 - Để tiếp tục configuring our data, hãy tạo realm của chúng ta. A realm là một khái niệm mà Keycloak sử dụng để chỉ một
@@ -108,7 +107,7 @@
 
 - Bước tiếp theo trong configuration của chúng ta là tạo một a client. Clients in Keycloak là các thực thể có thể
   request user authentication.
-- The clients thường là cthe applications or services mà chúng ta muốn bảo mật bằng cách cung cấp a single sign-on (
+- The clients thường là the applications or services mà chúng ta muốn bảo mật bằng cách cung cấp a single sign-on (
   SSO) solution. Để tạo a client, hãy nhấp vào tùy chọn the Clients option on the left menu.
 - ![img.png](Image/Figure9.6-O-stock’s-Spmia-realm-Clients-page.png)
 - Sau khi Client’s list được hiển thị, hãy nhấp vào the Create button. Sau khi nhấp vào, bạn sẽ thấy an Add Client form
@@ -125,16 +124,16 @@
     - Authorization Enabled: On
     - Valid Redirect URLs: http://localhost:80*
     - Web Origins: *
-- Bước tiếp theo là thiết lập the client roles,, vì vậy hãy nhấp vào the Roles tab. Để hiểu rõ hơn về client roles, hãy
-  tưởng tượng rằng ứng dụng của chúng ta sẽ có hai loại users: admins and regular users. The admin users có thể thực
-  thi tất cả các the application services và nthe regular users sẽ chỉ được phép thực thi một số service.
+- Bước tiếp theo là thiết lập the client roles, vì vậy hãy nhấp vào the Roles tab. Để hiểu rõ hơn về client roles, hãy
+  tưởng tượng rằng ứng dụng của chúng ta sẽ có hai loại users: admins and regular users. The admin users có thể thực thi
+  tất cả các the application services và the regular users sẽ chỉ được phép thực thi một số service.
 - Khi the Roles page được tải, bạn sẽ thấy a list of predefined client roles. Hãy nhấp vào Add Role button được hiển thị
   ở góc trên bên phải của the Roles table.
   ![img.png](Image/Figure9.8-Additional-configuration-for-O-stock’s-Keycloak-client.png)
   ![img.png](Image/Figure9.9-O-stock’s-Keycloak-Add-Role-page.png)
 - Vào the Add Role page, Chúng ta cần tạo the following client roles.
   ![img.png](Image/Figure9.10-O-stock’s-Keycloak-client-roles-USER-and-ADMIN.png)
-- Bây giờ chúng ta đã hoàn thành basic client configuration, hãy truy cập the Credentials page. TThe Credentials page sẽ
+- Bây giờ chúng ta đã hoàn thành basic client configuration, hãy truy cập the Credentials page. The Credentials page sẽ
   hiển thị the required client secret được yêu cầu cho the required client secret.
   ![img.png](Image/Figure9.11-O-stock’s-Keycloak-client-secret-on-the-Credentials-page.png)
 - Bước tiếp theo trong configuration của chúng ta là tạo các create realm roles. The realm roles sẽ cho phép chúng ta
@@ -145,7 +144,7 @@
   cùng bên phải của bảng. Giống như với the client roles, chúng ta sẽ tạo two types of realm roles: the ostock-user and
   the ostock-admin.
   ![img.png](Image/Figure9.12-Creating-the-ostock-admin-realm-role.png)
-- ![img.png](Image/Figure9.13-Specifying-additional-configurations.png)
+  ![img.png](Image/Figure9.13-Specifying-additional-configurations.png)
 - Bây giờ chúng ta đã định the ostock-admin realm role configured, hãy lặp lại các bước tương tự để tạo create the
   ostock-user role.
   ![img.png](Image/Figure9.14-A-list-of-O-stock’s-spmia-realm-roles.png)
@@ -165,16 +164,16 @@
 
 ### 6.4.5 Authenticating our O-stock users.
 
-- Tại thời điểm này, chúng ta có đủ base Keycloak server functionality của mình để thực hiệnperform application and
-  user authentication cho quy trình cấp mật khẩu.
+- Tại thời điểm này, chúng ta có đủ base Keycloak server functionality của mình để thực hiệnperform application and user
+  authentication cho quy trình cấp mật khẩu.
   ![img.png](Image/Figure9.18-Selecting-the-OpenID-Endpoint-Configuration-link.png)
   ![img.png](Image/Figure9.19-Mapping-O-stock’s-realm-roles.png)
-- Bây giờ chúng ta sẽ mô phỏng một người dùng muốn acquire an access token. chúng ta sẽ thực hiện việc này bằng cách
-  sử dụng Postman to POST đến endpoint t http://keycloak:8080/auth/realms/spmia-realm/protocol/openid-connect/token và
-  sau đó cung cấp ứng dụng, secret key, user ID, and password.
+- Bây giờ chúng ta sẽ mô phỏng một người dùng muốn acquire an access token. chúng ta sẽ thực hiện việc này bằng cách sử
+  dụng Postman to POST đến endpoint t http://keycloak:8080/auth/realms/spmia-realm/protocol/openid-connect/token và sau
+  đó cung cấp ứng dụng, secret key, user ID, and password.
 - Để mô phỏng a user có được an authentication token, chúng ta cần thiết lập Postman với the application name and secret
-  key. Đối với điều này, chúng ta sẽ chuyển các phần tử này đến authentication server endpoint của chúng ta bằng cách
-  sử dụng basic authentication.
+  key. Đối với điều này, chúng ta sẽ chuyển các phần tử này đến authentication server endpoint của chúng ta bằng cách sử
+  dụng basic authentication.
   ![img.png](Image/Figure9.20-Setting-up-O-stock’s-basic-authentication.png)
 - Tuy nhiên, chúng ta chưa sẵn sàng thực hiện cuộc gọi để nhận the token . Khi the application name and secret key được
   configured, chúng ta cần chuyển thông tin sau vào service dưới dạng HTTP form parameters:
@@ -189,13 +188,13 @@
   ![img.png](Image/Figure9.22-JSON-payload-returne-after.png)
     - access_token: The access token truy cập sẽ được hiển thị với each service call mà người dùng thực hiện đối với tài
       nguyên được bảo vệ.
-    - token_type: The authorization specification cho phép chúng ta xác định multiple token types. Loại mã thông báo
-      phổ biến nhất được sử dụng là the Bearer Token.
+    - token_type: The authorization specification cho phép chúng ta xác định multiple token types. Loại mã thông báo phổ
+      biến nhất được sử dụng là the Bearer Token.
     - refresh_token: The refresh token có thể được xuất trình trở lại the authorization server để phát hành lại a token
       sau khi hết hạn
     - expires_in: Đây là số giây trước khi the access token expires.. Giá trị mặc định để hết hạn mã thông báo ủy quyền
       vào Spring is 12 hours.
-    - scope: Điều này xác định s the scope mà this access token này hợp lệ
+    - scope: Điều này xác định the scope mà this access token này hợp lệ
       ![img.png](Image/Figure9.23-Looking-up-user-information-based.png)
 
 ## 6.5 Protecting the organization service using Keycloak
@@ -217,7 +216,7 @@
 
 ### 6.5.2  Configuring the service to point to our Keycloak server.
 
-- Sau khi chúng ta thiết lập the organization service được bảo vêk, mỗi khi thực hiện cuộc gọi tới service, người gọi
+- Sau khi chúng ta thiết lập the organization service được bảo vệ, mỗi khi thực hiện cuộc gọi tới service, người gọi
   phải bao gồm the authentication HTTP header có chứa a Bearer access token vào service.
 - Sau đó, tài nguyên được bảo vệ của chúng ta phải gọi lại the Keycloak server để xem the token có hợp lệ hay không.
   ![img.png](Image/Listing9.3-Keycloak-configuration.png)
@@ -232,7 +231,7 @@
     - KeycloakConfigResolver()
       ![img.png](Image/Listing9.4-Extending-SecurityConfig.png)
       ![img.png](Image/Listing9.4.1-Extending-SecurityConfig.png)
-- Các quy tắc truy cập có thể bao gồm từ coarse-grained ((any authenticated user được xác thực nào cũng có thể truy cập
+- Các quy tắc truy cập có thể bao gồm từ coarse-grained (any authenticated user được xác thực nào cũng có thể truy cập
   toàn bộ service) đến chi tiết (chỉ ứng dụng có vai trò này, nhưng được phép truy cập URL này thông qua DELETE).
 - Chúng ta không thể thảo luận về mọi hoán vị của các Spring Security’s access control rules, nhưng chúng ta có thể xem
   xét một số ví dụ phổ biến hơn.
@@ -248,15 +247,15 @@
 - Tiếp theo, chúng ta sẽ gọi the organization service with an access token. chúng ta muốn cắt và dán giá trị
   access_token từ the returned JSON call to the /openid-connect/token endpoint và sử dụng nó trong lệnh gọi của chúng
   tôi tới the organization service.
-- Hãy nhớ rằng, khi chúng ta gọi the organization service, chúng ta cần đặt the authorization type to Bearer Token
-  mang tên với the access_token value.
+- Hãy nhớ rằng, khi chúng ta gọi the organization service, chúng ta cần đặt the authorization type to Bearer Token mang
+  tên với the access_token value.
   ![img.png](Image/Figure9.25-Passing-in-the-access-token.png)
-- Đây có lẽ là một trong những trường hợp sử dụng đơn giản nhất để bảo vệ an endpoint using JWTs. Tiếp theo, chúng ta
-  sẽ xây dựng dựa trên ví dụ này và hạn chế quyền truy cập vào a specific endpoint cho a specific role.
+- Đây có lẽ là một trong những trường hợp sử dụng đơn giản nhất để bảo vệ an endpoint using JWTs. Tiếp theo, chúng ta sẽ
+  xây dựng dựa trên ví dụ này và hạn chế quyền truy cập vào a specific endpoint cho a specific role.
     - Trong ví dụ tiếp theo, chúng ta sẽ khóa lệnh gọi XÓA trên organization service của chúng ta chỉ với những users
       with ADMIN access.
-    - chúng ta có thể permit specific roles cụ thể thực thi một số phương thức bằng cách sử dụng @RolesAllowed trong
-      the controller.
+    - chúng ta có thể permit specific roles cụ thể thực thi một số phương thức bằng cách sử dụng @RolesAllowed trong the
+      controller.
 
 ![img.png](Image/Listing9.6-Using-the-@RolesAllowedAnnotation-in-the-OrganizationController.java.png)
 ![img.png](Image/Listing9.6.1-Using-the-@RolesAllowedAnnotation-in-the-OrganizationController.java.png)
@@ -265,15 +264,14 @@
   openid-connect/token POST request again. Khi chúng ta có the new access token, sau đó chúng ta cần gọi the DELETE
   endpoint cho the organization
   service: http://localhost:8072/organization/v1/organization/dfd13002-57c5-47ce-a4c2-a1fda2f51513.
-- chúng ta sẽ nhận được a 403 Forbidden HTTP status code trong cuộc gọi và an error message cho biết rằng quyền truy
-  cập đã bị denied for this service. The JSON text được trả về bởi cuộc gọi của chúng ta được hiển thị ở đây:
+- chúng ta sẽ nhận được a 403 Forbidden HTTP status code trong cuộc gọi và an error message cho biết rằng quyền truy cập
+  đã bị denied for this service. The JSON text được trả về bởi cuộc gọi của chúng ta được hiển thị ở đây:
   ![img.png](Image/Timestamp.png)
-- Nếu chúng ta đã thử cùng một cuộc gọi bằng the illary.huaylupo user account (password: password1) và its access
-  token, chúng ta sẽ thấy a successful call không trả về nội dung và the HTTP status code 204, No Content.
+- Nếu chúng ta đã thử cùng một cuộc gọi bằng the illary.huaylupo user account (password: password1) và its access token,
+  chúng ta sẽ thấy a successful call không trả về nội dung và the HTTP status code 204, No Content.
 - Tại thời điểm này, chúng ta đã xem xét cách gọi và bảo vệ a single service  (dịch vụ tổ chức) bằng Keycloak. Tuy
   nhiên, thường trong a microservice environment, chúng ta sẽ có multiple service để thực hiện a single transaction.
-- Trong các loại tình huống này, chúng ta cần đảm bảo rằng the access token được truyền từ service call to service
-  call.
+- Trong các loại tình huống này, chúng ta cần đảm bảo rằng the access token được truyền từ service call to service call.
 
 ### 6.5.4 Propagating the access token.
 
@@ -281,10 +279,10 @@
   Keycloak. Hãy nhớ rằng, the licensing service gọi the organization service để tra cứu thông tin. Câu hỏi trở thành,
   làm cách nào để chúng ta truyền the token từ service này sang service khác?
 - chúng ta sẽ thiết lập một ví dụ đơn giản trong đó chúng ta sẽ gọi the licensing service là the organization service.
-  Nếu bạn đã làm theo các ví dụ mà chúng ta đã xây dựng trong các chương trước, bạn sẽ thấy rằng cả hai service đều
-  đang chạy sau a gateway.
+  Nếu bạn đã làm theo các ví dụ mà chúng ta đã xây dựng trong các chương trước, bạn sẽ thấy rằng cả hai service đều đang
+  chạy sau a gateway.
   ![img.png](Image/Figure9.26-The-access-token.png)
-    - Người dùng đã authenticated with the Keycloak serverk và thực hiện cuộc gọi đến the O-stock web application. MThe
+    - Người dùng đã authenticated with the Keycloak serverk và thực hiện cuộc gọi đến the O-stock web application. The
       user’s access token được lưu trữ trong the user’s session. The O-stock web application cần truy xuất một số
       licensing data and call the licensing service REST endpoint. Là một phần của lời kêu gọi the licensing REST
       endpoint, the O-stock web application thêm the access token qua the HTTP Authorization header. The licensing
@@ -305,7 +303,7 @@
   the gateway không chuyển tiếp các sensitive HTTP headers như cookie, set-cookie và authorization to downstream
   services. Để cho phép truyền the authorization HTTP header, chúng ta cần thêm vào each route the following filter
   trong gateway-server.yml nằm trong the Spring Cloud Config repository:
-  -`- RemoveRequestHeader= Cookie,Set-Cookie`
+    - `- RemoveRequestHeader= Cookie,Set-Cookie`
 - This configuration là a blacklist of the sensitive headers mà the gateway sẽ không được truyền tới a downstream
   service. Sự vắng mặt của the Authorization value trong danh sách RemoveRequestHeader có nghĩa là cổng sẽ cho phép tiêu
   đề đó đi qua. Nếu chúng ta không đặt this configuration property, the gateway sẽ tự động chặn việc truyền cả ba giá
@@ -313,14 +311,14 @@
 - Tiếp theo, chúng ta cần configure licensing service của mình để bao gồm the Keycloak and Spring Security dependencies
   và thiết lập any authorization rules nào mà chúng ta muốn cho the service. Cuối cùng, chúng ta cần thêm the Keycloak
   properties vào the application properties file trong the configuration server.
-- Khi tuyên truyền access tokens, bước đầu tiên của chúng ta là add the Maven dependencies vào licensing service
-  pom.xml file của chúng ta. Danh sách sau đây cho thấy the dependencies.
+- Khi tuyên truyền access tokens, bước đầu tiên của chúng ta là add the Maven dependencies vào licensing service pom.xml
+  file của chúng ta. Danh sách sau đây cho thấy the dependencies.
   ![img.png](Image/Listing9.7-Configuring-Keycloak.png)
 - Bước tiếp theo là bảo vệ the licensing service để nó chỉ có thể được truy cập bởi an authenticated user. Danh sách sau
   đây cho thấy the SecurityConfig class.
   ![img.png](Image/Listing9.8-Restricting-access.png)
   ![img.png](Image/Listing9.8.1-Restricting-access.png)
-- Bước cuối cùng trong configuring the licensing service là thêm add the Keycloak configuration vào r
+- Bước cuối cùng trong configuring the licensing service là thêm add the Keycloak configuration vào
   licensing-service.properties file của chúng ta.
   ![img.png](Image/Listing9.9-Configuring-Keycloak.png)
 - Bây giờ chúng ta đã có các thay đổi the gateway để phổ biến tthe authorization header and the licensing service được
@@ -341,8 +339,8 @@
 
 ### 6.5.5 Parsing a custom field in a JWT.
 
-- chúng ta sẽ chuyển sang gateway của chúng ta để biết ví dụ về cách phân tích cú pháp a custom field in a JWT. Cụ
-  thể, chúng ta sẽ sửa đổi the TrackingFilter class mà chúng ta đã giới thiệu trong chương 6 để gdecode the
+- chúng ta sẽ chuyển sang gateway của chúng ta để biết ví dụ về cách phân tích cú pháp a custom field in a JWT. Cụ thể,
+  chúng ta sẽ sửa đổi the TrackingFilter class mà chúng ta đã giới thiệu trong chương 6 để gdecode the
   preferred_username field từ the JWT flowing through the gateway.
 - Để thực hiện việc này, chúng ta sẽ lấy thư viện trình phân tích cú pháp JWT và thêm nó vào the Gateway server’s
   pom.xml file. Multiple token có sẵn, nhưng chúng ta đã chọn the Apache Commons Codec và the org.json package để phân
@@ -372,7 +370,7 @@
     - Limit the attack surface of your microservices by locking down unneeded network ports.
       ![img.png](Image/Figure9.28-A-microservice-security-architecture.png)
 
-### 6.6.1 se HTTPS secure sockets layer (SSL) for all service communication
+### 6.6.1 Use HTTPS secure sockets layer (SSL) for all service communication
 
 - Trong tất cả các ví dụ về mã trong cuốn sách này, chúng ta đã sử dụng HTTP vì HTTP là một giao thức đơn giản và không
   yêu cầu thiết lập trên mọi service trước khi bạn bắt đầu sử dụng service.
@@ -389,7 +387,7 @@
   lưu lượng truy cập từ the service gateway. Hãy nhớ rằng the service gateway có thể hoạt động như a Policy Enforcement
   Point (PEP), có thể được thực thi trong tất cả services.
 - Việc thực hiện các service calls thông qua a service gateway cho phép bạn nhất quán về cách bạn đang bảo mật và kiểm
-  tra các services của mình. . A service gateway cũng cho phép bạn khóa port và endpoints mà bạn sẽ tiếp xúc với the
+  tra các services của mình. A service gateway cũng cho phép bạn khóa port và endpoints mà bạn sẽ tiếp xúc với the
   outside world.
 
 ### 6.6.3 Zone your services into a public API and private API
@@ -402,7 +400,7 @@
 - These microservices có xu hướng là service aggregators, kéo dữ liệu và thực hiện các tác vụ trên nhiều service. Public
   microservices cũng phải đứng sau service gateway của riêng chúng và có dịch vụ xác thực riêng để thực hiện xác thực và
   ủy quyền.
-- Việc truy cập vào public services của các client applications phải đi qua ma single route được bảo vệ bởi the service
+- Việc truy cập vào public services của các client applications phải đi qua a single route được bảo vệ bởi the service
   gateway. Ngoài ra, the public zone nên có service xác thực riêng.
 - The private zone đóng vai trò như một bức tường để bảo vệ chức năng và dữ liệu ứng dụng cốt lõi của bạn. Nó chỉ được
   truy cập thông qua a single, well-known port và phải được khóa lại để chỉ chấp nhận lưu lượng mạng từ the network
@@ -413,7 +411,7 @@
 
 ### 6.6.4 Limit the attack surface of your microservices by locking down unneeded network ports
 
-- Nhiều nhà phát triển không xem xét kỹ số lượng cổng port thiểu tuyệt đối mà họ cần mở để service của họ hoạt động.
+- Nhiều nhà phát triển không xem xét kỹ số lượng cổng port tối thiểu tuyệt đối mà họ cần mở để service của họ hoạt động.
   Configure the operating system your service đang chạy để chỉ cho phép truy cập vào và ra vào các port hoặc một phần cơ
   sở hạ tầng mà service của bạn cần  (monitoring, log aggregation).
 - Đừng chỉ tập trung vào các access ports đầu vào. Nhiều nhà phát triển quên khóa các port đi của họ. Khóa các port gửi

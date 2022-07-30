@@ -19,13 +19,13 @@
   bắt đầu. Khi giao dịch lưu chuyển qua nhiều service, correlation ID được truyền từ lệnh gọi service này sang lệnh gọi
   service khác.
 - chúng ta đã sử dụng a Spring Cloud Gateway filter để kiểm tra tất cả các HTTP requests đến và inject a correlation ID
-  vào the request nếu không có. Khi đã có the correlation ID , chúng ta đã sử dụng a custom Spring HTTP filter trên
-  từng service của mình để map biến đến với a custom UserContext object.
-- Với this object, chúng ta đã thêm the correlation ID vào log statements của mình theo cách thủ công bằng cách thêm
-  the correlation ID vào một a log statement hoặc thêm một chút the correlation ID trực tiếp vào Spring’s Mapped
-  Diagnostic Context (MDC). MDC là a map that stores a set of key-value pairs được cung cấp bởi ứng dụng được chèn vào
-  the log messages.
-- Trong chương nayf, chúng ta cũng đã viết a Spring interceptor để đảm bảo rằng tất cả các cuộc gọi HTTP từ một service
+  vào the request nếu không có. Khi đã có the correlation ID , chúng ta đã sử dụng a custom Spring HTTP filter trên từng
+  service của mình để map biến đến với a custom UserContext object.
+- Với this object, chúng ta đã thêm the correlation ID vào log statements của mình theo cách thủ công bằng cách thêm the
+  correlation ID vào một a log statement hoặc thêm một chút the correlation ID trực tiếp vào Spring’s Mapped Diagnostic
+  Context (MDC). MDC là a map that stores a set of key-value pairs được cung cấp bởi ứng dụng được chèn vào the log
+  messages.
+- Trong chương này, chúng ta cũng đã viết a Spring interceptor để đảm bảo rằng tất cả các cuộc gọi HTTP từ một service
   sẽ truyền the correlation ID bằng cách thêm the correlation ID vào the HTTP headers of outbound calls. May mắn thay,
   Spring Cloud Sleuth quản lý tất cả cơ sở hạ tầng và độ phức tạp của mã này cho chúng ta.
 - chúng ta sẽ thấy rằng bằng cách thêm Spring Cloud Sleuth vào các microservices của mình, chúng ta có thể:
@@ -76,7 +76,7 @@
 - Tuy nhiên, vì chức năng của a microservice-based application được phân tách thành các service nhỏ, chi tiết và chúng
   tôi có thể có multiple service instances cho a single service type, việc cố gắng liên kết debugging để log data từ
   multiple services để giải quyết vấn đề của người dùng có thể cực kỳ khó khăn.
-- Các nhà phát triển muốn debug sự cố trên s multiple servers thường phải thử những cách sau:
+- Các nhà phát triển muốn debug sự cố trên multiple servers thường phải thử những cách sau:
     - Log into multiple servers để kiểm tra the logs có trên mỗi service. Đây là một nhiệm vụ cực kỳ tốn công sức, đặc
       biệt nếu các service được đề cập có khối lượng giao dịch khác nhau khiến logs cuộn qua ở các tốc độ khác nhau.
     - Viết home-grown query scripts sẽ cố gắng phân tích cú pháp the logs và xác định the relevant log entries. Bởi vì
@@ -90,7 +90,7 @@
   instances đến một điểm tổng hợp tập trung, nơi the log data có thể được lập chỉ mục và có thể tìm kiếm được.
   ![img.png](Image/Figure11.3-The-combination-of-aggregated-logs.png)
 - May mắn thay, có nhiều mã nguồn mở và các sản phẩm thương mại có thể giúp chúng ta implement the logging architecture
-  trong hình 11.3. Ngoài ra, tồn tạimultiple implementation models cho phép chúng ta lựa chọn giữa giải pháp tại chỗ,
+  trong hình 11.3. Ngoài ra, tồn tại multiple implementation models cho phép chúng ta lựa chọn giữa giải pháp tại chỗ,
   được quản lý cục bộ hoặc a cloud-based solution.
   ![img.png](Image/Table11.1-Log-aggregation-solutions.png)
 - chúng ta sẽ xem ELK như một ví dụ về cách tích hợp Spring Cloud Sleuth-backed logs hậu thuẫn vào một nền tảng logging
@@ -127,15 +127,16 @@
     - Add the logstash-logback-encoder dependency in the pom.xml of our services
     - Create the Logstash TCP appender in a Logback configuration file
 - ADDING THE LOGSTASH ENCODER:
-    - we chúng ta cần thêm the logstash-logback-encoder dependency to the pom.xml file of our licensing, organization,
-      and gateway services.
-      ![img.png](Image/logstashDepency.png)
+    - Chúng ta cần thêm the logstash-logback-encoder dependency to the pom.xml file of our licensing, organization, and
+      gateway services.
+
+![img.png](Image/logstashDepency.png)
 
 - CREATING THE LOGSTASH TCP APPENDER:
     - Khi the dependency được thêm vào mỗi service, chúng ta cần thông báo cho the licensing service rằng nó cần giao
       tiếp với Logstash để gửi the applications logs, được định dạng là JSON. (Logback, theo mặc định, tạo ra các bản
-      ghi ứng dụng ở dạng văn bản thuần túy, nhưng để sử dụng các chỉ mục Elasticsearch, chúng ta cần đảm bảo rằng
-      chúng ta gửi the log data ở định dạng JSON.)
+      ghi ứng dụng ở dạng văn bản thuần túy, nhưng để sử dụng các chỉ mục Elasticsearch, chúng ta cần đảm bảo rằng chúng
+      ta gửi the log data ở định dạng JSON.)
     - Using the net.logstash.logback.encoder.LogstashEncoder class
     - Using the net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder class
     - Parsing the plain-text log data with Logstash
@@ -155,8 +156,8 @@
 - Trong hình 11.5, chúng ta có thể thấy hai khía cạnh quan trọng. Đầu tiên là LogstashEncoder bao gồm tất cả các giá trị
   được lưu trữ trong Spring’s MDC logger theo mặc định và thứ hai là vì chúng ta đã thêm the Spring Cloud Sleuth
   dependency vào service của mình, chúng ta có thể thấy TraceId, X-B3-TraceId, SpanId, X- Các trường B3-SpanId và
-  spanExportable trong log data. của chúng ta. Lưu ý rằng tiền tố X-B3 truyền tiêu đề mặc định mà Spring Cloud Sleuth
-  sử dụng từ service này sang service khác.
+  spanExportable trong log data. của chúng ta. Lưu ý rằng tiền tố X-B3 truyền tiêu đề mặc định mà Spring Cloud Sleuth sử
+  dụng từ service này sang service khác.
 - Tên này bao gồm X, được sử dụng cho custom headers không phải là một phần của đặc tả HTTP và B3, viết tắt của
   “BigBrotherBird”, tên trước đây của Zipkin.
 - Bạn cũng có thể configure the log data được hiển thị trong hình 11.5 bằng cách sử dụng
@@ -164,8 +165,8 @@
   đã được thêm theo mặc định vào cấu hình của chúng ta, add new patterns để hiển thị các MDC fields hiện có hoặc tùy
   chỉnh, v.v.
   ![img.png](Image/Listing11.2-Customizing-the-Logback-configuration.png)
-- Mặc dù chúng ta đã chọn the LogstashEncoder option cho ví dụ này, nhưng bạn nên chọn tùy chọn phù hợp nhất với nhu
-  cầu của mình. Bây giờ chúng ta đã có cấu hình Logback trong the licensing service, hãy thêm cấu hình tương tự vào các
+- Mặc dù chúng ta đã chọn the LogstashEncoder option cho ví dụ này, nhưng bạn nên chọn tùy chọn phù hợp nhất với nhu cầu
+  của mình. Bây giờ chúng ta đã có cấu hình Logback trong the licensing service, hãy thêm cấu hình tương tự vào các
   service khác của chúng ta: configuration and gateway. chúng ta sẽ xác định và chạy các the ELK Stack applications
   trong Docker containers.
 
@@ -173,8 +174,8 @@
 
 - Để thiết lập ELK Stack containers của chúng ta, chúng ta cần làm theo hai bước đơn giản. Đầu tiên là tạo the Logstash
   configuration file và thứ hai là xác định các the ELK Stack applications in our Docker configuration. Tuy nhiên, trước
-  khi chúng ta bắt đầu tạo our configuration, điều quan trọng cần lưu ý là đường dẫn Logstash có hai phần tử bắt buộc
-  và một phần tử tùy chọn. Các yếu tố bắt buộc là the inputs and outputs:
+  khi chúng ta bắt đầu tạo our configuration, điều quan trọng cần lưu ý là đường dẫn Logstash có hai phần tử bắt buộc và
+  một phần tử tùy chọn. Các yếu tố bắt buộc là the inputs and outputs:
     - The input cho phép Logstash đọc a specific source. Logstash hỗ trợ nhiều plugin đầu vào như GitHub, Http, TCP,
       Kafka và các plugin khác.
     - The output chịu trách nhiệm gửi dữ liệu sự kiện đến a particular destination. Elastic hỗ trợ nhiều plugin như CSV,
@@ -193,9 +194,7 @@
       filter. This filtery thêm a manningPublications tag vào các sự kiện. A real-world scenario về a possible tag cho
       các service của bạn có thể là the environment nơi ứng dụng chạy. Cuối cùng, phần tử thứ tư và thứ năm chỉ định
       plugin đầu ra cho Logstash service của chúng ta và gửi dữ liệu đã xử lý đến service Elasticsearch đang chạy trên
-      cổng
-
-    9200.
+      cổng 9200.
 
 - Bây giờ chúng ta đã có the Logstash configuration, hãy thêm ba mục nhập ELK Docker vào the docker-compose.yml file.
   Hãy nhớ rằng, chúng ta đang sử dụng tệp này để kích hoạt tất cả các the Docker containers được sử dụng cho các ví dụ
@@ -203,7 +202,7 @@
   nhập mới.
   ![img.png](Image/Listing11.4-Configuring-ELK-Stack-Docker-Compose.png)
   ![img.png](Image/Listing11.4.1-Configuring-ELK-Stack-Docker-Compose.png)
-- Để chạy n the Docker environment, chúng ta cần thực hiện các lệnh sau trong thư mục gốc nơi chứa the parent pom.xml.
+- Để chạy the Docker environment, chúng ta cần thực hiện các lệnh sau trong thư mục gốc nơi chứa the parent pom.xml.
   Lệnh mvn tạo a new image với những thay đổi mà chúng ta đã thực hiện cho the organization, licensing, and gateway
   services:
   `mvn clean package dockerfile:build docker-compose -f docker/docker-compose.yml up`
@@ -221,9 +220,9 @@
   ![img.png](Image/Figure11.8-The-Kibana-setup-page.png)
 - Để tiếp tục, chúng ta phải tạo an index pattern. Kibana sử dụng a set of index patterns để lấy dữ liệu từ một công cụ
   Elasticsearch. The index pattern trách nhiệm cho Kibana biết Elasticsearch indexes nào mà chúng ta muốn khám phá. Ví
-  dụ: trong trường hợp của chúng ta, chúng ta sẽ tạo một mẫu chỉ mục cho biết rằng chúng ta muốn truy xuất tất cả
-  thông tin Logstash từ Elasticsearch. Để tạo mẫu chỉ mục của chúng ta, hãy nhấp vào the Index Patterns link trong phần
-  Kibana ở bên trái của trang.
+  dụ: trong trường hợp của chúng ta, chúng ta sẽ tạo một mẫu chỉ mục cho biết rằng chúng ta muốn truy xuất tất cả thông
+  tin Logstash từ Elasticsearch. Để tạo mẫu chỉ mục của chúng ta, hãy nhấp vào the Index Patterns link trong phần Kibana
+  ở bên trái của trang.
   ![img.png](Image/Figure11.9-Configuring-the-index-pattern.png)
 - Trên the Create Index Pattern trong hình 11.9, chúng ta có thể thấy rằng Logstash đã tạo an index as a first step. Tuy
   nhiên, this index vẫn chưa sẵn sàng để sử dụng. Để kết thúc việc thiết lập chỉ mục, chúng ta phải chỉ định an index
@@ -255,9 +254,9 @@
   Trong chương 5, nơi chúng ta giới thiệu Spring Cloud Gateway, chúng ta đã biết cách xây dựng a gateway response
   filter, adding the generated correlation ID đã tạo vào the HTTP response do người gọi trả về để sử dụng trong các dịch
   vụ của chúng ta.
-- Bây giờ chúng ta sẽ sửa đổi bộ lọc đó để thêm tSpring Cloud Sleuth header. Để thiết lập gateway response filter của
-  chúng ta, chúng ta cần đảm bảo rằng chúng ta có các the Spring Cloud Sleuth dependencies trong tệp pom.xml của
-  chúng ta như sau:
+- Bây giờ chúng ta sẽ sửa đổi bộ lọc đó để thêm Spring Cloud Sleuth header. Để thiết lập gateway response filter của
+  chúng ta, chúng ta cần đảm bảo rằng chúng ta có các the Spring Cloud Sleuth dependencies trong tệp pom.xml của chúng
+  ta như sau:
   ![img.png](Image/dependencysleuth.png)
 - chúng ta sẽ sử dụng the spring-cloud-starter-sleuth dependency để nói với Spring Cloud Sleuth rằng chúng ta muốn the
   gateway tham gia vào a Spring Cloud trace.
@@ -266,8 +265,8 @@
 ![img.png](Image/Listing11.5.1-Adding-the-Spring-Cloud-Sleuth-trace-ID.png)
 
 - Bởi vì the gateway hiện đã được kích hoạt Spring Cloud Sleuth, chúng ta có thể truy cập tracing information từ bên
-  trong ResponseFilter của chúng ta bằng cách autowiring trong lớp Tracer. Lớp này cho phép chúng ta truy cập thông
-  tin về dấu vết hiện đang được thực thi.
+  trong ResponseFilter của chúng ta bằng cách autowiring trong lớp Tracer. Lớp này cho phép chúng ta truy cập thông tin
+  về dấu vết hiện đang được thực thi.
 - Phương thức tracer.currentSpan () .context (). TraceIdString () cho phép chúng ta truy xuất the current trace ID dưới
   dạng một Chuỗi cho giao dịch đang được thực hiện. Việc thêm the trace ID vào HTTP response gửi đi chuyển trở lại qua
   gateway là rất đơn giản.
@@ -275,8 +274,8 @@
       .add(FilterUtils.CORRELATION_ID, traceId);`
 
 - Với mã này, nếu chúng ta gọi an O-stock microservice thông qua gateway của mình, chúng ta sẽ nhận được an HTTP
-  response có tên tmx-tương quan-id với a Spring Cloud Sleuth trace ID. Hình 11.14 cho thấy kết quả của một lệnh gọi tới
-  endpoint to GET the licenses of an organization:
+  response có tên tmx-correlation-id với a Spring Cloud Sleuth trace ID. Hình 11.14 cho thấy kết quả của một lệnh gọi
+  tới endpoint to GET the licenses of an organization:
   ![img.png](Image/Figure11.14-With-the-Spring-Cloud-Sleuth-trace-ID.png)
 
 ## 8.4 Distributed tracing with Zipkin
@@ -321,8 +320,8 @@
 ### 8.4.3 Configuring a Zipkin server
 
 - Có một số cách để thiết lập Zipkin, nhưng chúng ta sẽ sử dụng a Docker container với the Zipkin server. Tùy chọn này
-  sẽ cho phép chúng ta tránh việc tạo a new project trong kiến trúc của chúng ta. Để thiết lập Zipkin, chúng ta sẽ
-  thêm the following registry entry vào our dockercompose.yml file nằm trong the Docker folder for the project:
+  sẽ cho phép chúng ta tránh việc tạo a new project trong kiến trúc của chúng ta. Để thiết lập Zipkin, chúng ta sẽ thêm
+  the following registry entry vào our dockercompose.yml file nằm trong the Docker folder for the project:
   ![img.png](Image/dockerCompose-zipkin.png)
 - Để chạy a Zipkin server, cần little configuration. Một trong những thứ chúng ta cần cấu hình khi chạy Zipkin là kho dữ
   liệu phụ trợ mà Zipkin sử dụng để lưu trữ dữ liệu theo dõi. Zipkin hỗ trợ bốn kho dữ liệu phụ trợ khác nhau:
@@ -334,8 +333,8 @@
   the in-memory database trong a production environment. The in-memory database chứa a limited amount of data và the
   data sẽ bị mất khi máy chủ Zipkin bị tắt hoặc bị lỗi.
 - Đối với ví dụ này, chúng ta sẽ chỉ cho bạn cách sử dụng Elasticsearch làm nơi lưu trữ dữ liệu vì chúng ta đã định
-  configured Elasticsearch. Các cài đặt bổ sung duy nhất mà chúng ta cần thêm là các biến STORAGE_TYPE và ES_HOSTS
-  trong the environment section của our configuration file. Đoạn mã sau hiển thị the complete Docker Compose registry:
+  configured Elasticsearch. Các cài đặt bổ sung duy nhất mà chúng ta cần thêm là các biến STORAGE_TYPE và ES_HOSTS trong
+  the environment section của our configuration file. Đoạn mã sau hiển thị the complete Docker Compose registry:
   ![img.png](Image/zipkinDockerCompose.png)
 
 ### 8.4.4 Setting tracing levels
@@ -350,9 +349,9 @@
     - A value of 0 means Spring Cloud Sleuth doesn’t send Zipkin any transactions.
     - A value of .5 means Spring Cloud Sleuth sends 50% of all transactions.
     - A value of 1 means Spring Cloud Sleuth sends all transactions (100%).
-- Vì mục đích của chúng ta, chúng ta sẽ gửi tất cả thông tin theo dõi (100%) cho các service và tất cả các giao dịch
-  của chúng ta. Để thực hiện việc này, chúng ta có thể đặt giá trị của spring.sleuth.sampler.percentage hoặc chúng ta
-  có thể thay thế lớp Sampler mặc định được sử dụng trong Spring Cloud Sleuth bằng AlwaysSampler.
+- Vì mục đích của chúng ta, chúng ta sẽ gửi tất cả thông tin theo dõi (100%) cho các service và tất cả các giao dịch của
+  chúng ta. Để thực hiện việc này, chúng ta có thể đặt giá trị của spring.sleuth.sampler.percentage hoặc chúng ta có thể
+  thay thế lớp Sampler mặc định được sử dụng trong Spring Cloud Sleuth bằng AlwaysSampler.
 - Lớp AlwaysSampler có thể được injected vào như một Spring bean vào một ứng dụng. Nhưng đối với ví dụ này, chúng ta sẽ
   sử dụng spring.sleuth.sampler.percentage trong the configuration file của the licensing, organization, and gateway
   services như sau:
@@ -408,7 +407,7 @@
 - `http://localhost:8072/license/v1/organization/4d10ec24-141a-4980-be34-➥ 2ddb5e0458c8/license/4af05c3b-a0f3-411d-b5ff-892c62710e15`
 - chúng ta có thể thấy rằng cuộc gọi đến the licensing service liên quan đến tám cuộc gọi HTTP. chúng ta thấy lệnh gọi
   đến the gateway và sau đó từ the gateway to the licensing service; the licensing service to the gateway and the
-  gateway to the organization; và cuối cùng, , the organization to the licensing service using Apache Kafka to update
+  gateway to the organization; và cuối cùng, the organization to the licensing service using Apache Kafka to update
   the Redis cache.
   ![img.png](Image/Figure11.18-Viewing-the-details-of-a-trace.png)
 
@@ -430,12 +429,12 @@
   054accff01c9ba6b. chúng ta có thể tìm kiếm dấu vết cụ thể này của Zipkin bằng cách the trace ID theo dõi được trả về
   bởi cuộc gọi của chúng ta vào hộp tìm kiếm ở góc trên bên phải của the Zipkin query screen Hình 11.19 cho thấy nơi
   chúng ta có thể nhập the trace ID.
-- Với the specific trace in hand, chúng ta có thể truy vấn Zipkin về giao dịch và xem việc the publication of the
-  DELETE message. The second span trong hình 11.20 là thông báo the channel output, được sử dụng để publish to a Kafka
-  topic được gọi là orgChangeTopic.
+- Với the specific trace in hand, chúng ta có thể truy vấn Zipkin về giao dịch và xem việc the publication of the DELETE
+  message. The second span trong hình 11.20 là thông báo the channel output, được sử dụng để publish to a Kafka topic
+  được gọi là orgChangeTopic.
   ![img.png](Image/Figure11.19-With-the-trace-ID-returned-in-the-HTTP-tmx-correlation-id.png)
   ![img.png](Image/Figure11.20-Spring-Cloud-Sleuth-automatically-traces.png)
-- Bạn có thể thấy the licensing service receive the message bằng cách nhấp vào g the licensing service span. Hình 11.21
+- Bạn có thể thấy the licensing service receive the message bằng cách nhấp vào the licensing service span. Hình 11.21
   cho thấy dữ liệu này.
   ![img.png](Image/Figure11.21-Zipkin-lets-us-see-the-Kafka-message.png)
 
@@ -452,7 +451,7 @@
   ![img.png](Image/Listing11.9-Implementing-the-findById()-method.png)
 - Với two custom spans này, hãy khởi động lại các service. Sau đó chọn GET endpoint sau:
 - `http://localhost:8072/license/v1/organization/4d10ec24-141a-4980-be34-➥ 2ddb5e0458c9/license/4af05c3b-a0f3-411d-b5ff-892c62710e16`
-- Nếu chúng ta xem xét the transaction in Zipkin,, chúng ta sẽ thấy việc bổ sung two new spans khi chúng ta gọi the
+- Nếu chúng ta xem xét the transaction in Zipkin, chúng ta sẽ thấy việc bổ sung two new spans khi chúng ta gọi the
   licensing service endpoint để truy xuất licensing information.
   ![img.png](Image/Figure11.22-The-custom-spans.png)
 - Hình 11.22 cũng cho thấy tracing và thời gian bổ sung liên quan đến Redis và tra cứu cơ sở dữ liệu của chúng ta. Đi

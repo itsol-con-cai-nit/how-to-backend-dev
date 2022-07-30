@@ -94,7 +94,7 @@
   đang cố gắng tiếp cận tài nguyên và chính tài nguyên đó.
 - The client không biết nó thậm chí đang giao tiếp với server. Reverse proxy sẽ đảm nhận việc nắm bắt the client’s
   request và sau đó client’s behalf gọi remote resource.
-    - Trong trường hợp của một kiến trúc microservice, Spring Cloud Gateway nhận một cuộc gọi microservice từ m a client
+    - Trong trường hợp của một kiến trúc microservice, Spring Cloud Gateway nhận một cuộc gọi microservice từ a client
       và chuyển tiếp nó đến the upstream service.
     - The service client nghĩ rằng nó chỉ giao tiếp với gateway. Nhưng nó không thực sự đơn giản như vậy. Để giao tiếp
       với the upstream services, gateway phải biết cách ánh xạ cuộc gọi đến với the upstream route.
@@ -118,7 +118,7 @@
   chúng ta có thể thực hiện cuộc gọi mà còn có thể thêm và xóa remove instances of a service mà không cần phải sửa đổi
   gateway.
 - Ví dụ: chúng ta có thể thêm một new service to Eureka và the gateway automatically routes các cuộc gọi đến nó vì nó
-  đang giao tiếp với Eureka về pvề nơi đặt physical service endpoints thực tế.
+  đang giao tiếp với Eureka về nơi đặt physical service endpoints thực tế.
 - Nếu chúng ta muốn xem the routes managed bởi the Gateway server, chúng ta có thể liệt kê các the routes thông qua the
   actuator/gateway/routes endpoint on the Gateway server.
   ![Alt text](Image/Figure8.6-Each-service-that-is-mapped.png?raw=true "Title")
@@ -252,7 +252,7 @@
 
 ![Alt text](Image/Listing8.9-Retrieving-the-tmx-correlation-id.png?raw=true "Title")
 
-- Trước tiên, chúng ta kiểm tra xemtmx-correlationID đã được đặt trên the HTTP headers cho yêu cầu đến chưa. Nếu nó
+- Trước tiên, chúng ta kiểm tra xem tmx-correlationID đã được đặt trên the HTTP headers cho yêu cầu đến chưa. Nếu nó
   không có ở đó, mã của chúng ta sẽ trả về null để tạo một mã sau này. Bạn có thể nhớ rằng trước đó, trong phương thức
   filter () trong lớp TrackingFilter của chúng ta, chúng ta đã thực hiện chính xác điều này với đoạn mã sau:
   ![Alt text](Image/Listing8.9.1-Retrieving-the-tmx-correlation-id.png?raw=true "Title")
@@ -266,7 +266,7 @@
 
 ## 5.7 Using the correlation ID in the services
 
-- Bây giờ chúng ta đã đảm bảo rằng một a correlation ID đã được thêm vào mọi lệnh gọi microservice qua gateway, chúng
+- Bây giờ chúng ta đã đảm bảo rằng a correlation ID đã được thêm vào mọi lệnh gọi microservice qua gateway, chúng
   tôi muốn đảm bảo rằng
     - The correlation ID có thể dễ dàng truy cập được đối với microservice được gọi.
     - Bất kỳ downstream service calls nào mà microservice thực hiện cũng có thể correlation ID cho các the downstream
@@ -286,7 +286,7 @@
 
 ### 5.7.1 UserContextFilter: Intercepting the incoming HTTP request.
 
-- Lớp đầu tiên chúng ta sẽ xây dựng là lớp UserContextFilter. Lớp này là một an HTTP servlet filter sẽ chặn tất cả các
+- Lớp đầu tiên chúng ta sẽ xây dựng là lớp UserContextFilter. Lớp này là an HTTP servlet filter sẽ chặn tất cả các
   HTTP requests đến vào service và ánh xạ the correlation ID (và một vài giá trị khác) từ HTTP request tới lớp
   UserContext.
   ![Alt text](Image/Listing8.12-Mapping-the-correlation-ID.png?raw=true "Title")
@@ -298,7 +298,7 @@
 - Lớp UserContext giữ các giá trị the HTTP header cho một service client request riêng lẻ được xử lý bởi microservice
   của chúng ta. Nó bao gồm các phương thức getter / setter lấy và lưu trữ các giá trị từ java.lang.ThreadLocal.
   ![Alt text](Image/Listing8.13-Storing-the-HTTP-header.png?raw=true "Title")
-- Ở đây, lớp UserContext không hơn gì một POJO giữ các giá trị được thu thập từ HTTP request. đến.
+- Ở đây, lớp UserContext không hơn gì một POJO giữ các giá trị được thu thập từ HTTP request đến.
 - Tiếp theo, chúng ta sẽ sử dụng lớp UserContextHolder để lưu trữ UserContext trong một biến ThreadLocal có thể truy cập
   bằng bất kỳ phương thức nào được gọi bởi luồng xử lý user’s request.
   ![Alt text](Image/Listing8.14-The-UserContextHolder-stores.png?raw=true "Title")
@@ -325,7 +325,7 @@
   mình trở lại client. Bằng cách này, chúng ta có thể chuyển lại the correlation ID cho người gọi mà không cần phải chạm
   vào the message body.
   ![Alt text](Image/Listing8.17-Injecting-the-correlation-ID-into-the-HTTP-response.png?raw=true "Title")
-- Khi chúng ta đã triển khai ResponseFilter, chúng ta có thể kích hoạt service của mình và gọi dlicensing or
+- Khi chúng ta đã triển khai ResponseFilter, chúng ta có thể kích hoạt service của mình và gọi licensing or
   organization service với nó. Sau khi dịch vụ hoàn tất, bạn sẽ thấy tmxcorrelation-id trên the HTTP response header từ
   cuộc gọi.
   ![Alt text](Image/Figure8.13-The-tmx-correlation-id.png?raw=true "Title")

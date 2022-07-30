@@ -9,7 +9,7 @@
   microservices khác bằng cách sử dụng asynchronous messages. Việc sử dụng asynchronous messages để liên lạc giữa các
   ứng dụng không phải là điều mới mẻ. Điểm mới là khái niệm sử dụng tin nhắn để truyền đạt các sự kiện đại diện cho
   những thay đổi trong trạng thái.
-- Khái niệm này được gọi là kiến trúc hướng sự kiện (EDA). Nó còn được gọi là messagedriven architecture (MDA). Điều mà
+- Khái niệm này được gọi là kiến trúc hướng sự kiện (EDA). Nó còn được gọi là message driven architecture (MDA). Điều mà
   an EDA-based approach cho phép chúng ta làm là xây dựng các hệ thống được tách biệt cao có thể phản ứng với các thay
   đổi mà không bị kết hợp chặt chẽ với các specific libraries or services.
 - Khi được kết hợp với microservices, EDA cho phép chúng ta nhanh chóng thêm chức năng mới vào ứng dụng của mình bằng
@@ -45,7 +45,7 @@
   trước đó bằng cách sử dụng a synchronous requestresponse model. Khi the organization state changes, the licensing and
   organization services sẽ giao tiếp qua lại thông qua các REST endpoints của họ.
 - Đối với cách tiếp cận thứ hai, the organization service sẽ emit an asynchronous event
-  (message)  để thông báo rằng organization data của nó đã thay đổi. The organization service sau đó spublish a message
+  (message)  để thông báo rằng organization data của nó đã thay đổi. The organization service sau đó publish a message
   đến một hàng đợi, thông báo này sẽ cho biết rằng an organization record đã được cập nhật hoặc bị xóa — một sự thay đổi
   về trạng thái. The licensing service sẽ lắng nghe người trung gian (message broker or queue) để xác định xem an
   organization event occurred hay không và nếu có, hãy xóa the organization data from its cache.
@@ -58,7 +58,7 @@
 - Trong hình 10.1, khi a user calls the licensing service, the licensing service sẽ cần tra cứu the organization data.
   Để làm như vậy, the licensing service trước tiên sẽ truy xuất organization mong muốn theo ID của nó từ a Redis
   cluster.
-- Nếu the licensing service không thể tìm thấy the organization data, sau đó nó sẽ gọi the organization service bằng g a
+- Nếu the licensing service không thể tìm thấy the organization data, sau đó nó sẽ gọi the organization service bằng a
   REST-based endpoint, lưu trữ data được trả lại trong Redis trước khi trả lại the organization data cho người dùng.
 - Nếu ai đó cập nhật hoặc xóa the organization record bằng cách sử dụng the organization service’s REST endpoint, the
   organization service sẽ cần gọi an endpoint được hiển thị trên the licensing service và yêu cầu nó làm mất hiệu lực
@@ -76,7 +76,7 @@
       hoặc bị xóa, chúng ta đã giới thiệu việc ghép nối từ the organization service back to the licensing service.
     - the data in the Redis cache bị vô hiệu, the organization service cần an exposed endpoint trên the licensing
       service có thể được gọi để làm mất hiệu lực Redis cache của nó hoặc the organization service cần nói chuyện trực
-      tiếp với the Redis server thuộc sở hữu của y the licensing service để xóa dữ liệu trong đó.
+      tiếp với the Redis server thuộc sở hữu của the licensing service để xóa dữ liệu trong đó.
     - Việc để the organization service nói chuyện với Redis có vấn đề riêng vì chúng ta đang trao đổi với một cửa hàng
       dữ liệu thuộc sở hữu trực tiếp của một service khác. In a microservice environment, đây là một điều tuyệt vời. Mặc
       dù người ta có thể lập luận rằng the organization data thuộc về the organization service, nhưng the licensing
@@ -151,7 +151,7 @@
     - The sender không biết ai sẽ sử dụng nó. Điều này có nghĩa là chúng ta có thể dễ dàng thêm add new message
       consumers (và chức năng mới) mà không ảnh hưởng đến the original sending service. Đây là một khái niệm cực kỳ mạnh
       mẽ vì chức năng mới có thể được thêm vào ứng dụng mà không cần phải chạm vào các service hiện có. Thay vào đó, mã
-      mới có thể lắng nghe các n listen for events being published và phản ứng với chúng một cách phù hợp.
+      mới có thể lắng nghe các listen for events being published và phản ứng với chúng một cách phù hợp.
 
 ### 7.2.3 Downsides of a messaging architecture.
 
@@ -235,7 +235,7 @@
 
 - Trong phần này, chúng ta sẽ giải thích cách add the Kafka and Redis services vào môi trường Docker cho trình our
   message producer. Để đạt được điều này, hãy bắt đầu bằng cách thêm mã được hiển thị trong danh sách sau vào tệp
-  docker-compost.yml của chúng ta.
+  docker-compose.yml của chúng ta.
 - ![img.png](Image/Listing10.10-Adding-Kafka-and-Redis.png)
 - ![img.png](Image/Listing10.10.1-Adding-Kafka-and-Redis.png)
 
@@ -254,7 +254,7 @@
   a Spring Cloud Stream message broker. chúng ta có thể làm điều này bằng cách annotating the organization service’s
   bootstrap class, OrganizationServiceApplication, với @EnableBinding.
   ![img.png](Image/Listing10.2-The-annotated-OrganizationServiceApplication.png)
-- Trong danh sách 10.2,the @EnableBinding annotation cho Spring Cloud Stream biết rằng chúng ta muốn liên kết service
+- Trong danh sách 10.2, the @EnableBinding annotation cho Spring Cloud Stream biết rằng chúng ta muốn liên kết service
   với the service to a message broker. Việc sử dụng Source.class trong @EnableBinding cho Spring Cloud Stream biết rằng
   service này sẽ giao tiếp với the message broker thông qua một tập hợp channels được xác định trong the Source class.
   Hãy nhớ rằng, channels nằm phía trên a message queue. Spring Cloud Stream có a default set of channels có thể được
@@ -295,8 +295,8 @@
     - The spring.cloud.stream.bindings is the start of the configuration needed for our service to publish to a Spring
       Cloud Stream message broker.
     - The configuration property spring.cloud.stream.bindings.output trong listing maps the source.output()
-      channel trong dlisting 10.4 tới orgChangeTopic trên the message broker mà chúng ta sắp giao tiếp.
-    - Nó cũng cho Spring Cloud Stream biết rằng cácmessages được gửi đến this topic nên được serialized dưới dạng JSON.
+      channel trong listing 10.4 tới orgChangeTopic trên the message broker mà chúng ta sắp giao tiếp.
+    - Nó cũng cho Spring Cloud Stream biết rằng các messages được gửi đến this topic nên được serialized dưới dạng JSON.
       Spring Cloud Stream có thể serialized các message ở nhiều định dạng bao gồm JSON, XML và định dạng Avro của Apache
       Foundation.
 - Bây giờ chúng ta đã có mã sẽ publish a message qua Spring Cloud Stream và the configuration để yêu cầu Spring Cloud
@@ -306,7 +306,7 @@
 ### 7.4.3 Writing the message consumer in the licensing service
 
 - Tại thời điểm này, chúng ta đã sửa đổi the organization service to publish a message to Kafka mỗi khi the organization
-  service changes data. Any interested service cũng có thể phản ứng mà không cần phải được y the organization service
+  service changes data. Any interested service cũng có thể phản ứng mà không cần phải được the organization service
   gọi một cách rõ ràng. Điều đó cũng có nghĩa là chúng ta có thể dễ dàng thêm chức năng mới có thể phản ứng với những
   thay đổi trong the organization service bằng cách lắng nghe các thông báo đến trong the message queue.
   ![img.png](Image/depencyMavenStream.png)
@@ -315,8 +315,8 @@
   Giống như the organization service, chúng ta sẽ chú thích the licensing service’s bootstrap class,
   LicenseServiceApplication, với the @EnableBinding annotation.
   ![img.png](Image/Listing10.8-Consuming-a-message.png)
-- Vì the licensing service là s the message consumer, chúng ta sẽ chuyển s @EnableBinding the value Sink.class. Điều này
-  yêu cầu Spring Cloud Stream liên kết với một a message broker bằng Spring Sink interface. Tương tự như gthe Source
+- Vì the licensing service là the message consumer, chúng ta sẽ chuyển @EnableBinding the value Sink.class. Điều này
+  yêu cầu Spring Cloud Stream liên kết với một a message broker bằng Spring Sink interface. Tương tự như the Source
   interface (được mô tả trong phần 10.3.1), Spring Cloud Stream hiển thị a default channel on the Sink interface. This
   Sink interface channel này được gọi là input và được sử dụng để lắng nghe các tin nhắn đến.
 - Khi chúng ta đã xác định rằng chúng ta muốn nghe tin nhắn qua the @EnableBinding annotation, chúng ta có thể viết mã
@@ -415,7 +415,7 @@
       REST thực, chúng ta cần truy xuất Organization object được liên kết với lệnh gọi từ Redis bằng phương thức
       checkRedisCache().
     - Nếu the organization object được đề cập không có trong Redis, mã trả về giá trị null. Nếu giá trị null được trả về
-      từ phương thức checkRedisCache (), mã sẽ gọithe organization service’s REST endpoint để truy xuất bản ghi tổ chức
+      từ phương thức checkRedisCache (), mã sẽ gọi the organization service’s REST endpoint để truy xuất bản ghi tổ chức
       mong muốn. Nếu the organization service trả về an organization, thì organization object trả về sẽ được lưu vào bộ
       nhớ đệm bằng phương thức cacheOrganizationObject().
     - Đầu ra đầu tiên từ bảng điều khiển cho thấy lần đầu tiên chúng ta cố gắng truy cập the licensing service endpoint
@@ -436,9 +436,9 @@
     - The key từ danh sách 10.16 là đối với each custom input channel mà chúng ta muốn hiển thị, chúng ta xác định một
       phương thức với @Input trả về a SubscribableChannel class. Sau đó, chúng ta sử dụng @OutputChannel trước phương
       thức sẽ được gọi nếu chúng ta muốn xác định các kênh đầu ra để publishing messages. Trong trường hợp là an output
-      channel, phương thức đã xác định trả về m a MessageChannel class thay vì f the SubscribableChannel class được sử
+      channel, phương thức đã xác định trả về a MessageChannel class thay vì the SubscribableChannel class được sử
       dụng với the input channel. Đây là cuộc gọi đến @OutputChannel:
-    - Bây giờ chúng ta đã có a custom input channel,, chúng ta cần sửa đổi thêm two more things to use it in the
+    - Bây giờ chúng ta đã có a custom input channel, chúng ta cần sửa đổi thêm two more things to use it in the
       licensing service. Đầu tiên, chúng ta cần sửa đổi the licensing service để map Kafka topic’s custom input channel
       name in the licensing configuration file.
       ![img.png](Image/Listing10.17-Modifying-the-licensing-service.png)
