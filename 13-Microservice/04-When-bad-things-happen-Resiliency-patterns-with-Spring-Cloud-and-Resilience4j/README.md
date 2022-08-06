@@ -27,7 +27,7 @@
 
 ## 4.2 What are client-side resiliency patterns?
 
-- Client-side resiliency software patterns tập trung vào việc bảo vệ a client của a remote resource (một cuộc gọi
+- `Client-side resiliency software patterns` tập trung vào việc bảo vệ a client của a remote resource (một cuộc gọi
   microservice khác hoặc database lookup) khỏi sự cố khi remote resource fails do lỗi hoặc hiệu suất kém.
   ![Alt text](Image/Figure7.1-TheFourClientResiliencyPatternsAct.png?raw=true "Title")
 - These patterns (client-side load balancing, circuit breaker, fallback, and bulkhead) được thực hiện the client (
@@ -80,15 +80,15 @@
 
 ## 4.3 Why client resiliency matters
 
-- Mặc dù chúng ta đã nói về các patterns of client resiliency khác nhau này trong phần tóm tắt, nhưng hãy đi sâu vào một
-  ví dụ cụ thể hơn về nơi có thể áp dụng these patterns . Chúng ta sẽ xem xét một tình huống điển hình và xem lý do tại
-  sao các mẫu client resiliency patterns lại quan trọng đối với việc triển khai microservice-based architecture chạy
+- Mặc dù chúng ta đã nói về các patterns của client resiliency khác nhau này trong phần tóm tắt, nhưng hãy đi sâu vào
+  một ví dụ cụ thể hơn về nơi có thể áp dụng những pattern này . Chúng ta sẽ xem xét một tình huống điển hình và xem lý
+  do tại sao các client resiliency patterns lại quan trọng đối với việc triển khai microservice-based architecture chạy
   trên the cloud.
-- Applications A and B giao tiếp trực tiếp with the licensing service.Licensing service truy xuất dữ liệu từ cơ sở dữ
+- Applications A and B giao tiếp trực tiếp with the licensing service. Licensing service truy xuất dữ liệu từ cơ sở dữ
   liệu và gọi organization service để thực hiện một số công việc cho nó.
-- The organization service truy xuất dữ liệu từ một nền tảng cơ sở dữ liệu hoàn toàn khác và gọi đến một another
-  service, inventory service, from a third-party cloud provider, service của họ chủ yếu dựa vào thiết bị Lưu trữ gắn
-  trong Mạng nội bộ (NAS) để ghi dữ liệu vào hệ thống tệp được chia sẻ. Ứng dụng C gọi trực tiếp inventory service.
+- The organization service truy xuất dữ liệu từ một nền tảng cơ sở dữ liệu hoàn toàn khác và gọi đến một service khác,
+  inventory service, từ một third-party cloud provider, service của họ chủ yếu dựa vào thiết bị Lưu trữ gắn trong Mạng
+  nội bộ (NAS) để ghi dữ liệu vào hệ thống tệp được chia sẻ. Ứng dụng gọi trực tiếp inventory service.
   ![Alt text](Image/Figure7.2-AnApplicationCanBeThought.png?raw=true "Title")
 - The developers đã viết organization service không bao giờ lường trước được sự chậm chạp xảy ra với các cuộc gọi đến
   inventory service. Họ đã viết mã của mình để việc ghi vào cơ sở dữ liệu của họ và các lần đọc từ dịch vụ xảy ra trong
@@ -100,16 +100,16 @@
   thành. Toàn bộ kịch bản này có thể tránh được nếu một circuit-breaker pattern đã được thực hiện tại mỗi điểm mà tài
   nguyên phân tán được gọi (hoặc là lệnh gọi đến cơ sở dữ liệu hoặc lệnh gọi đến service).
 
-- In figure 7.3,licensing service không bao giờ gọi trực tiếp organization service. Thay vào đó, khi cuộc gọi được thực
-  hiện, licensing service sẽ ủy quyền lệnh gọi thực tế của service cho circuit breaker,circuit breaker này sẽ nhận cuộc
-  gọi và gói nó trong một chuỗi (thường được quản lý trong một nhóm luồng) độc lập với người gọi ban đầu.
+- Trong figure 7.3,licensing service không bao giờ gọi trực tiếp organization service. Thay vào đó, khi cuộc gọi được
+  thực hiện, licensing service sẽ ủy quyền lệnh gọi thực tế của service cho circuit breaker,circuit breaker này sẽ nhận
+  cuộc gọi và gói nó trong một chuỗi (thường được quản lý trong một nhóm luồng) độc lập với người gọi ban đầu.
 - Bằng cách gói cuộc gọi trong một chuỗi, the client không còn trực tiếp chờ cuộc gọi hoàn tất. Thay vào đó, circuit
   breaker giám sát luồng và có thể ngắt cuộc gọi nếu luồng chạy quá dài.
   ![Alt text](Image/Figure7.3-TheCircuitBreakerTrips.png?raw=true "Title")
     - Fail fast: Khi một remote service gặp sự cố xuống cấp, ứng dụng sẽ nhanh chóng bị lỗi và ngăn chặn các vấn đề về
       cạn kiệt tài nguyên thường làm tắt toàn bộ ứng dụng. Trong hầu hết các tình huống ngừng hoạt động, tốt hơn là giảm
       một phần thay vì ngừng hoàn toàn.
-    - Fail gracefully: Bằng cách timing out and failing fast, the circuit breaker pattern cho chúng ta khả năng hỏng hóc
+    - Fail gracefully: Bằng cách timing out và failing fast, the circuit breaker pattern cho chúng ta khả năng hỏng hóc
       một cách duyên dáng hoặc tìm kiếm các cơ chế thay thế để thực hiện ý định của người dùng. Ví dụ: nếu người dùng
       đang cố gắng truy xuất dữ liệu từ một nguồn dữ liệu và nguồn dữ liệu đó đang bị suy giảm dịch vụ, thì các dịch vụ
       của chúng ta có thể truy xuất dữ liệu đó từ một vị trí khác.
@@ -132,7 +132,7 @@
   thêm các cuộc gọi thất bại hoặc hoạt động kém. This pattern sau đó thực hiện một lỗi nhanh chóng và ngăn chặn các yêu
   cầu trong tương lai đến một remote resource bị lỗi.
   ![Alt text](Image/Figure7.4-Resilience4jCircuitBreaker.png?raw=true "Title")
-- Ban đầu, e Resilience4j circuit breaker bắt đầu ở closed state và chờ client requests. closed state sử dụng ring bit
+- Ban đầu, Resilience4j circuit breaker bắt đầu ở closed state và chờ client requests. closed state sử dụng ring bit
   buffer để lưu trữ trạng thái thành công hoặc thất bại của các yêu cầu. Khi một yêu cầu thành công được thực hiện,
   circuit breaker lưu một bit 0 trong ring bit buffer. Nhưng nếu nó không nhận được phản hồi từ dịch vụ được gọi, nó sẽ
   lưu bit 1.
@@ -151,9 +151,9 @@
 
   ![Alt text](Image/Figure7.6-Resilience4jSitsBetweenEachRemoteResource.png?raw=true "Title")
 - Hãy bắt đầu cuộc thảo luận Resilience4j của chúng ta bằng cách trình bày cách kết thúc việc truy xuất licensing
-  service data từ cơ sở dữ liệu cấp phép bằng synchronous circuit breaker . Với một cuộc gọi đồng bộ, the licensing
-  service truy xuất dữ liệu của nó nhưng đợi câu lệnh SQL hoàn thành hoặc hết thời gian chờ bộ ngắt mạch trước khi tiếp
-  tục xử lý.
+  service data từ cơ sở dữ liệu cấp phép bằng circuit breaker đồng bộ. Với một cuộc gọi đồng bộ, the licensing service
+  truy xuất dữ liệu của nó nhưng đợi câu lệnh SQL hoàn thành hoặc hết thời gian chờ bộ ngắt mạch trước khi tiếp tục xử
+  lý.
 - Resilience4j và Spring Cloud sử dụng @CircuitBreaker để đánh dấu Java class methods được quản lý bởi Resilience4j
   circuit breaker. Khi Spring framework nhìn thấy annotation này, nó sẽ tự động tạo ra một proxy bao bọc method và
   manages tất cả các lệnh gọi đến phương thức đó thông qua một nhóm luồng được đặt riêng để xử lý các cuộc gọi từ xa.
@@ -167,8 +167,7 @@
 - Nếu bạn nhập _http://localhost:8080/v1/organization/e6a625cc-718b-48c2-ac76-1dfdff9a531e/license/endpoint_
   đủ lần trong Postman, bạn sẽ thấy thông báo lỗi sau được trả về từ licensing service:
   ![Alt text](Image/Message-LicensingService.png?raw=true "Title")
-  -Nếu chúng ta tiếp tục thực hiện dịch vụ không thành công,the ring bit buffer sẽ lấp đầy và chúng ta sẽ nhận được
-  lỗi.
+- Nếu chúng ta tiếp tục thực hiện dịch vụ không thành công,the ring bit buffer sẽ lấp đầy và chúng ta sẽ nhận được lỗi.
   ![Alt text](Image/Figure7.7-ACircuitBreakerError.png?raw=true "Title")
 
 ### 4.5.1 Customizing the circuit breaker
@@ -204,12 +203,12 @@
   tính này phải chứa tên của phương thức sẽ được gọi khi Resilience4j ngắt cuộc gọi do lỗi.
 - Điều thứ hai chúng ta cần làm là xác định một fallback method. Phương thức này phải nằm trong cùng lớp với phương thức
   gốc được bảo vệ bởi @CircuitBreaker.
-- Để tạo phương thức dự phòng trong Resilience4j, chúng ta cần tạo a method that contains cùng chữ ký với hàm gốc cộng
-  với one extra parameter, đó là target exception parameter. Với cùng một chữ ký, chúng ta có thể chuyển tất cả các
-  parameters từ original method sang fallback method.
+- Để tạo phương thức dự phòng trong Resilience4j, chúng ta cần tạo một method chứa cùng chữ ký với hàm gốc cộng với một
+  extra parameter, đó là target exception parameter. Với cùng một chữ ký, chúng ta có thể chuyển tất cả các parameters
+  từ original method sang fallback method.
 - Bây giờ chúng ta đã có fallback method, hãy tiếp tục và gọi lại endpoint của chúng ta. Lần này, khi chúng ta chọn nó
-  trong Postman và gặp lỗi hết thời gian chờ (hãy nhớ rằng chúng ta có cơ hội một trong ba), chúng ta sẽ không nhận
-  được ngoại lệ từ service call.
+  trong Postman và gặp lỗi hết thời gian chờ (hãy nhớ rằng chúng ta có cơ hội một trong ba), chúng ta sẽ không nhận được
+  ngoại lệ từ service call.
   ![Alt text](Image/Figure7.8-Resilience4jFallback.png?raw=true "Title")
 
 ## 4.7 Implementing the bulkhead pattern
@@ -220,13 +219,13 @@
 - Với khối lượng lớn, các vấn đề về hiệu suất với một trong số nhiều service có thể dẫn đến việc tất cả các luồng cho
   Java container bị hoạt động tối đa và đang chờ xử lý công việc, trong khi các yêu cầu công việc mới được sao lưu. Vùng
   chứa Java cuối cùng sẽ bị sập.
-- The bulkhead pattern segregates remote resource calls trong nhóm luồng của riêng chúng để có thể chứa a single
+- The bulkhead pattern tách biệt các cuộc gọi remote resource trong nhóm luồng của riêng chúng để có thể chứa a single
   misbehaving service và không làm hỏng contained. Resilience4j cung cấp hai cách triển khai khác nhau của the bulkhead
   pattern.
     - Semaphore bulkhead: Sử dụng cách tiếp cận cách ly semaphore, giới hạn số lượng yêu cầu đồng thời đến service. Khi
       đạt đến giới hạn, nó bắt đầu từ chối các yêu cầu.
-    - Thread pool bulkhead: sử dụng một hàng đợi có giới hạn và một nhóm luồng cố định. Cách tiếp cận này chỉ từ chối yêu
-      cầu khi nhóm và hàng đợi đã đầy.
+    - Thread pool bulkhead: sử dụng một hàng đợi có giới hạn và một nhóm luồng cố định. Cách tiếp cận này chỉ từ chối
+      yêu cầu khi nhóm và hàng đợi đã đầy.
 - Mô hình này hoạt động tốt nếu chúng ta có một số lượng nhỏ remote resources được truy cập trong một ứng dụng và khối
   lượng cuộc gọi cho các dịch vụ riêng lẻ được phân phối đồng đều (tương đối).
 - Vấn đề là nếu chúng ta có các service có khối lượng lớn hơn nhiều hoặc thời gian hoàn thành lâu hơn các service khác,
@@ -242,13 +241,13 @@
       AvailableProcessors ().
     - queueCapacity: Đặt thời gian tối đa mà các luồng nhàn rỗi sẽ đợi các tác vụ mới trước khi kết thúc. Điều này xảy
       ra khi số luồng nhiều hơn số luồng lõi. Giá trị mặc định là 20 ms.
-- chúng ta thường không biết các đặc điểm hiệu suất của một service cho đến khi nó hoạt động dưới mức tải.
+- Chúng ta thường không biết các đặc điểm hiệu suất của một service cho đến khi nó hoạt động dưới mức tải.
 - A key indicator cho thấy các thuộc tính nhóm luồng cần được điều chỉnh là khi một lệnh gọi dịch vụ đang trong quá
   trình hết thời gian chờ, ngay cả khi remote resource được nhắm mục tiêu là lành mạnh.
   ![Alt text](Image/Listing7.7-CreatingABulkheadAround.png?raw=true "Title")
-- @Bulkhead: annotation này cho biết rằng chúng ta đang thiết lập bulkhead pattern. Nếu chúng ta không đặt thêm giá
-  trị nào trong các thuộc tính ứng dụng, thì Resilience4j sẽ sử dụng các giá trị mặc định được đề cập trước đó cho
-  semaphore bulkhead type.
+- @Bulkhead: annotation này cho biết rằng chúng ta đang thiết lập bulkhead pattern. Nếu chúng ta không đặt thêm giá trị
+  nào trong các thuộc tính ứng dụng, thì Resilience4j sẽ sử dụng các giá trị mặc định được đề cập trước đó cho semaphore
+  bulkhead type.
 
 ## 4.8 Implementing the retry pattern
 
@@ -290,7 +289,7 @@
       quyền (timeoutDuration).
       ![Alt text](Image/Listing7.10-ConfiguringTheRetryPattern.png?raw=true "Title")
     - timeoutDuration: cho phép chúng ta xác định thời gian một luồng chờ cấp phép; giá trị mặc định cho tham số này là
-      5 s (giây).
+      5s (giây).
     - limitRefreshPeriod: cho phép chúng ta đặt khoảng thời gian giới hạn việc làm mới. Sau mỗi khoảng thời gian, bộ
       giới hạn tốc độ đặt lại số lượng quyền trở lại giá trị limitForPeriod. Giá trị mặc định cho limitRefreshPeriod là
       500 ns (nanoseconds).
@@ -313,13 +312,13 @@
   để chặn mọi cuộc gọi trong REST service của chúng ta.
 - Sau đó, nó có thể lấy thông tin này từ HTTP request đến và lưu trữ thông tin ngữ cảnh này trong một đối tượng
   UserContext tùy chỉnh.
-- Sau đó, bất cứ lúc nào mã của chúng ta cần truy cập giá trị này trong lệnh gọi REST service của chúng ta, mã của
-  chúng ta có thể truy xuất UserContext từ biến lưu trữ ThreadLocal và đọc giá trị.
+- Sau đó, bất cứ lúc nào mã của chúng ta cần truy cập giá trị này trong lệnh gọi REST service của chúng ta, mã của chúng
+  ta có thể truy xuất UserContext từ biến lưu trữ ThreadLocal và đọc giá trị.
   ![Alt text](Image/Listing7.13-AllUserContextData.png?raw=true "Title")
 - UserContextHolder class lưu trữ UserContext trong một ThreadLocal class. Sau khi nó được lưu trữ trong ThreadLocal,
   bất kỳ mã nào được thực thi cho một yêu cầu sẽ sử dụng đối tượng UserContext được lưu trữ trong UserContextHolder.
-- Để thực thi ví dụ của chúng ta, chúng ta sẽ gọi service của mình, chuyển vào một correlation ID bằng cách sử dụng
-  HTTP header tmx-correlation-id và một giá trị của TEST-CORRELATION-ID.
+- Để thực thi ví dụ của chúng ta, chúng ta sẽ gọi service của mình, chuyển vào một correlation ID bằng cách sử dụng HTTP
+  header tmx-correlation-id và một giá trị của TEST-CORRELATION-ID.
   ![Alt text](Image/Figure7.11-AddingACorrelationID.png?raw=true "Title")
 
 

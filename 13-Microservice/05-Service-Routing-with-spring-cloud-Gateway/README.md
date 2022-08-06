@@ -5,16 +5,17 @@
 
     - Thật khó để triển khai các khả năng này trong từng service một cách nhất quán. Các nhà phát triển tập trung vào
       việc delivering functionality và trong cơn lốc của hoạt động hàng ngày, họ có thể dễ dàng quên việc triển khai
-      service logging or tracking trừ khi họ làm việc trong một ngành được quản lý khi yêu cầu.
+      service logging hoặc tracking trừ khi họ làm việc trong một ngành được quản lý khi yêu cầu.
     - Đẩy mạnh trách nhiệm thực hiện các mối quan tâm xuyên suốt như bảo mật và đăng nhập cho các nhóm phát triển cá
       nhân làm tăng đáng kể khả năng ai đó sẽ không thực hiện chúng đúng cách hoặc sẽ quên thực hiện chúng. Mối quan tâm
       xuyên suốt đề cập đến các phần hoặc tính năng của thiết kế chương trình có thể áp dụng trong toàn bộ ứng dụng và
       có thể ảnh hưởng đến các phần khác của ứng dụng.
-    - Có thể tạo ra sự phụ thuộc khó khăn trên tất cả các dịch vụ của chúng ta. chúng ta càng xây dựng nhiều khả năng
+    - Có thể tạo ra sự phụ thuộc khó khăn trên tất cả các dịch vụ của chúng ta. Chúng ta càng xây dựng nhiều khả năng
       thành một khuôn khổ chung được chia sẻ trên tất cả các service của chúng ta, thì càng khó thay đổi hoặc thêm hành
       vi trong mã chung của chúng ta mà không cần phải biên dịch lại và triển khai lại tất cả các dịch vụ của chúng tôi.
       Đột nhiên, việc nâng cấp các khả năng cốt lõi được tích hợp vào thư viện dùng chung sẽ trở thành một quá trình di
       chuyển lâu dài.
+
 - Để giải quyết vấn đề này, chúng ta cần tóm tắt những mối quan tâm xuyên suốt này thành một service có thể hoạt động
   độc lập và hoạt động như một bộ lọc và bộ định tuyến cho tất cả các cuộc gọi microservice trong kiến trúc của chúng
   ta. chúng ta gọi service này là gateway.
@@ -45,8 +46,8 @@
   như một PEP trung tâm cho các cuộc gọi service. Việc sử dụng PEP tập trung có nghĩa là các mối quan tâm service xuyên
   suốt có thể được thực hiện ở một nơi duy nhất mà không cần các nhóm phát triển riêng lẻ phải thực hiện các mối quan
   tâm đó.
-    - Static routing: A service gateway đặt tất cả các lệnh gọi service phía sau a single URL and API route. Điều này
-      đơn giản hóa việc phát triển vì chúng ta chỉ phải biết về một service endpoint cho tất cả các service của mình.
+    - Static routing: A service gateway đặt tất cả các lệnh gọi service phía sau a single URL và API route. Điều này đơn
+      giản hóa việc phát triển vì chúng ta chỉ phải biết về một service endpoint cho tất cả các service của mình.
     - Dynamic routing: A service gateway có thể kiểm tra các service requests đến và dựa trên dữ liệu từ yêu cầu đến,
       thực hiện định tuyến thông minh cho the service caller. Ví dụ: khách hàng tham gia chương trình beta có thể có tất
       cả các cuộc gọi đến một dịch vụ được chuyển đến một nhóm dịch vụ cụ thể đang chạy phiên bản mã khác với những gì
@@ -104,7 +105,7 @@
 
 ### 5.4.1 Automated mapping of routes via service discovery.
 
-- All route mappings cho the gateway được thực hiện bằng cách xác định the routes trong gateway-server.yml file.
+- Tất cả route mappings cho the gateway được thực hiện bằng cách xác định the routes trong gateway-server.yml file.
 - Tuy nhiên, Spring Cloud Gateway có thể automatically route requests dựa trên service IDs của chúng bằng cách thêm các
   cấu hình sau vào the gateway-server configuration file.
   ![Alt text](Image/Listing8.5-Setting-up-the-discovery-locator.png?raw=true "Title")
@@ -115,12 +116,12 @@
   ![Alt text](Image/Url-as-the-endpoint.png?raw=true "Title")
   ![Alt text](Image/Figure8.5-The-Spring-Cloud-Gateway.png?raw=true "Title")
 - Vẻ đẹp của việc sử dụng Spring Cloud Gateway với Eureka là giờ đây chúng ta không chỉ a single endpoint mà qua đó
-  chúng ta có thể thực hiện cuộc gọi mà còn có thể thêm và xóa remove instances of a service mà không cần phải sửa đổi
-  gateway.
+  chúng ta có thể thực hiện cuộc gọi mà còn có thể thêm và xóa remove instances của một service mà không cần phải sửa
+  đổi gateway.
 - Ví dụ: chúng ta có thể thêm một new service to Eureka và the gateway automatically routes các cuộc gọi đến nó vì nó
   đang giao tiếp với Eureka về nơi đặt physical service endpoints thực tế.
 - Nếu chúng ta muốn xem the routes managed bởi the Gateway server, chúng ta có thể liệt kê các the routes thông qua the
-  actuator/gateway/routes endpoint on the Gateway server.
+  actuator/gateway/routes endpoint trên the Gateway server.
   ![Alt text](Image/Figure8.6-Each-service-that-is-mapped.png?raw=true "Title")
 
 ### 5.4.2 Manually mapping routes using service discovery.
@@ -133,7 +134,7 @@
   organization service, đó là /organization-service/ **: organization-service.
     - NOTE: Khi automated route mapping trong đó gateway hiển thị service chỉ dựa trên Eureka service ID, nếu không có
       service instances nào đang chạy, the gateway sẽ không hiển thị the route cho the service.Tuy nhiên, nếu chúng ta
-      manually map a route tới a service discovery ID theo cách thủ công và không có trường hợp nào được đăng ký với
+      manually map một route tới một service discovery ID theo cách thủ công và không có trường hợp nào được đăng ký với
       Eureka, gateway sẽ vẫn hiển thị the route. Nếu chúng ta cố gắng gọi route cho the nonexistent service, nó sẽ trả
       về lỗi HTTP 500
 - Nếu chúng ta muốn loại trừ the automated mapping của the Eureka service ID route và chỉ có organization service route
@@ -147,9 +148,9 @@
 ### 5.4.3 Dynamically reloading route configuration
 
 - Điều tiếp theo chúng ta sẽ xem xét khi định cấu hình các tuyến trong Spring Cloud Gateway là cách dynamically refresh
-  routes. The ability to dynamically reload routes rất hữu ích vì nó cho phép chúng ta thay đổi the mapping of routes mà
-  không cần phải khởi động lại (các) Gateway server. Các tuyến hiện có có thể được sửa đổi nhanh chóng và new routes sẽ
-  phải thực hiện hành động recycling each Gateway server trong môi trường của chúng ta.
+  routes. The ability để dynamically reload routes rất hữu ích vì nó cho phép chúng ta thay đổi the mapping của routes
+  mà không cần phải khởi động lại (các) Gateway server. Các tuyến hiện có có thể được sửa đổi nhanh chóng và new routes
+  sẽ phải thực hiện hành động recycling each Gateway server trong môi trường của chúng ta.
 - Nếu chúng ta nhập the actuator/gateway/routes endpoint, chúng ta sẽ thấy organization service của chúng ta hiện được
   hiển thị trong gateway.
 - Bây giờ, nếu chúng ta muốn thêm new route mappings , tất cả những gì chúng ta phải làm là thực hiện các thay đổi đối
@@ -159,7 +160,8 @@
   lại route configuration của nó.
 - Sau khi đạt đến actuator/ gateway/refresh này, nếu sau đó bạn nhập the /routes endpoint. Bạn sẽ thấy điều đó hai tuyến
   đường mới được tiếp xúc. Phản hồi của bộ truyền động / cổng / làm mới trả về mã trạng thái HTTP 200 mà không có nội
-  dung phản hồi. The response of the actuator/gateway/refresh trả về mã trạng thái HTTP 200 mà không có a response body.
+  dung phản hồi. The response của the actuator/gateway/refresh trả về mã trạng thái HTTP 200 mà không có a response
+  body.
 
 ## 5.5 The real power of Spring Cloud Gateway: Predicate and Filter Factories
 
@@ -168,18 +170,18 @@
   tùy chỉnh sẽ được áp dụng chống lại tất cả các lệnh gọi service đi qua gateway.
 - Thông thường, chúng ta sẽ sử dụng custom này để thực thi một bộ chính sách ứng dụng nhất quán như security, logging,
   and tracking giữa tất cả services.
-- Các application policies này được coi là cross-cutting concerns vì chúng ta muốn strategies này được áp dụng cho tất
-  cả services trong ứng dụng của chúng ta mà không cần phải sửa đổi từng service để triển khai chúng.
+- Các application policies này được coi là mối quan tâm cross-cutting vì chúng ta muốn `strategies` này được áp dụng cho
+  tất cả services trong ứng dụng của chúng ta mà không cần phải sửa đổi từng service để triển khai chúng.
 - Theo cách này, Spring Cloud Gateway Predicate và Filter Factories có thể được sử dụng tương tự như các Spring aspect
   classes.
 - Chúng có thể khớp hoặc chặn một loạt các hành vi và trang trí hoặc thay đổi hành vi của cuộc gọi mà người lập trình
-  ban đầu không nhận thức được sự thay đổi. Trong khi a servlet filter hoặc Spring aspect được a specific service, việc
-  sử dụng Gateway và các Predicate and Filter Factories của nó cho phép chúng ta thực hiện các mối quan tâm xuyên suốt
-  trên tất cả các service đang được định tuyến thông qua gateway.
+  ban đầu không nhận thức được sự thay đổi. Trong khi a servlet filter hoặc Spring aspect được một specific service,
+  việc sử dụng Gateway và các Predicate and Filter Factories của nó cho phép chúng ta thực hiện các mối quan tâm xuyên
+  suốt trên tất cả các service đang được định tuyến thông qua gateway.
 - Hãy nhớ rằng, predicates cho phép chúng ta kiểm tra xem các yêu cầu có đáp ứng một tập hợp các điều kiện hay không
   trước khi xử lý yêu cầu.
   ![Alt text](Image/The-real-power-of-Spring-Cloud-Gateway.png?raw=true "Title")
-- Đầu tiên, the gateway client ((browsers, apps, v.v.) gửi yêu cầu đến Spring Cloud Gateway. Sau khi nhận được yêu cầu
+- Đầu tiên, the gateway client (browsers, apps, v.v.) gửi yêu cầu đến Spring Cloud Gateway. Sau khi nhận được yêu cầu
   đó, nó sẽ chuyển trực tiếp đến B Gateway Handler phụ trách việc xác minh rằng đường dẫn được yêu cầu khớp với cấu hình
   của đường cụ thể mà nó đang cố gắng truy cập.
 - Nếu mọi thứ khớp, nó sẽ đi vào Gateway Web Handler chịu trách nhiệm đọc các filter và gửi yêu cầu đến các filter đó để
@@ -196,9 +198,9 @@
 
 ### 5.5.2 Built-in Filter Factories
 
-- Hệ thống built-in Filter Factories cho phép chúng ta đưa inject policy enforcement points vào mã của mình và thực hiện
-  nhiều hành động trên tất cả các lệnh gọi dịch vụ theo một cách nhất quán. Nói cách khác, các bộ lọc này cho phép chúng
-  ta sửa đổi các yêu cầu và phản hồi HTTP requests and responses.
+- Hệ thống built-in Filter Factories cho phép chúng ta đưa inject `policy enforcement points` vào mã của mình và thực
+  hiện nhiều hành động trên tất cả các lệnh gọi dịch vụ theo một cách nhất quán. Nói cách khác, các bộ lọc này cho phép
+  chúng ta sửa đổi các yêu cầu và phản hồi HTTP requests and responses.
   ![Alt text](Image/Table8.2-Built-in-filters-in-Spring-Cloud-Gateway.png?raw=true "Title")
 
 ### 5.5.3  Custom filters
@@ -206,32 +208,32 @@
 - Khả năng ủy quyền tất cả các yêu cầu thông qua the gateway cho phép chúng ta đơn giản hóa các lệnh gọi service của
   mình. Nhưng sức mạnh thực sự của Spring Cloud Gateway phát huy tác dụng khi chúng ta muốn viết custom logic có thể
   được áp dụng chống lại tất cả các lệnh gọi dịch vụ đi qua gateway.
-- Thông thường, this custom logic được sử dụng để thực thi một bộ application policies nhất quán như security, logging,
+- Thông thường, custom logic này được sử dụng để thực thi một bộ application policies nhất quán như security, logging,
   and tracking giữa tất cả các service.
 - Spring Cloud Gateway cho phép chúng ta xây dựng custom logic bằng cách sử dụng a filter trong gateway. Hãy nhớ rằng, a
   filter cho phép chúng ta triển khai a chain of business logic mà each service request sẽ đi qua khi được triển khai.
   Spring Cloud Gateway hỗ trợ hai loại filters sau.
-    - Pre-filters: A pre-filter được gọi trước khi yêu cầu thực tế được gửi đến the target destination . A pre-filter
+    - Pre-filters: A pre-filter được gọi trước khi yêu cầu thực tế được gửi đến the target destination. A pre-filter
       thường thực hiện nhiệm vụ đảm bảo rằng service có định dạng thông báo nhất quán.
     - Post-filters: A post-filter được gọi sau khi the target service và phản hồi được gửi lại cho the client. Thông
       thường, chúng ta triển khai a post-filter để ghi lại phản hồi từ target service, xử lý lỗi hoặc kiểm tra phản hồi
       đối với sensitive information.
       ![Alt text](Image/Figure8.10-The-pre-filters-target-route-and-post-filters.png?raw=true "Title")
     - Bất kỳ pre-filters được xác định trong gateway đều được gọi khi một yêu cầu đi vào the gateway. The pre-filters sẽ
-      kiểm tra và sửa đổi một an HTTP request trước khi nó đến với actual service. Tuy nhiên, A pre-filter không thể
-      chuyển hướng người dùng đến a different endpoint or service.
+      kiểm tra và sửa đổi một HTTP request trước khi nó đến với actual service. Tuy nhiên, A pre-filter không thể chuyển
+      hướng người dùng đến a different endpoint hoặc service.
     - Sau khi the pre-filters được thực thi đối với yêu cầu đến bởi gateway, the gateway sẽ xác định đích (nơi dịch vụ
       đang hướng tới).
     - Sau khi the target service, the gateway post-filters sẽ được gọi. The post-filters kiểm tra và sửa đổi phản hồi từ
       service được gọi.
 - Cách tốt nhất để hiểu cách triển khai the gateway filters là xem chúng hoạt động. Để đạt được điều này, trong một số
-  phần tiếp theo, chúng ta sẽ xây dựng các pre- and post-filters, sau đó chạy các client requests thông qua chúng.
+  phần tiếp theo, chúng ta sẽ xây dựng các pre- và post-filters, sau đó chạy các client requests thông qua chúng.
   ![Alt text](Image/Figure8.11-Gateway-filters-provide-centralized-tracking.png?raw=true "Title")
     - Tracking filter: The tracking filter là một pre-filter trước đảm bảo rằng mọi yêu cầu đến từ cổng kết nối đều có
       một correlation ID được liên kết với nó. correlation ID là một ID duy nhất được thực hiện trên tất cả các
       microservices được thực thi khi thực hiện yêu cầu của client. correlation ID cho phép chúng ta theo dõi chuỗi sự
       kiện xảy ra khi một cuộc gọi đi qua một chuỗi các cuộc gọi microservice.
-    - Target service: The target service có thể là một organization or the licensing service. Cả hai service đều nhận
+    - Target service: The target service có thể là một organization hoặc the licensing service. Cả hai service đều nhận
       được correlation ID trong HTTP request header.
     - Response filter: The response filter là một post-filter sau đưa correlation ID được liên kết với lệnh gọi service
       vào HTTP response header được gửi đến the client. Bằng cách này, the client sẽ có quyền truy cập vào the
@@ -239,16 +241,16 @@
 
 ## 5.6 Building the pre-filter
 
-- Việc xây dựng filters trong Spring Cloud Gateway rất đơn giản. Để bắt đầu, chúng ta sẽ xây dựng một pre-filterc, được
-  gọi là TrackingFilter, sẽ kiểm tra tất cả các yêu cầu đến gatewayh và xác định xem có HTTP header được gọi là
-  tmx-tương quan-id trong request hay không.
+- Việc xây dựng filters trong Spring Cloud Gateway rất đơn giản. Để bắt đầu, chúng ta sẽ xây dựng một pre-filter, được
+  gọi là TrackingFilter, sẽ kiểm tra tất cả các yêu cầu đến gateway và xác định xem có HTTP header được gọi là tmx-tương
+  quan-id trong request hay không.
 - The tmx-correlation-id header sẽ chứa a unique GUID (Globally Universal ID) có thể được sử dụng để theo dõi user’s
   request trên multiple microservices.
   ![Alt text](Image/Listing8.8-Pre-filter-for-generating-correlation-IDs.png?raw=true "Title")
-- Để tạo ba global filterc trong Spring Cloud Gateway, chúng ta cần implement GlobalFilter và sau đó ghi đè phương thức
+- Để tạo ba global filter trong Spring Cloud Gateway, chúng ta cần implement GlobalFilter và sau đó ghi đè phương thức
   filter().
-- chúng ta đã implemented a class called FilterUtils, class này bao gồm chức năng phổ biến được tất cả các filter sử
-  dụng.
+- chúng ta đã implemented một class được gọi là FilterUtils, class này bao gồm chức năng phổ biến được tất cả các filter
+  sử dụng.
 
 ![Alt text](Image/Listing8.9-Retrieving-the-tmx-correlation-id.png?raw=true "Title")
 
@@ -266,8 +268,8 @@
 
 ## 5.7 Using the correlation ID in the services
 
-- Bây giờ chúng ta đã đảm bảo rằng a correlation ID đã được thêm vào mọi lệnh gọi microservice qua gateway, chúng
-  tôi muốn đảm bảo rằng
+- Bây giờ chúng ta đã đảm bảo rằng a correlation ID đã được thêm vào mọi lệnh gọi microservice qua gateway, chúng tôi
+  muốn đảm bảo rằng
     - The correlation ID có thể dễ dàng truy cập được đối với microservice được gọi.
     - Bất kỳ downstream service calls nào mà microservice thực hiện cũng có thể correlation ID cho các the downstream
       calls.
@@ -278,17 +280,16 @@
   ![Alt text](Image/Figure8.12-Using-a-set-of-common-classes.png?raw=true "Title")
     - Khi một cuộc gọi được thực hiện đến licensing service thông qua gateway, TrackingFilter sẽ inject một a
       correlation ID vào HTTP header đến cho bất kỳ cuộc gọi nào đến gateway.
-    - Lớp UserContextFilter, a custom HTTP ServletFilter,, ánh xạ một correlation ID với lớp UserContext. Lớp
-      UserContext lưu trữ các giá trị trong một chuỗi để sử dụng sau này trong cuộc gọi.
+    - Lớp UserContextFilter, a custom HTTP ServletFilter, ánh xạ một correlation ID với lớp UserContext. Lớp UserContext
+      lưu trữ các giá trị trong một chuỗi để sử dụng sau này trong cuộc gọi.
     - The licensing service business logic thực thi một cuộc gọi đến the organization service.
     - RestTemplate gọi the organization service. RestTemplate sử dụng custom Spring interceptor class,
-      UserContextInterceptor, để inject correlation ID vào the outbound call as an HTTP header.
+      UserContextInterceptor, để inject correlation ID vào the outbound call như một HTTP header.
 
 ### 5.7.1 UserContextFilter: Intercepting the incoming HTTP request.
 
-- Lớp đầu tiên chúng ta sẽ xây dựng là lớp UserContextFilter. Lớp này là an HTTP servlet filter sẽ chặn tất cả các
-  HTTP requests đến vào service và ánh xạ the correlation ID (và một vài giá trị khác) từ HTTP request tới lớp
-  UserContext.
+- Lớp đầu tiên chúng ta sẽ xây dựng là lớp UserContextFilter. Lớp này là một HTTP servlet filter sẽ chặn tất cả các HTTP
+  requests đến vào service và ánh xạ the correlation ID (và một vài giá trị khác) từ HTTP request tới lớp UserContext.
   ![Alt text](Image/Listing8.12-Mapping-the-correlation-ID.png?raw=true "Title")
   ![Alt text](Image/Listing8.12.1-Mapping-the-correlation-ID.png?raw=true "Title")
 - Cuối cùng, UserContextFilter sẽ ánh xạ các giá trị HTTP header mà bạn quan tâm đến một Java UserContext class.
@@ -318,14 +319,14 @@
 
 - Hãy nhớ rằng Spring Gateway thực hiện lệnh gọi HTTP thực thay mặt cho service client và kiểm tra the response từ the
   target service call.
-- Sau đó, nó thay đổi the response or decorates nó với thông tin bổ sung. Khi được kết hợp với việc thu thập dữ liệu
-  bằng the pre-filter, a gateway post-filter là vị trí lý tưởng để thu thập metrics and complete any logging liên quan
+- Sau đó, nó thay đổi the response hoặc decorates nó với thông tin bổ sung. Khi được kết hợp với việc thu thập dữ liệu
+  bằng the pre-filter, a gateway post-filter là vị trí lý tưởng để thu thập metrics và complete bất kì logging liên quan
   đến user’s transaction.
 - chúng ta sẽ muốn tận dụng điều này bằng cách injecting the correlation ID mà chúng ta đã chuyển qua microservices của
   mình trở lại client. Bằng cách này, chúng ta có thể chuyển lại the correlation ID cho người gọi mà không cần phải chạm
   vào the message body.
   ![Alt text](Image/Listing8.17-Injecting-the-correlation-ID-into-the-HTTP-response.png?raw=true "Title")
-- Khi chúng ta đã triển khai ResponseFilter, chúng ta có thể kích hoạt service của mình và gọi licensing or
+- Khi chúng ta đã triển khai ResponseFilter, chúng ta có thể kích hoạt service của mình và gọi licensing hoặc
   organization service với nó. Sau khi dịch vụ hoàn tất, bạn sẽ thấy tmxcorrelation-id trên the HTTP response header từ
   cuộc gọi.
   ![Alt text](Image/Figure8.13-The-tmx-correlation-id.png?raw=true "Title")
