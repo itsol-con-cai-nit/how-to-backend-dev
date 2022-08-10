@@ -1,0 +1,9 @@
+spring:
+    application:
+     name: organization-service 
+    profiles:
+      active: dev
+    cloud:
+        config: 
+            uri: http://configserver:8071
+
