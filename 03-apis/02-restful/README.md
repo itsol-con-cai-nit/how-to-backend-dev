@@ -47,7 +47,15 @@ Chi tiết về status code có thể xem tại [đây](https://developer.mozill
 ### 1.3 API
 `API (Application Programming Interface)` là một tập các quy tắc và cơ chế mà theo đó, một ứng dụng hay một thành phần sẽ tương tác với một ứng dụng hay thành phần khác. 
 
-API có thể trả về dữ liệu mà bạn cần cho ứng dụng của mình ở những kiểu dữ liệu phổ biến như JSON hay XML.
+Nghe có vẻ khó hiểu, nhìn chung, API như là một bản giao ước, hợp đồng giữa 2 bên client và server. Điều đó có nghĩa là, cả phía client và phía server cùng phải tuân theo một quy định, quy ước mà được đặt ra từ trước để có để yêu cầu hoặc phục vụ lẫn nhau.
+
+Vì sao lại như vậy? Vì trên thế giới có hàng tỷ thiết bị cần được phục vụ, và các thiết bị đó hàng ngày hàng giờ gửi yêu cầu lên các server để yêu cầu xử lý các nghiệp vụ nhất định, nếu không gọi đúng, gọi chuẩn, gọi theo quy tắc của server thì yêu cầu đó sẽ không biết gọi đi đâu, không biết server nào xử lý, không biết có phản hồi hay không. Thay vào đó, trước khi xây dựng nên hai phía client và server, thì API cần được thiết kế ra để quy định rằng, nếu như có một client yêu cầu thông tin X nào đó, thì nó có thể gọi tới server A để lấy thông tin này, nhưng với điều kiện gói tin yêu cầu (HTTP requset) gửi tới server A phải theo URL như thế này, phải có HTTP method như thế này, dữ liệu truyền trong body (nếu có) phải như thế này, bla bla, .... Đó chính là quy định được đặt ra để một client có thể giao tiếp được với đúng server mà nó mong muốn. Vì thế nên API ra đời.
+
+Nó như là một thành phần đứng giữa client và server, là tiếng nói chung và sự thống nhất giữa hai bên.
+
+![](./image/api-example.png)
+
+Thường thường, các API được định nghĩa, thiết kế phía server và được triển khai phía server. API có thể trả về dữ liệu mà bạn cần cho ứng dụng của mình ở những kiểu dữ liệu phổ biến như JSON hay XML.
 
 ### 1.4 JSON & XML
 
@@ -182,6 +190,12 @@ Hoặc có thể sử dụng mặc định` limit` và `offset`: `GET /ticket?of
 
 <br>
 <br>
+
+## 5. Code demo
+
+Code demo được để ở [đây]()
+
+Lưu ý, sử dụng tomcat version 8 và maven để chạy. Link expose sau khi deploy project lên tomcat đó là: http://localhost:<tomcat-port>/rest/
 
 ### REFERENCES
 
