@@ -188,14 +188,15 @@ Sử dụng `page` và `per_page`: `GET /ticket?page=1&per_page=100`
 
 Hoặc có thể sử dụng mặc định` limit` và `offset`: `GET /ticket?offset=10&limit=100`
 
-<br>
-<br>
-
 ## 5. Code demo
 
-Code demo được để ở [đây]()
+Code demo được để ở [đây](./tiny-restful)
 
-Lưu ý, sử dụng tomcat version 8 và maven để chạy. Link expose sau khi deploy project lên tomcat đó là: http://localhost:<tomcat-port>/rest/
+Lưu ý, sử dụng tomcat version 8 và maven để chạy. Link expose sau khi deploy project lên tomcat đó là: `http://localhost:<tomcat-port>/rest/....`
+
+
+<br>
+<br>
 
 ### REFERENCES
 
