@@ -24,8 +24,11 @@
 ## 2. DB
 - SQL
 - NoSQL: 
-	+ MongoDB, Cassandra, Firebase, ...
+	+ [MongoDB](./02-db/02-no-sql/01-mongodb/README.md)
+	+ Cassandra
+	+ Firebase
 	+ Elasticsearch
+	+ ...
 - Advance: 
 	+ ORMs: [Hibernate](https://github.com/truongbb/hibernate-tutorial)
 	+ ACID

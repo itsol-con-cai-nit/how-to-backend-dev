@@ -1,6 +1,6 @@
 # MongoDB
 
-1. MongoDB basic
+1. [MongoDB basic](./01-basic/README.md)
 
 2. Basic cluster administration
 
