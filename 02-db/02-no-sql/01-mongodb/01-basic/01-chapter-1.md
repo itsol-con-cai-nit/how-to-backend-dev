@@ -6,7 +6,7 @@
 
 MongoDB là một DB thuộc loại NoSQL, nó thể hiện việc lưu trữ dữ liệu nhưng không thể hiện quan hệ ràng buộc giữa chúng, và không lưu dưới dạng các bảng và cột như SQL. Mặc dù không lưu dưới dạng các bảng và cột, nhưng MongoDB vẫn lưu teo cấu trúc và tổ chức của nó.
 
-Cụ thể hơn, MongoDB là một cơ sở dữ liệu tài liệu (`MongoDB is a NoSQL document`). Nghĩa là, các dữ liệu trong MongoDB được lưu trữ dưới dạng các `tài liệu` (document). Và tập hợp các tài liệu được gọi là một `collection`.
+Cụ thể hơn, MongoDB là một cơ sở dữ liệu tài liệu (`MongoDB is a NoSQL document data base`). Nghĩa là, các dữ liệu trong MongoDB được lưu trữ dưới dạng các `tài liệu` (document). Và tập hợp các tài liệu được gọi là một `collection`.
 
 ## 2. What is a Document in the MongoDB?
 

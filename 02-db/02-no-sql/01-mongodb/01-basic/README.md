@@ -5,3 +5,8 @@
 2. The Mongo query language + Atlas
 
 3. Deeper dive into the MongoDB query language
+
+
+### REFERENCES
+
+[1] https://university.mongodb.com/
