@@ -42,7 +42,7 @@
 
 ## 3. APIs
 - SOAP
-- RESTful
+- [RESTful](./03-apis/02-restful/README.md)
 - [GraphQL](./03-apis/03-graphql/README.md)
 - gRPC
 - Swagger
