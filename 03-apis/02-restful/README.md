@@ -55,9 +55,7 @@ Nó như là một thành phần đứng giữa client và server, là tiếng n
 
 ![](./image/api-example.png)
 
-Thường thường, các API được định nghĩa, thiết kế phía server và được triển khai phía server. API có thể trả về dữ liệu mà bạn cần cho ứng dụng của mình ở những kiểu dữ liệu phổ biến như JSON hay XML.
-
-### 1.4 JSON & XML
+Thường thường, các API được định nghĩa, thiết kế phía server và được triển khai phía server. API có thể trả về dữ liệu mà bạn cần cho ứng dụng của mình ở những kiểu dữ liệu phổ biến như [JSON](https://www.w3schools.com/js/js_json_intro.asp) hay [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction).
 
 ## 2. REST và RESTful
 
