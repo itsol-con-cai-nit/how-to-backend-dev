@@ -19,6 +19,8 @@
 - Concurrency: Thread Pool & Thread, Concurrent collection
 - Java NIO
 - Basic socket, RMI
+- Heap & stack mem
+- Tunning Java app
 - ...
 	
 ## 2. DB
