@@ -31,3 +31,11 @@ Một `collection` trong MongoDB là một cách lưu trữ có tổ chức củ
 Về khoản này, chúng ta hoàn toàn có thể ánh xạ khái niệm collection và document của MongoDB sang với table và record của SQL: một collection tương tự với một table và một document là một record trong table đó, vì vậy nên các trường (field) của document chính là các cột (column) trong bảng của SQL.
 
 ![](./img/mongodb-notion-ref-sql.jpg)
+
+
+<br/>
+<br/>
+
+REFERENCES
+
+[1] MongoDB Basic tutorial of `MongoDB university`
