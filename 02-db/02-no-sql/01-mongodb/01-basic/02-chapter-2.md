@@ -46,9 +46,11 @@ mongorestore <options> <connection-string> <directory or file to restore>
 
 Với các option cụ thể của lệnh dump có thể đọc tại [đây](https://www.mongodb.com/docs/database-tools/mongodump/) và lệnh restore có thể đọc tại [đây](https://www.mongodb.com/docs/database-tools/mongorestore/)
 
-## 3. Data explorer
+## 3. Find command
 
-## 4. Find command
+Chúng ta làm quen với câu lệnh thao thác với dữ liệu đầu tiên trong MongoDB, câu lệnh tìm kiếm - `find()`
+
+
 
 
 <br/>
