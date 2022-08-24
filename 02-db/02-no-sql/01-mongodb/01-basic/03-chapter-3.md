@@ -28,4 +28,49 @@ Giá trị của trường `_id` mặc định là một đối tượng `Object
 
 ![](./img/id-ex.png)
 
+Khi ta insert document vào collection của MongoDB, nếu như trùng giá trị của trường `_id` thì MongoDB sẽ bắn ra lỗi và hành động insert sẽ không thành công.
+
 Ngoài ra, câu lệnh `insert` còn hỗ trợ chúng ta có thể thêm vào một mảng các document, chi tiết hơn có thể đọc ở [đây](https://www.mongodb.com/docs/manual/reference/method/db.collection.insert/). Bên cạnh hàm `insert`, MongoDB còn hỗ trợ hàm [`insertOne`](https://www.mongodb.com/docs/manual/reference/method/db.collection.insertOne/) và [`insertMany`](https://www.mongodb.com/docs/manual/reference/method/db.collection.insertMany/)
+
+Khi sử dụng hàm `insert` và truyền vào một mảng các document, các document này lần lượt được insert theo thứ tự mà chúng đứng trong mảng, từ đầu tới cuối.
+
+![](./img/insert-many.png)
+
+Có 3 bản ghi được insert và không có lỗi xảy ra, nhưng khi chúng ta chạy lại lệnh insert này 1 lần nữa, cũng không có lỗi xảy ra.
+
+![](./img/insert-many-2.png)
+
+Do MongoDB tự động sinh ra `_id` cho mỗi document khi chúng được thêm vào một collection. Để tránh việc này, ta cần thêm id của mình. Nhưng giả sử, khi 2 id nào đó của 3 document ta muốn insert bị trùng nhau thì sao?
+
+![](./img/insert-many-error-1.png)
+
+MongoDB báo lỗi ở bản ghi có `name` là `test 2` và kết quả là chỉ insert được 1 bản ghi mà thôi. Điều này lý giải như sau: Trong mảng các document chúng ta muốn insert vào DB, MongoDB sẽ duyệt từ đầu cho tới cuối mảng và gặp document nào sẽ insert document đó, khi gặp `_id` trùng, MongoDB sẽ bắn ra lỗi và dừng lại. Điều này nói lên rằng bản ghi có `_id` là `1` với `name` là `test 1` đã được insert, nhưng khi insert bản ghi có `name` là `test 2`, do trùng giá trị trường `_id` nên MongoDB bắn ra lỗi và dừng việc insert lại, bản ghi có `_id` là `3` sẽ không được insert vào DB.
+
+Việc insert theo thứ tự này là mặc định, hoặc có thể thêm vào trong câu lệnh dưới dạng một option như sau
+
+![](./img/insert-many-order-true.png)
+
+Khi không muốn việc insert theo thứ tự này diễn ra, mà ta muốn MongoDB phải quét hết tất cả các bản ghi và thực hiện insert hết các bản ghi mà nó có thể, ta sử dụng option `order: false`.
+
+![](./img/insert-many-order-false.png)
+
+Ngoài ra, việc insert nhiều dữ liệu cùng lúc chúng ta hoàn toàn có thể sử dụng lệnh `mongoimport` hoặc `mongorestore` đã được đề cập ở [bài trước](./02-chapter-2.md).
+
+## 2. Creat new database, collection
+
+Khi chúng ta muốn tạo một DB mới, ta chỉ cần sử dụng lệnh `use <db name>` với điều kiện tên DB đó chưa tồn tại trong hệ thống.
+
+Và tương tự, khi chúng ta muốn tạo 1 collection mới, chúng ta có thể tạo thông qua việc `insert` dữ liệu với tên collection chưa tồn tại trong hệ thống.
+
+![](./img/create-collection.png)
+
+## 3. Updating documents
+
+## 4. Deleting documents
+
+<br/>
+<br/>
+
+REFERENCES
+
+[1] MongoDB Basic tutorial of `MongoDB university`

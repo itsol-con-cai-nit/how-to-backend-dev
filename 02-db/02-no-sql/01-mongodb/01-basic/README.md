@@ -4,7 +4,7 @@
 
 2. [Importing, Exporting and Querying data](./02-chapter-2.md)
 
-3. Creating and Manupulating Documents
+3. [Creating and Manupulating Documents](./03-chapter-3.md)
 
 4. Advanced CRUD operations
 
@@ -15,4 +15,4 @@
 
 ### REFERENCES
 
-[1] https://university.mongodb.com/
+[1] MongoDB Basic tutorial of `MongoDB university`
