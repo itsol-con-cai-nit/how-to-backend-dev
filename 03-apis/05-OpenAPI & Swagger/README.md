@@ -12,7 +12,7 @@ OpenAPI Specification (OAS) là một định dạng mô tả API dành cho REST
 ## 1.3. Đặc tả 
   Xác định một giao diện chuẩn, không có ngôn ngữ cho các API RESTful cho phép cả người và máy tính khám phá và hiểu các khả năng của dịch vụ mà không cần truy cập vào mã nguồn, tài liệu hoặc thông qua kiểm tra lưu lượng mạng. Khi được xác định đúng, người dùng có thể hiểu và tương tác với dịch vụ từ xa với một lượng logic triển khai tối thiểu. Sau đó, định nghĩa OpenAPI có thể được sử dụng bởi các công cụ tạo tài liệu để hiển thị API, các công cụ tạo mã để tạo máy chủ và máy khách bằng các ngôn ngữ lập trình khác nhau, công cụ kiểm tra và nhiều trường hợp sử dụng khác.
 
-![markdown](images/giaodienAPI.jpg) 
+![markdown](images/giaodien.jpg) 
 ## 1.4. Định dạng
  Bản thân tài liệu OpenAPI tuân theo Đặc điểm kỹ thuật OpenAPI là một đối tượng JSON, có thể được biểu diễn ở định dạng JSON hoặc YAML.
  - Ví dụ dưới dạng JSON :
