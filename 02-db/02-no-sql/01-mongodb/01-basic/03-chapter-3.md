@@ -66,6 +66,65 @@ Và tương tự, khi chúng ta muốn tạo 1 collection mới, chúng ta có t
 
 ## 3. Updating documents
 
+Trong MongoDB query language (MQL), có 2 câu lệnh phổ biến trong việc update một hoặc nhiều document, đó chính là [`updateOne`](https://www.mongodb.com/docs/manual/reference/method/db.collection.updateOne/) (tương ứng với `findOne`) và [`updateMany`](https://www.mongodb.com/docs/manual/reference/method/db.collection.updateMany/) (tương ứng với `find`). Câu hỏi được đặt ra là, giả sử như điều kiện update của lệnh `updateOne` tìm ra nhiều hơn 1 bản ghi cần update thì sao? Câu trả lời đó chính là chỉ duy nhất 1 bản ghi tìm thấy đầu tiên được update mà thôi, các bản ghi còn lại mặc dù khớp với điều kiện update nhưng sẽ không được cập nhật.
+
+Trước tiên, chúng ta có 16 bản ghi có dữ liệu thành phố là HUDSON
+
+![](./img/city-hudson.png)
+
+Với mỗi bản ghi có câu trúc như sau:
+
+![](./img/city-hudson-one.png)
+
+Hãy cập nhật cả 16 bản ghi này bằng cách tăng giá trị trường `pop` lên thêm 10 đơn vị cho cả 16 bản ghi này, chúng ta sử dụng toán tử [`$inc`](https://www.mongodb.com/docs/manual/reference/operator/update/inc/)
+
+![](./img/update-many-result.png)
+
+Kết quả là chúng ta đã tìm thấy 16 bản ghi (`matchedCount` có giá trị là 16), kết quả sau khi cập nhật là thành công (`ackowledged` mang giá trị `true`) với 16 bản ghi được cập nhật (`modifiedCount` mang giá trị 16).
+
+Toán tử `$inc` có thể sử dụng để tăng giá trị của nhiều trường cùng lúc với cú pháp:
+
+```JS
+{"$inc": {"pop": 10, "<field2>": <increment value>, ... }}
+```
+
+Xét bản ghi có zip code là 12534.
+
+![](./img/zip-12534.png)
+
+Cập nhật trường `pop` của bản ghi này, khi chúng ta cập nhật giá trị mới luôn, không thông qua tăng hoặc giảm như cách sử dụng toán tử `$inc` trước đó, ta sử dụng toán tử [`$set`](https://www.mongodb.com/docs/manual/reference/operator/update/set/).
+
+![](./img/update-one-result.png)
+
+Và cũng tương tự trước đó, chúng ta đã cập nhật thành công, nhưng chỉ với 1 bản ghi được ghi nhận thay đổi.
+
+Nhưng giả sử ta viết sai tên trường cần update thì sao? Kết quả là một trường mới sẽ được thêm vào document mà chúng ta update.
+
+![](./img/add-new-field-update.png)
+
+Vì thế, khi sử dụng hàm update, chúng ta cần cẩn trọng trong việc viết đúng tên trường và đúng chính tả.
+
+Toán tử `$set` có thể sử dụng để cập nhật giá trị cho nhiều trường, hoặc thêm giá trị cho nhiều trường cùng một lúc với cú pháp:
+
+```JS
+{"$set": {"pop": 10, "<field2>": <increment value>, ... }}
+```
+
+Còn trường hợp cập nhật giá trị cho một trường mà trường đó là một mảng dữ liệu có sẵn trong DB thì sao? Chúng ta dùng toán tử `$push`. Giả sử chúng ta có một bản ghi có dữ liệu như sau:
+
+![](./img/find-field-array.png)
+
+Chúng ta sẽ sử dụng toán tử `$push` để thêm object vào mảng `scores` đã có sẵn:
+
+![](./img/push-operator.png)
+
+
+Kết quả cho ra thành công với mong đợi!
+
+Khi muốn thêm một mảng vào document sẵn có, ta chắc chắn là dùng toán tử `$set` rồi! Khi muốn loại bỏ 1 trường ra khỏi 1 document, chúng ta sẽ sử dụng toán tử ngược lại với `$set` đó chính là [`$unset`](https://www.mongodb.com/docs/manual/reference/operator/update/unset/)
+
+Ngoài 2 hàm `updateOne` và `updateMany`, chúng ta có một hàm [`update`](https://www.mongodb.com/docs/manual/reference/method/db.collection.update/), xử lý chung cho cả 2 hàm trên
+
 ## 4. Deleting documents
 
 <br/>
