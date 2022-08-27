@@ -6,7 +6,7 @@
 
 3. [Creating and Manupulating Documents](./03-chapter-3.md)
 
-4. Advanced CRUD operations
+4. [Advanced CRUD operations](./04-chapter-4.md)
 
 5. Indexing & Aggregation pipeline
 
