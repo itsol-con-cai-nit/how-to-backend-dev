@@ -127,6 +127,20 @@ Ngoài 2 hàm `updateOne` và `updateMany`, chúng ta có một hàm [`update`](
 
 ## 4. Deleting documents
 
+Tương tự với cập nhật, chúng ta cũng có 2 hàm [`deleteOne`](https://www.mongodb.com/docs/manual/reference/method/db.collection.deleteOne/) và [`deleteMany`](https://www.mongodb.com/docs/manual/reference/method/db.collection.deleteMany/) dành cho việc xóa 1 hoặc nhiều bản ghi theo điều kiện mà ta mong muốn.
+
+Cú pháp của 2 hàm xóa trên chính xác giống như các hàm tìm kiếm `find`, hoặc `findOne`, chúng ta chỉ cần đưa điều kiện tìm kiếm vào trong các hàm xóa trên, nhiệm vụ của MongoDB sẽ tìm kiếm các bản ghi (document) khớp với các điều kiện tìm kiếm đó và xóa bỏ chúng đi.
+
+![](./img/spam-collection-data.png)
+
+Không giống như việc cập nhật có hàm `update`, việc xóa không hỗ trợ hàm xóa chung chung mà chỉ có 2 hàm chúng ta vừa thảo luận bên trên.
+
+Bây giờ, muốn xóa bỏ 1 collection, chúng ta sử dụng lệnh [`drop`](https://www.mongodb.com/docs/manual/reference/method/db.collection.drop/).
+
+![](./img/drop-collection.png)
+
+Và lưu ý rằng, **khi xóa bỏ tất cả các collection trong một DB, thì DB đó tự động bị xóa bỏ**.
+
 <br/>
 <br/>
 
