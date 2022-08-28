@@ -167,6 +167,61 @@ Có 206 bản ghi thỏa mãn trường `amentities` trong nó là một mảng 
 
 ## 5. Array operators an projection
 
+Khi muốn lấy một số cột của bảng chứ không phải toàn bộ các cột, trong SQL sẽ sử lý như sau
+
+```SQL
+SELECT NAME, ID
+FROM STUDENT
+```
+
+Trong MongoDB, kỹ thuật này gọi là `projection`. Projection hoạt động là một phần của câu truy vấn, nó đứng sau điều kiện tìm kiếm để chỉ ra các cột nào được hiển thị ở kết quả và cột nào không. Ví dụ:
+
+```JS
+db.listingsAndReviews.find({"amenities": {"$size": 20}}, {"price": 1, "address": 1}).pretty()
+```
+
+Câu lệnh này chỉ hiển thị trường price và address ở kết quả mà thôi mà không lấy các trường khác. Cú pháp cụ thể của projection đó là:
+
+```JS
+db.<collection>.find({<query>}, {<projection>})
+```
+
+Các trường sẽ lấy ra trong kết quả của câu truy vấn sẽ được mang giá trị 1, ngược lại, trường nào ẩn đi thì sẽ mang giá trị là 0. Chúng ta chỉ có thể sử dụng giá trị 1 cho tất cả các trường và tương tự với giá trị 0. 
+
+```JS
+db.<collection>.find({<query>}, {<field1>: 1, <field2>: 1})
+
+or
+
+db.<collection>.find({<query>}, {<field1>: 0, <field2>: 0})
+```
+
+Nên sử dụng hỗn hợp giá trị 1 và 0 trong một projection thì sẽ dẫn đến lỗi. 
+
+![](./img/projection-err.png)
+
+
+Ngoại trừ trường hợp muốn ẩn giá trị của trường `_id` thì chúng ta mới có thể sử dụng hỗn hợp 1 (cho các trường khác) và 0 (cho trường `_id`)
+
+![](./img/projection-id-exclude.png)
+
+
+Tiếp theo, chúng ta sẽ tìm hiểu toán tử `$elemMatch`. Giả sử chúng ta có dữ liệu như sau
+
+![](./img/grade-document-ex.png)
+
+Chúng ta muốn tìm kiếm tất cả các dữ liệu có trường `scores` thỏa mãn điều kiện: 1 trong những `type` của đối tượng chứa trong mảng `scores` mang giá trị 'homework'.
+
+```JS
+db.grades.find({"scores": {"$elemMatch": {"type" : "homework"}}}).pretty()
+```
+
+Và đây là kết quả
+
+![](./img/elem-match-ex.png)
+
+Toán tử này hỗ trợ chúng ta có thể tìm kiếm document mà trường cần tìm kiếm là một mảng các object, và điều kiện tìm kiếm của chúng ta là trường trong object thuộc mảng đó thỏa mãn một yếu đó nào đó mà ta mong muốn. Tìm hiểu thêm về `$elemMatch` [tại đây](https://www.mongodb.com/docs/manual/reference/operator/query/elemMatch/).
+
 ## 6. Array operators an sub-documents
 
 
