@@ -224,6 +224,27 @@ Toán tử này hỗ trợ chúng ta có thể tìm kiếm document mà trườn
 
 ## 6. Array operators an sub-documents
 
+Ở phần này, chúng ta sẽ bàn luận về cách truy vấn và tìm ra các document dựa vào dữ kiện bên trong của mảng.
+
+Xét các document ở collection `trips` thuộc db `sample_training`.
+
+![](./img/trip-sample-data.png)
+
+Bây giờ, chúng ta muốn tìm tất cả các document có `type` của `start station location` mang giá trị là `Point`, ta sẽ sử dụng toán tử dấu chấm (dot operator - `.`)
+
+![](./img/query-sub-document.png)
+
+Đó chính là cách mà MongoDB cho phép chúng ta truy vấn dựa vào dữ kiện của các trường trong một sub-document, thuộc một field nào đó.
+
+Ngoài ra, chúng ta muốn lấy ra các document có giá trị kinh độ (longitude) nhỏ hơn -74 trong mảng `coordinate` của trường `start station location` thì ta sẽ sử dụng thêm chỉ số
+
+![](./img/query-array-element.png)
+
+Chỉ số `0` ở trong câu truy vấn (đứng sau `coordinate` bởi dấu `.`) cho phép ta truy cập vào phần tử ở vị trí đầu tiên trong mảng `coordinate`. Tương tự, khi ta muốn truy cập vào vị trí phần tử bất kì trong mảng ta sẽ sử dụng chỉ số tương ứng. Đây chính là cách mà MongoDB cho phép chúng ta truy vấn dựa vào dữ kiện của trường trong sub-document là một mảng dữ liệu.
+
+Nếu muốn tìm kiếm phần tử của mảng thuộc một sub-document thỏa mãn điều kiện ở 2 hoặc nhiều trường thì ra cần dùng toán tử `$elemMatch`.
+
+![](./img/query-sub-document-elemMatch.png)
 
 <br/>
 <br/>
