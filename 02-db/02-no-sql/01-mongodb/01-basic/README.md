@@ -8,7 +8,7 @@
 
 4. [Advanced CRUD operations](./04-chapter-4.md)
 
-5. Indexing & Aggregation pipeline
+5. [Indexing & Aggregation pipeline](./05-chapter-5.md)
 
 <br/>
 <br/>

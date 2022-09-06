@@ -1,4 +1,4 @@
-# Chapter 3: Advanced CRUD Operations
+# Chapter 4: Advanced CRUD Operations
 
 ## 1. Query operators - Comparision
 
