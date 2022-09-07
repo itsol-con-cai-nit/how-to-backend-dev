@@ -2,7 +2,7 @@
 
 1. [MongoDB basic](./01-basic/README.md)
 
-2. Basic cluster administration
+2. [Basic cluster administration](./02-basic-cluster-administration/README.md)
 
 3. Aggregation Framework
 
