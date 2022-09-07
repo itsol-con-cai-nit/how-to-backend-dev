@@ -25,12 +25,7 @@
 	
 ## 2. DB
 - SQL
-- NoSQL: 
-	+ MongoDB, Cassandra, Firebase, ...
-	+ Elasticsearch
-- Advance: 
-	+ ORMs: [Hibernate](https://github.com/truongbb/hibernate-tutorial)
-	+ ACID
+	+ Basic
 	+ View
 	+ Function
 	+ Procedure
@@ -40,6 +35,15 @@
 	+ Sharding
 	+ Replica set
 	+ Log
+- NoSQL: 
+	+ [MongoDB](./02-db/02-no-sql/01-mongodb/README.md)
+	+ Cassandra
+	+ Firebase
+	+ Elasticsearch
+	+ ...
+- DB Framework: 
+	+ ORMs: [Hibernate](https://github.com/truongbb/hibernate-tutorial)
+	+ ACID
 - Others: SparkSQL
 
 ## 3. APIs
