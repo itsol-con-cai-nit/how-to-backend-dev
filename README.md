@@ -51,7 +51,7 @@
 - [RESTful](./03-apis/02-restful/README.md)
 - [GraphQL](./03-apis/03-graphql/README.md)
 - gRPC
-- OpenAPI & Swagger
+- [OpenAPI & Swagger](./03-apis/05-open-api-swagger/README.md)
 	
 ## 4. Spring
 - Core
