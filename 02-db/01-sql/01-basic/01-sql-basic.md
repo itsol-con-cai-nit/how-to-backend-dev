@@ -43,4 +43,4 @@
 vì vậy khi thiết kế cơ sở dữ liệu hay viết câu lệnh `SQL` cần nắm rõ kiểu dữ liệu có được hỗ trợ trong `DBMS` đang sử dụng hay không.
   - Bài viết chỉ nêu ra những loại dữ liệu phổ biến nhất trong các `DBMS` một số `DBMS` vẫn có các `Data type` của riêng chúng như
 Microsoft SQL Server có `money`, `smallmoney`.
-  - Cần lưu ý về khả năng lưu trữ của `Data Type` để chọn ra loại phù hợp nhất cho yêu cầu của dự án. 
+  - Cần lưu ý về khả năng lưu trữ của `Data Type` để chọn ra loại phù hợp nhất cho yêu cầu của dự án.
