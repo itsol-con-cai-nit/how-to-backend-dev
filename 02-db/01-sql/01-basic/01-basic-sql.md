@@ -14,7 +14,7 @@
 
 ## Database structure
 - Trong `relational database`, `data` được tổ chức dưới dạng `table` bao gồm `column (field)` và `row (record)`
-  ![img.png](img.png)
+  ![img.png](img/img.png)
 - Ví dụ với `table` Product chứa thông tin của các sản phẩm bao gồm một vài column cơ bản như id, product_name, price, description.
 
 ### Column (field)
