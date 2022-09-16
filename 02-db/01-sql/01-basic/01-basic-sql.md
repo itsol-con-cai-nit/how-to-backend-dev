@@ -58,12 +58,12 @@ Kể cả có cố gắng thế nào đi chăng nữa thì cũng không hiểu).
 ##### The Three-Valued Logic of SQL
 - `The law of contradiction`: 1 thứ `không thể` đồng thời vừa thuộc vừa không thuộc 1 loại cụ thể.  
 ![img.png](img.png)
-- Do hỗ trợ sử dụng NULL nên SQL đã phá vỡ `The law of contradiction`, trong SQL chúng ta có `Three-Valued Logic`: bên cạnh `true` và `false` còn có `unknow`.  
+- Do hỗ trợ sử dụng NULL nên SQL đã phá vỡ `The law of contradiction`, trong SQL chúng ta có `Three-Valued Logic`: bên cạnh `true` và `false` còn có `unknown`.  
 ![img_1.png](img_1.png)
 ###### Comparisons to null
-- NULL trong SQL có thể hiểu 1 cách đơn giản là có thể trở thành bất cứ giá trị nào.Vậy nên không thể đưa ra kết quả true hay false
-khi so sánh với NULL. Đây chính là lý do xuất hiện `Unknow` - true hoặc false tùy thuộc vào giá trị sẽ thay thế cho NULL trong tương lai.
-Do đó các giá trị khi so sánh với `NULL` sẽ trả về kết quả `UNKOWN`.
+- NULL trong SQL có thể hiểu 1 cách đơn giản là có thể trở thành bất cứ giá trị nào. Vậy nên không thể đưa ra kết quả true hay false
+khi so sánh với NULL. Đây chính là lý do xuất hiện `unknown` - true hoặc false tùy thuộc vào giá trị sẽ thay thế cho NULL trong tương lai.
+Do đó các giá trị khi so sánh với `NULL` sẽ trả về kết quả `unknown`.
 
 ```sql
 --Tất cả những biểu thức dưới đây đều được trả kết quả unknown
@@ -77,16 +77,16 @@ NULL = NULL
 - Vì lý do này nên SQL đã cung cấp hàm IS NULL để có thể kiểm tra xem 1 field có đang NULL hay không.
 
 ###### Logical Operations Involving Unknown
-- Khi sử dụng các toán tử logic (and, or) với NULL kết quả của viêc so sánh trực tiếp với NULL sẽ vẫn là UNKOW xong các toán tử logic vẫn giữ nguyên quy tắc sẵn có.
+- Khi sử dụng các toán tử logic (and, or) với NULL kết quả của viêc so sánh trực tiếp với NULL sẽ vẫn là unknown xong các toán tử logic vẫn giữ nguyên quy tắc sẵn có.
 - VD :
 ```sql
 --Phép so sánh logic trả về TRUE
     (NULL = 1) OR (1 = 1)
--- => (UNKNOW) OR (TRUE)
+-- => (unknown) OR (TRUE)
 -- => TRUE
 -- Phép so sánh logic trả về FALSE
 (NULL = 1) AND (0 = 1)
--- => (UNKNOW) AND (FALSE)
+-- => (unknown) AND (FALSE)
 -- => FALSE
 ```
 
@@ -96,7 +96,7 @@ NULL = NULL
 ![img_2.png](img_2.png)
 - VD:
 ```sql
--- Câu query này không trả về dữ liệu nào bởi col = NULL luôn trả về UNKNOW
+-- Câu query này không trả về dữ liệu nào bởi col = NULL luôn trả về unknown
 SELECT col
   FROM t
  WHERE col = NULL
@@ -112,25 +112,25 @@ FROM t
 SELECT col
 WHERE      col = NULL
    OR NOT (col = NULL)
--- => UNKONW OR NOT (UNKNOW)
--- => UNKONW OR UNKONW 
--- => UNKONW
+-- => unknown OR NOT (unknown)
+-- => unknown OR unknown
+-- => unknown
 ```
 ###### Odd Consequence: not in (null, …) is never true
 - NOT IN(NULL,...) luôn trả về unknow hoặc false.
 ```sql
 WHERE 1 NOT IN (NULL)
--- NULL có thể là 1 hoặc không là 1 nên kết quả trả về sẽ là unknow.
+-- NULL có thể là 1 hoặc không là 1 nên kết quả trả về sẽ là unknown.
 WHERE 1 NOT IN (NULL,1)
 -- Do đã có 1 trong tệp (NULL,1) nên kết quả trả về sẽ là false.
 WHERE 1 NOT IN (NULL,2)
--- ULL có thể là 1 hoặc không là 1 nên kết quả trả về sẽ là unknow.
+-- ULL có thể là 1 hoặc không là 1 nên kết quả trả về sẽ là unknown.
 ```
 - Mẹo: đừng cho phép NULL ở trong danh sách của NOT IN, xem xét sử dụng NOT EXISTS để thay thế hoặc 
 bổ sung thêm 1 mệnh đề where để loại bỏ NULL.
 
 ###### Exception: Check Constraints
-- Điều kiện hàm CHECK sẽ chấp nhận cả giá trị true và unknow.
+- Điều kiện hàm CHECK sẽ chấp nhận cả giá trị true và unknown.
 ```sql
 - a hoặc b có thể nhận giá trị lớn hơn 10 nếu như giá trị còn lại NULL.
 CREATE TABLE t (
@@ -138,7 +138,7 @@ CREATE TABLE t (
     b NUMERIC CHECK (b >= 0),
     CHECK ( a + b <= 10 )
 )
--- Nếu a NULL thì (a+b <= 10) => Unknow => thỏa mãn điều kiện hàm CHECK  
+-- Nếu a NULL thì (a+b <= 10) => unknown => thỏa mãn điều kiện hàm CHECK  
 
 ```
 
