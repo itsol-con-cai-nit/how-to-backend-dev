@@ -54,8 +54,17 @@
   - `Not Applicable/Inapplicable`:  thông tin không thể áp dụng cho dữ liệu mà chúng ta nói đến (VD: Khi chúng ta gán độ dài của cánh máy bay cho 1 bảng dữ liệu về oto=>
 Kể cả có cố gắng thế nào đi chăng nữa thì cũng không hiểu).
 - Sau này hai loại vô giá trị trên được gom lại thành một và lấy ký hiệu đại diện là `NULL`.
-##### NULL characteristics
-- Các giá trị khi so sánh với `NULL` sẽ trả về kết quả `UNKOWN`:
+
+##### The Three-Valued Logic of SQL
+- `The law of contradiction`: 1 thứ `không thể` đồng thời vừa thuộc vừa không thuộc 1 loại cụ thể.  
+![img.png](img.png)
+- Do hỗ trợ sử dụng NULL nên SQL đã phá vỡ `The law of contradiction`, trong SQL chúng ta có `Three-Valued Logic`: bên cạnh `true` và `false` còn có `unknow`.  
+![img_1.png](img_1.png)
+###### Comparisons to null
+- NULL trong SQL có thể hiểu 1 cách đơn giản là có thể trở thành bất cứ giá trị nào.Vậy nên không thể đưa ra kết quả true hay false
+khi so sánh với NULL. Đây chính là lý do xuất hiện `Unknow` - true hoặc false tùy thuộc vào giá trị sẽ thay thế cho NULL trong tương lai.
+Do đó các giá trị khi so sánh với `NULL` sẽ trả về kết quả `UNKOWN`.
+
 ```sql
 --Tất cả những biểu thức dưới đây đều được trả kết quả unknown
 1 = NULL
@@ -64,16 +73,77 @@ Kể cả có cố gắng thế nào đi chăng nữa thì cũng không hiểu).
 4 <> NULL
 NULL = NULL
 ```
-  - Vì tính chất này nên khi dùng các toán tử để so sánh sẽ gây ra lỗi, chẳng hạn như câu Query dưới đây, 
-Database sẽ thực hiện so sánh và trả về tất cả các giá trị  `col_1 = NULL` cho ra kết quả `TRUE` nhưng lại nhận lại các giá trị `UNKOWN` từ đó gây ra lỗi.
-Để khắc phục điều này chúng ta sử dụng `col_1 IS NULL` để thay thế cho `col_1 = NULL`.
+- Không có gì có thể bằng NULL, ngay kể cả NULL cũng không bằng NULL vì mỗi NULL có thể khác nhau.
+- Vì lý do này nên SQL đã cung cấp hàm IS NULL để có thể kiểm tra xem 1 field có đang NULL hay không.
+
+###### Logical Operations Involving Unknown
+- Khi sử dụng các toán tử logic (and, or) với NULL kết quả của viêc so sánh trực tiếp với NULL sẽ vẫn là UNKOW xong các toán tử logic vẫn giữ nguyên quy tắc sẵn có.
+- VD :
 ```sql
---SQL thất bại khi gọi ra NULL
-SELECT *
-  FROM tbl_A
- WHERE col_1 = NULL
+--Phép so sánh logic trả về TRUE
+    (NULL = 1) OR (1 = 1)
+-- => (UNKNOW) OR (TRUE)
+-- => TRUE
+-- Phép so sánh logic trả về FALSE
+(NULL = 1) AND (0 = 1)
+-- => (UNKNOW) AND (FALSE)
+-- => FALSE
 ```
-- 
+
+###### General Rule: where, having, when, etc.
+- Các mệnh đề  where, having, and when yêu cầu điều kiện true, không false là chưa đủ.
+
+![img_2.png](img_2.png)
+- VD:
+```sql
+-- Câu query này không trả về dữ liệu nào bởi col = NULL luôn trả về UNKNOW
+SELECT col
+  FROM t
+ WHERE col = NULL
+-- Sử dụng IS NULL để tìm kiếm các kết quả liên quan đến NULL
+- WHERE col IS NULL
+```
+
+###### Odd Consequence: P or not P is not always true
+- Mệnh đề P hoặc NOT P sẽ không còn đúng nữa.
+```sql
+-- Câu query ko trả về kết quả nào cả
+FROM t
+SELECT col
+WHERE      col = NULL
+   OR NOT (col = NULL)
+-- => UNKONW OR NOT (UNKNOW)
+-- => UNKONW OR UNKONW 
+-- => UNKONW
+```
+###### Odd Consequence: not in (null, …) is never true
+- NOT IN(NULL,...) luôn trả về unknow hoặc false.
+```sql
+WHERE 1 NOT IN (NULL)
+-- NULL có thể là 1 hoặc không là 1 nên kết quả trả về sẽ là unknow.
+WHERE 1 NOT IN (NULL,1)
+-- Do đã có 1 trong tệp (NULL,1) nên kết quả trả về sẽ là false.
+WHERE 1 NOT IN (NULL,2)
+-- ULL có thể là 1 hoặc không là 1 nên kết quả trả về sẽ là unknow.
+```
+- Mẹo: đừng cho phép NULL ở trong danh sách của NOT IN, xem xét sử dụng NOT EXISTS để thay thế hoặc 
+bổ sung thêm 1 mệnh đề where để loại bỏ NULL.
+
+###### Exception: Check Constraints
+- Điều kiện hàm CHECK sẽ chấp nhận cả giá trị true và unknow.
+```sql
+- a hoặc b có thể nhận giá trị lớn hơn 10 nếu như giá trị còn lại NULL.
+CREATE TABLE t (
+    a NUMERIC CHECK (a >= 0),
+    b NUMERIC CHECK (b >= 0),
+    CHECK ( a + b <= 10 )
+)
+-- Nếu a NULL thì (a+b <= 10) => Unknow => thỏa mãn điều kiện hàm CHECK  
+
+```
+
+![img_3.png](img_3.png)
+
 ## How database store data
 https://www.youtube.com/watch?v=OyBwIjnQLtI&list=PL6n9fhu94yhXg5A0Fl3CQAo1PbOcRPjd0
 https://modern-sql.com/concept/three-valued-logic
